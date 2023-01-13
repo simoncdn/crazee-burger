@@ -1,6 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
-import BtnToLoginPage from '../../BtnToLoginPage'
+import { useParams , Link} from 'react-router-dom'
 
 export default function OrderPage() {
     const {username} = useParams()
@@ -8,8 +7,10 @@ export default function OrderPage() {
   return (
     <div>
         <h1>{`Bonjour ${username}`}</h1>
-        <br />
-        <BtnToLoginPage content="Déconnexion" />
+
+        <Link to={"/"}>
+          <button>Déconnexion</button>
+        </Link>
     </div>
   )
 }

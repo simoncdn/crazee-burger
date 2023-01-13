@@ -1,11 +1,16 @@
 import React from 'react'
-import BtnToLoginPage from '../../BtnToLoginPage'
+import { Link } from 'react-router-dom'
+
 export default function Error() {
 
   return (
     <div>
         <h1>ErrorPage</h1>
-        <BtnToLoginPage content="Retourner à la page d'accueil"/>
+        
+        <Link to={"/"}>
+          <button>Retourner à la page d'accueil</button>
+        </Link>
+
     </div>
   )
 }
