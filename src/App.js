@@ -1,6 +1,6 @@
 import './App.css';
-import LoginPage from './components/Pages/LoginPage';
 import {Routes, Route} from 'react-router-dom';
+import LoginPage from './components/Pages/LoginPage';
 import ErrorPage from './components/Pages/error/ErrorPage'
 import OrderPage from './components/Pages/order/OrderPage';
 
