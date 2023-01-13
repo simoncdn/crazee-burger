@@ -1,10 +1,17 @@
 import './App.css';
-import LoginPage from './Components/Pages/LoginPage';
+import {Routes, Route} from 'react-router-dom';
+import ErrorPage from './components/pages/error/ErrorPage'
+import OrderPage from './components/pages/order/OrderPage';
+import LoginPage from './components/pages/login/LoginPage';
 
 function App() {
   return (
     <div className="App">
-      <LoginPage />
+      <Routes>
+        <Route path='/' element={<LoginPage />} />
+        <Route path='/order/:username' element={<OrderPage />} />
+        <Route path='*' element={<ErrorPage />} />
+      </Routes>
     </div>
   );
 }
