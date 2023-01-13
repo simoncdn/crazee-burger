@@ -19,11 +19,11 @@ export default function LoginForm() {
           onSubmit={handleSubmit}>
         <h2>Bienvenue chez nous !</h2>
         <br />
-        <h3>Connectez vous</h3>
+        <h3>Connectez-vous</h3>
 
         <input type="text" 
           id="name" 
-          placeholder='Entrez votre prenom'
+          placeholder='Entrez votre prenom...'
           value={username}
           onChange={handleChange}
           required
