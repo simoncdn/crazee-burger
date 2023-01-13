@@ -10,7 +10,7 @@ export default function LoginForm() {
   
     const handleSubmit = (event) => {
       event.preventDefault();
-      alert(`Bonjour + ${username}`);
+      alert(`Bonjour ${username}`);
       setUsername("")
     }
   return (
