@@ -27,7 +27,8 @@ export default function LoginForm() {
         </div>
 
         <div className="LoginForm">
-            <form onSubmit={handleSubmit}>
+            <form action='submit'
+            onSubmit={handleSubmit}>
 
                 <label htmlFor="name"></label>
                 <input type="text" 
