@@ -22,14 +22,13 @@ export default function LoginForm() {
         <h3>Connectez-vous</h3>
 
         <input type="text" 
-          id="name" 
           placeholder='Entrez votre prenom...'
           value={username}
           onChange={handleChange}
           required
         />
 
-        <button id='btnConnexion'>Accedez a votre espace</button>
+        <button>Accedez a votre espace</button>
         </form>
     </div>
   )
