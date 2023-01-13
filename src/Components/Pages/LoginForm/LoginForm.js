@@ -14,7 +14,7 @@ export default function LoginForm() {
       setUsername("")
     }
   return (
-    <div className="LoginForm">
+    <div>
         <form action='submit'
           onSubmit={handleSubmit}>
         <h2>Bienvenue chez nous !</h2>
@@ -22,13 +22,13 @@ export default function LoginForm() {
         <h3>Connectez-vous</h3>
 
         <input type="text" 
-          placeholder='Entrez votre prenom...'
+          placeholder='Entrez votre prénom...'
           value={username}
           onChange={handleChange}
           required
         />
 
-        <button>Accedez a votre espace</button>
+        <button>Accéder à votre espace</button>
         </form>
     </div>
   )
