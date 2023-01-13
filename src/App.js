@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path='/' element={<LoginPage />} />
         <Route path='/order/:username' element={<OrderPage />} />
-        <Route path='/*' element={<ErrorPage />} />
+        <Route path='*' element={<ErrorPage />} />
       </Routes>
     </div>
   );
