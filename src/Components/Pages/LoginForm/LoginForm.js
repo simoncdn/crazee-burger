@@ -21,7 +21,6 @@ export default function LoginForm() {
         <br />
         <h3>Connectez vous</h3>
 
-        <label htmlFor="name"></label>
         <input type="text" 
           id="name" 
           placeholder='Entrez votre prenom'
@@ -30,7 +29,6 @@ export default function LoginForm() {
           required
         />
 
-        <label htmlFor="btnConnexion"></label>
         <button id='btnConnexion'>Accedez a votre espace</button>
         </form>
     </div>
