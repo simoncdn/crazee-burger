@@ -26,8 +26,8 @@ const LogoStyled = styled.div `
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: ${theme.colors.primary};
-    font-size: ${theme.fonts.P4};
-    font-weight: ${theme.weights.bold};
+    font-size: ${theme.fonts.size.P4};
+    font-weight: ${theme.fonts.weights.bold};
   }
 
   img{

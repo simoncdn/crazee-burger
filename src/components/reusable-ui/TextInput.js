@@ -13,6 +13,7 @@ export default function TextInput({value, onChange, Icon, ...restProps}) {
         {...restProps}
         type="text"
         />
+
     </InputStyled>
   )
 }
@@ -29,17 +30,17 @@ const InputStyled = styled.div `
 
     .icon{
       color: ${theme.colors.greySemiDark};
-      font-size: ${theme.fonts};
+      font-size: ${theme.fonts.size.P0};
       margin-right: 8px;
     }
 
     input{
-      font-size: ${theme.fonts.P0};
+      font-size: ${theme.fonts.size.P0};
       color: ${theme.colors.dark};
       border: none;
       width: 100%;
 
-      ::placeholder{
+      &::placeholder{
         background: ${theme.colors.white};
         color: ${theme.colors.greyLight};
       }
