@@ -1,8 +1,8 @@
-import React from 'react'
-import Navbar from './navbar/Navbar'
-import styled from 'styled-components'
-import { theme } from '../../../theme'
-import Main from './navbar/Main'
+import React from "react";
+import Navbar from "./navbar/Navbar";
+import styled from "styled-components";
+import { theme } from "../../../theme";
+import Main from "./navbar/Main";
 
 export default function OrderPage() {
   return (
@@ -12,7 +12,7 @@ export default function OrderPage() {
         <Main />
       </div>
     </OrderPageStyled>
-  )
+  );
 }
 
 const OrderPageStyled = styled.div`
@@ -21,9 +21,9 @@ const OrderPageStyled = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 
-  .container{
+  .container {
     background-color: ${theme.colors.white};
     width: 1400px;
     height: 90%;
@@ -33,4 +33,4 @@ const OrderPageStyled = styled.div`
     border-radius: ${theme.borderRadius.extraRound};
     overflow: hidden;
   }
-`
+`;
