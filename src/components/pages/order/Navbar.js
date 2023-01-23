@@ -34,17 +34,17 @@ export default function Navbar() {
             <BsPersonCircle className='icon'/>
 
         </div>
-    </NavbarStyled>
+    </NavbarStyled> 
   )
 }
 
-const NavbarStyled = styled.div`
+const NavbarStyled = styled.nav`
     background-color: ${theme.colors.white};
     display: flex;
     justify-content: space-between;
     width: 100%;
     height: 10%;
-    padding: 30px 70px 30px 20px;
+    padding: 0px 70px 0px 20px;
 
     .nav-side-left{
         display: flex;
@@ -57,23 +57,23 @@ const NavbarStyled = styled.div`
             text-align: right;
             h1{
                 color: ${theme.colors.greyMedium};
-                font-size: 20px;
+                font-size: ${theme.fonts.size.P2};
             }
             span{
-                color: orange;
+                color: ${theme.colors.primary};
             }
             button{
                 border: none;
                 background-color: ${theme.colors.white};
-                font-size: 14px;
+                font-size: ${theme.fonts.size.P0};
                 color: ${theme.colors.greyMedium};
                 cursor: pointer;
             }
         }
         .icon{
-            font-size: 42px;
-            color: grey;
-            margin-left: 15px;
+            font-size: ${theme.fonts.size.P4};
+            color: ${theme.colors.greyDark};
+            margin-left: ${theme.spacing.sm};
         }
     }
 `
