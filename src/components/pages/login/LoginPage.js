@@ -7,7 +7,7 @@ export default function LoginPage() {
   return (
     <LoginPageStyled>
       <Logo 
-      scale={2.5}
+      className={"logo-login-page"}
       />
       <LoginForm />
     </LoginPageStyled>
@@ -36,5 +36,8 @@ const LoginPageStyled = styled.div`
     left: 0;
     right: 0;
     z-index: -1;
+  }
+  .logo-login-page{
+    transform: scale(2.5);
   }
 `

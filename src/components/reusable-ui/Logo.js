@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { theme } from '../../theme'
 
-export default function Logo({scale, handleClick, cursorPointer}) {
+export default function Logo({handleClick,className}) {
   return (
     <LogoStyled 
-    style={{transform: `scale(${scale})`, cursor: `${cursorPointer}`}}
     onClick={handleClick}
+    className={className}
     >
         <h1>CRAZEE</h1>
         <img src="/images/logo-orange.png" alt="logo"/>
