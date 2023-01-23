@@ -10,14 +10,13 @@ export default function Navbar() {
 
   return (
     <NavbarStyled>
-        <div className="nav-side-left">
-            <Logo />
-        </div>
+
+        <Logo />
 
         <div className="nav-side-right">
 
             <div className="nav-side-right-user">
-                <h1>{`Hey, ${username}`}</h1>
+                <h1>Hey, <span>{username}</span></h1>
 
                 <Link to={"/"}>
                 <button >Se déconnecter</button>
@@ -36,6 +35,36 @@ const NavbarStyled = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 150px;
-    padding: 50px;
+    height: 15%;
+    padding: 30px 70px 30px 20px;
+
+    /* .nav-side-left{
+        background-color: violet;
+    } */
+    .nav-side-right{
+        display: flex;
+        align-items: center;
+        .nav-side-right-user{
+            text-align: right;
+            h1{
+                color: ${theme.colors.greyMedium};
+                font-size: 20px;
+            }
+            span{
+                color: orange;
+            }
+            button{
+                border: none;
+                background-color: ${theme.colors.white};
+                font-size: 14px;
+                color: ${theme.colors.greyMedium};
+                cursor: pointer;
+            }
+        }
+        .icon{
+            font-size: 42px;
+            color: grey;
+            margin-left: 15px;
+        }
+    }
 `
