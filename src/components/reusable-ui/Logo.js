@@ -6,7 +6,7 @@ export default function Logo() {
   return (
     <LogoStyled>
         <h1>CRAZEE</h1>
-        <img src="./images/logo-orange.png" alt="logo"/>
+        <img src="/images/logo-orange.png" alt="logo"/>
         <h1>BURGER</h1>
     </LogoStyled>
   )
@@ -17,7 +17,6 @@ const LogoStyled = styled.div `
   align-items: center;
   color: ${theme.colors.white};
   transform: scale(2.5);
-
   h1{
     display: flex;
     text-align: center;
