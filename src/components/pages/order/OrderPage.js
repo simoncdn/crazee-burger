@@ -28,7 +28,7 @@ const OrderPageStyle = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: end;
-    border-radius: 0px 0px 15px 15px;
+    border-radius: 15px 15px 15px 15px;
     overflow: hidden;
     main{
       background-color: #F5F5F7;
