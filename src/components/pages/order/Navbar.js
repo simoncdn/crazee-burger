@@ -7,11 +7,19 @@ import { BsPersonCircle } from 'react-icons/bs'
 
 export default function Navbar() {
     const {username} = useParams();
-
+    const handleClick = () => {
+        window.location.reload(false)
+    }
   return (
     <NavbarStyled>
 
-        <Logo />
+        <div className="nav-side-left">
+            <Logo 
+            scale={1}
+            handleClick={handleClick}
+            cursorPointer={"pointer"}
+            />
+        </div>
 
         <div className="nav-side-right">
 
@@ -35,12 +43,13 @@ const NavbarStyled = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 15%;
+    height: 10%;
     padding: 30px 70px 30px 20px;
 
-    /* .nav-side-left{
-        background-color: violet;
-    } */
+    .nav-side-left{
+        display: flex;
+        align-items: center;
+    }
     .nav-side-right{
         display: flex;
         align-items: center;
