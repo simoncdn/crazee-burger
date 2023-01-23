@@ -29,7 +29,7 @@ const OrderPageStyled = styled.div`
     height: 95vh;
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: center;
     border-radius: ${theme.borderRadius.extraRound};
     overflow: hidden;
   }
