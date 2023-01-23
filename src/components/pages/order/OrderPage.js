@@ -26,7 +26,7 @@ const OrderPageStyled = styled.div`
   .container {
     background-color: ${theme.colors.white};
     width: 1400px;
-    height: 90%;
+    height: 95vh;
     display: flex;
     flex-direction: column;
     justify-content: end;
