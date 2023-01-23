@@ -2,9 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { theme } from '../../theme'
 
-export default function Logo() {
+export default function Logo({scale, handleClick, cursorPointer}) {
   return (
-    <LogoStyled>
+    <LogoStyled 
+    style={{transform: `scale(${scale})`, cursor: `${cursorPointer}`}}
+    onClick={handleClick}
+    >
         <h1>CRAZEE</h1>
         <img src="/images/logo-orange.png" alt="logo"/>
         <h1>BURGER</h1>
@@ -16,7 +19,6 @@ const LogoStyled = styled.div `
   display: flex;
   align-items: center;
   color: ${theme.colors.white};
-  transform: scale(2.5);
   h1{
     display: flex;
     text-align: center;
@@ -36,5 +38,4 @@ const LogoStyled = styled.div `
     width: 80px;
     margin: 0 5px;
   }
-
 `
