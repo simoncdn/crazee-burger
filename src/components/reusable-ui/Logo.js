@@ -2,10 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { theme } from '../../theme'
 
-export default function Logo({handleClick,className}) {
+export default function Logo({onClick,className}) {
   return (
     <LogoStyled 
-    onClick={handleClick}
+    onClick={onClick}
     className={className}
     >
         <h1>CRAZEE</h1>
