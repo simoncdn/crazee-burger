@@ -1,8 +1,18 @@
 import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { formatPrice } from "../../../../utils/maths";
 
 export default function CardDescriptionPart({ title, price }) {
+  const [toggle, setToggle] = useState(false);
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    setToggle(!toggle);
+    setTimeout(() => {
+      setToggle(toggle);
+    }, 200);
+  };
   return (
     <CardDescriptionPartStyled>
       <div className="title">
@@ -10,7 +20,12 @@ export default function CardDescriptionPart({ title, price }) {
       </div>
       <div className="description">
         <p>{formatPrice(price)}</p>
-        <button>Ajouter</button>
+        <button
+          onClick={handleClick}
+          className={toggle ? "clicked" : "unclicked"}
+        >
+          Ajouter
+        </button>
       </div>
     </CardDescriptionPartStyled>
   );
@@ -41,7 +56,8 @@ const CardDescriptionPartStyled = styled.div`
       color: #ffa01b;
       font-size: 16px;
     }
-    button {
+
+    .unclicked {
       width: 95px;
       height: 36px;
       background-color: #ff9f1b;
@@ -53,6 +69,21 @@ const CardDescriptionPartStyled = styled.div`
       :hover {
         background-color: white;
         color: #ff9f1b;
+        transition: 400ms ease;
+      }
+    }
+    .clicked {
+      width: 95px;
+      height: 36px;
+      background-color: #ff9f1b;
+      color: white;
+      border-radius: 5px;
+      border: 1px solid #ff9f1b;
+      transition: 400ms ease;
+      cursor: pointer;
+      :hover {
+        background-color: #ff9f1b;
+        color: white;
         transition: 400ms ease;
       }
     }
