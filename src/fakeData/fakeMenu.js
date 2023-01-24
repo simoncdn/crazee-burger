@@ -17,9 +17,9 @@ export const fakeMenu1 = [
     isAvailable: true,
     isAdvertised: false,
   },
-]
+];
 
-export const fakeMenu2 = [
+const fakeMenu2 = [
   {
     id: 1,
     imageSource: "/images/burger-bacon-egg.png",
@@ -110,4 +110,6 @@ export const fakeMenu2 = [
     isAvailable: true,
     isAdvertised: false,
   },
-]
+];
+
+export default fakeMenu2;
