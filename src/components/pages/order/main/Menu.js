@@ -4,7 +4,6 @@ import { theme } from "../../../../theme";
 import Card from "./Card";
 
 export default function Menu() {
-  console.log(fakeData);
   return (
     <MenuStyled>
       {fakeData.map((item) => (
@@ -33,4 +32,17 @@ const MenuStyled = styled.div`
   grid-row-gap: 60px;
   grid-column-gap: 85px;
   justify-content: center;
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-button {
+    background: transparent;
+    height: 5px;
+  }
 `;
