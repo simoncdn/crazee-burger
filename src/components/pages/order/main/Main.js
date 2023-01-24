@@ -12,6 +12,7 @@ export default function Main() {
 
 const MainStyled = styled.div`
   width: 100%;
+  height: 90%;
   flex-grow: 1;
   display: flex;
 `;
