@@ -20,7 +20,7 @@ const NavbarStyled = styled.nav`
   justify-content: space-between;
   height: 10vh;
   padding: 0px 70px 0px 20px;
-  border-bottom: 1px solid ${theme.colors.grey};
+  border-bottom: 1px solid ${theme.colors.greyLight};
   .logo-order-page {
     cursor: pointer;
   }
