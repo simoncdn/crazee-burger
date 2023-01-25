@@ -11,7 +11,7 @@ export default function Main() {
 }
 
 const MainStyled = styled.div`
-  flex-grow: 1;
+  flex: 1;
   display: grid;
   grid-template-columns: 1fr;
   overflow-y: scroll;
