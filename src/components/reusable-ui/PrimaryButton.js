@@ -30,20 +30,20 @@ const PrimaryButtonStyled = styled.button`
   border: 1px solid ${theme.colors.primary_burger};
   cursor: pointer;
 
-  &:hover:not(:disabled) {
+  :hover {
     background-color: ${theme.colors.white};
     color: ${theme.colors.primary_burger};
     border: 1px solid ${theme.colors.primary_burger};
     transition: all 200ms ease-out;
   }
 
-  &:active {
+  :active {
     color: ${theme.colors.white};
     background-color: ${theme.colors.primary_burger};
     border: 1px solid ${theme.colors.primary_burger};
   }
 
-  &:disabled {
+  &.is-disabled {
     opacity: 0.6;
     cursor: not-allowed;
   }

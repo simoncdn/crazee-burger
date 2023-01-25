@@ -1,19 +1,8 @@
-import React, { useState } from "react";
 import styled from "styled-components";
 import { theme } from "../../theme/index";
 import PrimaryButton from "./PrimaryButton";
 
 export default function Card({ title, image, leftDescription }) {
-  // const [toggle, setToggle] = useState(false);
-
-  // const addToBasket = (event) => {
-  //   event.preventDefault();
-  //   console.log("Clicked");
-  //   setToggle(!toggle);
-  //   setTimeout(() => {
-  //     setToggle(toggle);
-  //   }, 200);
-  // };
   return (
     <CardStyled>
       <div className="image">
@@ -24,7 +13,7 @@ export default function Card({ title, image, leftDescription }) {
         <div className="description">
           <div className="left-description">{leftDescription}</div>
           <div className="right-description">
-            <PrimaryButton className={"primary-button"} label={"Ajouter"} />
+            <PrimaryButton className="primary-button" label={"Ajouter"} />
           </div>
         </div>
       </div>
@@ -100,36 +89,6 @@ const CardStyled = styled.div`
           cursor: pointer;
           padding: 12px;
         }
-        /* .unclicked {
-          width: 95px;
-          height: 36px;
-          background-color: #ff9f1b;
-          color: white;
-          border-radius: 5px;
-          border: 1px solid #ff9f1b;
-          transition: 400ms ease;
-          cursor: pointer;
-          :hover {
-            background-color: white;
-            color: #ff9f1b;
-            transition: 400ms ease;
-          }
-        }
-        .clicked {
-          width: 95px;
-          height: 36px;
-          background-color: #ff9f1b;
-          color: white;
-          border-radius: 5px;
-          border: 1px solid #ff9f1b;
-          transition: 400ms ease;
-          cursor: pointer;
-          :hover {
-            background-color: #ff9f1b;
-            color: white;
-            transition: 400ms ease;
-          }
-        } */
       }
     }
   }
