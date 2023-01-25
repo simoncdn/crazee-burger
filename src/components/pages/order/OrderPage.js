@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "./navbar/Navbar";
 import styled from "styled-components";
 import { theme } from "../../../theme";
-import Main from "./navbar/Main";
+import Main from "./main/Main";
 
 export default function OrderPage() {
   return (
@@ -28,8 +28,9 @@ const OrderPageStyled = styled.div`
     width: 1400px;
     height: 95vh;
     display: flex;
+    position: relative;
     flex-direction: column;
-    justify-content: end;
+    justify-content: center;
     border-radius: ${theme.borderRadius.extraRound};
     overflow: hidden;
   }

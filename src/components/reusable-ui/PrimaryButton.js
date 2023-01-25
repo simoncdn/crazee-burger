@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { theme } from "../../theme";
 
-export default function PrimaryButton({ label, Icon }) {
+export default function PrimaryButton({ label, Icon, className }) {
   return (
-    <PrimaryButtonStyled>
+    <PrimaryButtonStyled className={className}>
       <span>{label}</span>
       {Icon && Icon}
     </PrimaryButtonStyled>
@@ -30,21 +30,35 @@ const PrimaryButtonStyled = styled.button`
   border: 1px solid ${theme.colors.primary_burger};
   cursor: pointer;
 
-  &:hover:not(:disabled) {
+  :hover {
     background-color: ${theme.colors.white};
     color: ${theme.colors.primary_burger};
     border: 1px solid ${theme.colors.primary_burger};
     transition: all 200ms ease-out;
   }
 
-  &:active {
+  :active {
     color: ${theme.colors.white};
     background-color: ${theme.colors.primary_burger};
     border: 1px solid ${theme.colors.primary_burger};
   }
 
-  &:disabled {
+  &.is-disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+  &.with-focus {
+    border: 1px solid white;
+    background-color: ${theme.colors.white};
+    color: ${theme.colors.primary};
+    :hover {
+      color: ${theme.colors.white};
+      background-color: ${theme.colors.primary};
+      border: 1px solid ${theme.colors.white};
+    }
+    :active {
+      background-color: ${theme.colors.white};
+      color: ${theme.colors.primary};
+    }
   }
 `;
