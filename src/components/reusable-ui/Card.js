@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { theme } from "../../../../theme/index";
-import PrimaryButton from "../../../reusable-ui/PrimaryButton";
+import { theme } from "../../theme/index";
+import PrimaryButton from "./PrimaryButton";
 
 export default function Card({ title, image, leftDescription }) {
   // const [toggle, setToggle] = useState(false);
