@@ -18,8 +18,7 @@ const NavbarStyled = styled.nav`
   background-color: ${theme.colors.white};
   display: flex;
   justify-content: space-between;
-  width: 100%;
-  height: 10%;
+  height: 10vh;
   padding: 0px 70px 0px 20px;
   border-bottom: 1px solid #e4e5e9;
   .logo-order-page {
