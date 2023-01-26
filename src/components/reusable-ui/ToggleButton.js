@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components/macro";
-import { theme } from "../../../../theme";
+import { theme } from "../../theme";
 
-export default function ToggleAdminButton({
+export default function ToggleButton({
   isChecked,
   onToggle,
-  labelIfChecked = "Désactiver le mode admin",
-  labelIfUnchecked = "Activer le mode admin",
+  labelIfChecked,
+  labelIfUnchecked,
 }) {
   return (
-    <ToggleAdminButtonStyled>
+    <ToggleButtonStyled>
       <input
         type="checkbox"
         className="toggle"
@@ -23,15 +23,14 @@ export default function ToggleAdminButton({
         data-checked={labelIfChecked}
         data-unchecked={labelIfUnchecked}
       ></label>
-    </ToggleAdminButtonStyled>
+    </ToggleButtonStyled>
   );
 }
 
-const ToggleAdminButtonStyled = styled.div`
+const ToggleButtonStyled = styled.div`
   /* border: 1px solid red; */
 
   display: flex;
-  margin-right: 50px;
   input[type="checkbox"] {
     // Hides the square box but keeps the core "toggle functionality"
     &.toggle {
