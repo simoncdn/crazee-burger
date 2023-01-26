@@ -8,10 +8,10 @@ import Profile from "./Profile";
 import ToggleButton from "./ToggleButton";
 
 export default function NavbarRightSide() {
-  const [toggle, setToggle] = useState(false);
+  const [adminMode, setAdminMode] = useState(false);
 
   useEffect(() => {
-    if (toggle) {
+    if (adminMode) {
       toast.info("Mode admin activé", {
         // icon: <FaUserSecret size={30} />,
         theme: "dark",
@@ -24,11 +24,14 @@ export default function NavbarRightSide() {
         progress: undefined,
       });
     }
-  }, [toggle]);
+  }, [adminMode]);
 
   return (
     <NavbarRightSideStyled className="nav-side-right">
-      <ToggleButton isChecked={toggle} onToggle={() => setToggle(!toggle)} />
+      <ToggleButton
+        isChecked={adminMode}
+        onToggle={() => setAdminMode(!adminMode)}
+      />
       <Profile />
       <ToastContainer className="toaster" bodyClassName="body-toast" />
     </NavbarRightSideStyled>
