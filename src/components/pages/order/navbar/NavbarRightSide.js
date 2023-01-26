@@ -1,4 +1,5 @@
 import React from "react";
+import { ToastContainer } from "react-toastify";
 import styled from "styled-components";
 import { theme } from "../../../../theme";
 import Profile from "./Profile";
@@ -9,6 +10,7 @@ export default function NavbarRightSide() {
     <NavbarRightSideStyled className="nav-side-right">
       <ToggleButton />
       <Profile />
+      <ToastContainer className="toaster" bodyClassName="body-toast" />
     </NavbarRightSideStyled>
   );
 }
@@ -43,5 +45,22 @@ const NavbarRightSideStyled = styled.div`
     color: ${theme.colors.greyDark};
     margin-left: ${theme.spacing.sm};
     margin-right: 50px;
+  }
+  .toaster {
+    max-width: 300px;
+  }
+
+  .Toastify__toast.Toastify__toast-theme--dark.Toastify__toast--info {
+    background: ${theme.colors.background_dark};
+  }
+
+  .body-toast {
+    .Toastify__toast-icon.Toastify--animate-icon.Toastify__zoom-enter {
+      margin-right: 20px;
+      margin-left: 5px;
+    }
+    div {
+      line-height: 1.3em;
+    }
   }
 `;
