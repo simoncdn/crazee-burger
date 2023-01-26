@@ -1,14 +1,34 @@
-import React from "react";
-import { ToastContainer } from "react-toastify";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 import { theme } from "../../../../theme";
 import Profile from "./Profile";
 import ToggleButton from "./ToggleButton";
 
 export default function NavbarRightSide() {
+  const [toggle, setToggle] = useState(false);
+
+  useEffect(() => {
+    if (toggle) {
+      toast.info("Mode admin activé", {
+        // icon: <FaUserSecret size={30} />,
+        theme: "dark",
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  }, [toggle]);
+
   return (
     <NavbarRightSideStyled className="nav-side-right">
-      <ToggleButton />
+      <ToggleButton isChecked={toggle} onToggle={() => setToggle(!toggle)} />
       <Profile />
       <ToastContainer className="toaster" bodyClassName="body-toast" />
     </NavbarRightSideStyled>
@@ -18,11 +38,7 @@ export default function NavbarRightSide() {
 const NavbarRightSideStyled = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 50px;
-  .admin-button {
-    background-color: green;
-    margin-right: 40px;
-  }
+  padding-right: 50px;
   .profile {
     text-align: right;
     h1 {
