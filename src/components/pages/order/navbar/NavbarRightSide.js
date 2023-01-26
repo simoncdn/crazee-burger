@@ -7,10 +7,10 @@ import Profile from "./Profile";
 import ToggleButton from "../../../reusable-ui/ToggleButton";
 
 export default function NavbarRightSide() {
-  const [adminMode, setAdminMode] = useState(false);
+  const [isAdminMode, setIsAdminMode] = useState(false);
 
   const displayToastNotification = () => {
-    if (!adminMode) {
+    if (!isAdminMode) {
       toast.info("Mode admin activé", {
         theme: "dark",
         position: "bottom-right",
@@ -22,7 +22,7 @@ export default function NavbarRightSide() {
         progress: undefined,
       });
     }
-    setAdminMode(!adminMode);
+    setIsAdminMode(!isAdminMode);
   };
 
   return (
