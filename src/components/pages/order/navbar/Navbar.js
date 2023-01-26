@@ -19,7 +19,7 @@ const NavbarStyled = styled.nav`
   display: flex;
   justify-content: space-between;
   height: 10vh;
-  padding: 0px 70px 0px 20px;
+  padding: 0 20px;
   border-bottom: 1px solid ${theme.colors.greyLight};
   .logo-order-page {
     cursor: pointer;
