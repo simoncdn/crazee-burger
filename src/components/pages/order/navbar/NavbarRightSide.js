@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../theme";
 import Profile from "./Profile";
+import ToggleButton from "./ToggleButton";
 
 export default function NavbarRightSide() {
   return (
     <NavbarRightSideStyled className="nav-side-right">
-      {/* <div className="admin-button">Admin button</div> */}
+      <ToggleButton />
       <Profile />
     </NavbarRightSideStyled>
   );
@@ -15,6 +16,7 @@ export default function NavbarRightSide() {
 const NavbarRightSideStyled = styled.div`
   display: flex;
   align-items: center;
+  margin-right: 50px;
   .admin-button {
     background-color: green;
     margin-right: 40px;
