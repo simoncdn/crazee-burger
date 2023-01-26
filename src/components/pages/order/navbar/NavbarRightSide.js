@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 import { theme } from "../../../../theme";
 import Profile from "./Profile";
-import ToggleButton from "./ToggleButton";
+import ToggleAdminButton from "./ToggleAdminButton";
 
 export default function NavbarRightSide() {
   const [adminMode, setAdminMode] = useState(false);
@@ -28,7 +28,7 @@ export default function NavbarRightSide() {
 
   return (
     <NavbarRightSideStyled className="nav-side-right">
-      <ToggleButton
+      <ToggleAdminButton
         isChecked={adminMode}
         onToggle={() => setAdminMode(!adminMode)}
       />
