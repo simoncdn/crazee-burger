@@ -3,6 +3,7 @@ import Navbar from "./navbar/Navbar";
 import styled from "styled-components";
 import { theme } from "../../../theme";
 import Main from "./main/Main";
+import Panel from "./panel/Panel";
 
 export default function OrderPage() {
   return (
@@ -10,6 +11,7 @@ export default function OrderPage() {
       <div className="container">
         <Navbar />
         <Main />
+        <Panel />
       </div>
     </OrderPageStyled>
   );
