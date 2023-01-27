@@ -1,18 +1,32 @@
-import React from "react";
 import Navbar from "./navbar/Navbar";
 import styled from "styled-components";
 import { theme } from "../../../theme";
 import Main from "./main/Main";
-import Panel from "./panel/Panel";
+import GlobalContext from "../../context/GlobalContext";
+import { useState } from "react";
 
 export default function OrderPage() {
+  const [isAdminMode, setIsAdminMode] = useState(false);
+  const [windowPanel, setWindowPanel] = useState(true);
+  const [tabIndex, setTabIndex] = useState(0);
+
+  const adminContextValue = {
+    isAdminMode,
+    setIsAdminMode,
+    windowPanel,
+    setWindowPanel,
+    tabIndex,
+    setTabIndex,
+  };
+
   return (
     <OrderPageStyled>
-      <div className="container">
-        <Navbar />
-        <Main />
-        <Panel />
-      </div>
+      <GlobalContext.Provider value={adminContextValue}>
+        <div className="container">
+          <Navbar />
+          <Main />
+        </div>
+      </GlobalContext.Provider>
     </OrderPageStyled>
   );
 }
