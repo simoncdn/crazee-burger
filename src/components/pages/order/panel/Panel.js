@@ -1,37 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import GlobalContext from "../../../context/GlobalContext";
+import TabsPanel from "./TabsPanel";
+import WindowPanel from "./WindowPanel";
 
-export default function Panel() {
+export default function Panel({ className }) {
+  const { windowPanel } = useContext(GlobalContext);
+  const { tabIndex } = useContext(GlobalContext);
+
   return (
-    <PanelStyled>
-      <div className="tabs">
-        <p>tabs1</p>
-        <p>tabs2</p>
-        <p>tabs3</p>
-      </div>
-      <div className="panel-block">
-        <p>block</p>
-      </div>
+    <PanelStyled className={className}>
+      <TabsPanel />
+      <WindowPanel
+        tabIndex={tabIndex}
+        className={windowPanel ? "window-panel " : "window-panel close"}
+      />
     </PanelStyled>
   );
 }
 
 const PanelStyled = styled.div`
   width: 100%;
-  height: 292px;
-  background-color: violet;
   display: flex;
   flex-direction: column;
-  .tabs {
-    background-color: red;
-    display: flex;
-    height: 42px;
-    align-items: center;
-    margin-left: 70px;
-  }
-  .panel-block {
-    background-color: green;
-    width: 100%;
-    flex: 1;
-  }
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
 `;
