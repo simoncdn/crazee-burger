@@ -7,16 +7,16 @@ import { useState } from "react";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
-  const [windowPanel, setWindowPanel] = useState(true);
-  const [tabIndex, setTabIndex] = useState(0);
+  const [isWindowPanel, setIsWindowPanel] = useState(true);
+  const [isTabIndex, setIsTabIndex] = useState(0);
 
   const adminContextValue = {
     isAdminMode,
     setIsAdminMode,
-    windowPanel,
-    setWindowPanel,
-    tabIndex,
-    setTabIndex,
+    isWindowPanel,
+    setIsWindowPanel,
+    isTabIndex,
+    setIsTabIndex,
   };
 
   return (

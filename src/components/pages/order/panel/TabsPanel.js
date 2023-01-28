@@ -9,28 +9,28 @@ import PrimaryButton from "../../../reusable-ui/PrimaryButton";
 import { useEffect } from "react";
 
 export default function TabsPanel() {
-  const { windowPanel, setWindowPanel } = useContext(GlobalContext);
-  const { tabIndex, setTabIndex } = useContext(GlobalContext);
+  const { isWindowPanel, setIsWindowPanel, isTabIndex, setIsTabIndex } =
+    useContext(GlobalContext);
 
   const tabs = [
     {
-      index: 2,
+      index: 0,
       label: "",
-      icon: windowPanel ? (
+      icon: isWindowPanel ? (
         <FiChevronDown className="icon" />
       ) : (
         <FiChevronUp className="icon" />
       ),
-      onClick: () => setWindowPanel(!windowPanel),
+      onClick: () => setIsWindowPanel(!isWindowPanel),
     },
     {
-      index: 0,
+      index: 1,
       label: "Ajouter un produit",
       icon: <AiOutlinePlus className="icon" />,
       onClick: () => changeTabOnIndex(0),
     },
     {
-      index: 1,
+      index: 2,
       label: "Modifier un produit",
       icon: <MdModeEditOutline className="icon" />,
       onClick: () => changeTabOnIndex(1),
@@ -38,18 +38,18 @@ export default function TabsPanel() {
   ];
 
   const changeTabOnIndex = (index) => {
-    setTabIndex(index);
-    setWindowPanel(true);
+    setIsTabIndex(index);
+    setIsWindowPanel(true);
   };
 
   useEffect(() => {
-    if (windowPanel === false) {
-      setTabIndex(2);
+    if (isWindowPanel === false) {
+      setIsTabIndex(0);
     }
-    return () => {
-      setTabIndex(0);
-    };
-  }, [windowPanel]);
+    // return (index) => {
+    //   setIsTabIndex(index);
+    // };
+  }, [isWindowPanel, setIsTabIndex]);
 
   return (
     <TabsPanelStyled>
@@ -58,7 +58,7 @@ export default function TabsPanel() {
           key={index}
           label={tab.label}
           Icon={tab.icon}
-          className={tabIndex === tab.index ? "tab active" : "tab"}
+          className={isTabIndex === tab.index ? "tab active" : "tab"}
           onClick={tab.onClick}
         />
       ))}

@@ -6,13 +6,13 @@ import Menu from "./Menu";
 import { theme } from "../../../../theme";
 
 export default function Main() {
-  const { windowPanel, isAdminMode } = useContext(GlobalContext);
+  const { isWindowPanel, isAdminMode } = useContext(GlobalContext);
 
   return (
     <MainStyled>
       <Menu />
       <div className={isAdminMode ? "open" : "close"}>
-        <Panel className={windowPanel ? "max-height" : "min-height"} />
+        <Panel className={isWindowPanel ? "max-height" : "min-height"} />
       </div>
     </MainStyled>
   );

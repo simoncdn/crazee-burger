@@ -5,15 +5,14 @@ import TabsPanel from "./TabsPanel";
 import WindowPanel from "./WindowPanel";
 
 export default function Panel({ className }) {
-  const { windowPanel } = useContext(GlobalContext);
-  const { tabIndex } = useContext(GlobalContext);
+  const { isWindowPanel, isTabIndex } = useContext(GlobalContext);
 
   return (
     <PanelStyled className={className}>
       <TabsPanel />
       <WindowPanel
-        tabIndex={tabIndex}
-        className={windowPanel ? "window-panel " : "window-panel close"}
+        tabIndex={isTabIndex}
+        className={isWindowPanel ? "window-panel " : "window-panel close"}
       />
     </PanelStyled>
   );

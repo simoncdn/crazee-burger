@@ -3,10 +3,10 @@ import { theme } from "../../../../theme";
 export default function WindowPanel({ tabIndex, className }) {
   return (
     <WindowPanelStyled className={className}>
-      <div className={tabIndex === 0 ? "content actived" : "content unactived"}>
+      <div className={tabIndex === 1 ? "content actived" : "content unactived"}>
         ADD PRODUCT
       </div>
-      <div className={tabIndex === 1 ? "content actived" : "content unactived"}>
+      <div className={tabIndex === 2 ? "content actived" : "content unactived"}>
         MODIFY PRODUCT
       </div>
     </WindowPanelStyled>

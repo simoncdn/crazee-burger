@@ -8,7 +8,7 @@ import { useContext } from "react";
 import GlobalContext from "../../../context/GlobalContext";
 
 export default function NavbarRightSide() {
-  const { isAdminMode, setIsAdminMode, setTabIndex, setWindowPanel } =
+  const { isAdminMode, setIsAdminMode, setIsTabIndex, setIsWindowPanel } =
     useContext(GlobalContext);
 
   const displayToastNotification = () => {
@@ -25,8 +25,8 @@ export default function NavbarRightSide() {
       });
     }
     setIsAdminMode(!isAdminMode);
-    setTabIndex(0);
-    setWindowPanel(true);
+    setIsTabIndex(0);
+    setIsWindowPanel(true);
   };
 
   return (
