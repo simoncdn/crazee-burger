@@ -10,7 +10,7 @@ export default function OrderPage() {
   const [isWindowPanel, setIsWindowPanel] = useState(true);
   const [isTabIndex, setIsTabIndex] = useState(0);
 
-  const adminContextValue = {
+  const globalContextValue = {
     isAdminMode,
     setIsAdminMode,
     isWindowPanel,
@@ -21,7 +21,7 @@ export default function OrderPage() {
 
   return (
     <OrderPageStyled>
-      <GlobalContext.Provider value={adminContextValue}>
+      <GlobalContext.Provider value={globalContextValue}>
         <div className="container">
           <Navbar />
           <Main />
