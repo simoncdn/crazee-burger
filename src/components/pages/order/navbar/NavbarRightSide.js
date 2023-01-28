@@ -25,7 +25,7 @@ export default function NavbarRightSide() {
       });
     }
     setIsAdminMode(!isAdminMode);
-    setIsTabIndex(0);
+    setIsTabIndex(1);
     setIsWindowPanel(true);
   };
 
