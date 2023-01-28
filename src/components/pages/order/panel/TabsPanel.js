@@ -52,13 +52,13 @@ export default function TabsPanel() {
 
   return (
     <TabsPanelStyled>
-      {tabs.map((tab, index) => (
+      {tabs.map(({ index, label, icon, onClick }) => (
         <PrimaryButton
           key={index}
-          label={tab.label}
-          Icon={tab.icon}
-          className={isTabIndex === tab.index ? "tab active" : "tab"}
-          onClick={tab.onClick}
+          label={label}
+          Icon={icon}
+          className={isTabIndex === index ? "tab active" : "tab"}
+          onClick={onClick}
         />
       ))}
     </TabsPanelStyled>
