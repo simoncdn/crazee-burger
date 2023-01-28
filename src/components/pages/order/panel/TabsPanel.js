@@ -27,13 +27,13 @@ export default function TabsPanel() {
       index: 1,
       label: "Ajouter un produit",
       icon: <AiOutlinePlus className="icon" />,
-      onClick: () => changeTabOnIndex(0),
+      onClick: () => changeTabOnIndex(1),
     },
     {
       index: 2,
       label: "Modifier un produit",
       icon: <MdModeEditOutline className="icon" />,
-      onClick: () => changeTabOnIndex(1),
+      onClick: () => changeTabOnIndex(2),
     },
   ];
 
@@ -43,12 +43,11 @@ export default function TabsPanel() {
   };
 
   useEffect(() => {
-    if (isWindowPanel === false) {
+    if (!isWindowPanel) {
       setIsTabIndex(0);
+    } else if (isWindowPanel && isTabIndex === 0) {
+      setIsTabIndex(1);
     }
-    // return (index) => {
-    //   setIsTabIndex(index);
-    // };
   }, [isWindowPanel, setIsTabIndex]);
 
   return (
