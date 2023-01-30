@@ -22,18 +22,21 @@ export default function TabsPanel() {
         <FiChevronUp className="icon" />
       ),
       onClick: () => setIsWindowPanel(!isWindowPanel),
+      className: isWindowPanel ? "tab" : "tab active",
     },
     {
       index: 1,
       label: "Ajouter un produit",
       icon: <AiOutlinePlus className="icon" />,
       onClick: () => changeTabOnIndex(1),
+      className: isTabIndex === 1 ? "tab active" : "tab",
     },
     {
       index: 2,
       label: "Modifier un produit",
       icon: <MdModeEditOutline className="icon" />,
       onClick: () => changeTabOnIndex(2),
+      className: isTabIndex === 2 ? "tab active" : "tab",
     },
   ];
 
@@ -42,22 +45,22 @@ export default function TabsPanel() {
     setIsWindowPanel(true);
   };
 
-  useEffect(() => {
-    if (!isWindowPanel) {
-      setIsTabIndex(0);
-    } else if (isWindowPanel && isTabIndex === 0) {
-      setIsTabIndex(1);
-    }
-  }, [isWindowPanel, setIsTabIndex]);
+  // useEffect(() => {
+  //   if (!isWindowPanel) {
+  //     setIsTabIndex(1);
+  //   } else if (isWindowPanel && isTabIndex === 0) {
+  //     setIsTabIndex(1);
+  //   }
+  // }, [isWindowPanel, setIsTabIndex]);
 
   return (
     <TabsPanelStyled>
-      {tabs.map(({ index, label, icon, onClick }) => (
+      {tabs.map(({ index, label, icon, onClick, className }) => (
         <PrimaryButton
           key={index}
           label={label}
           Icon={icon}
-          className={isTabIndex === index ? "tab active" : "tab"}
+          className={className}
           onClick={onClick}
         />
       ))}

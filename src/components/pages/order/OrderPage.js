@@ -8,7 +8,7 @@ import { useState } from "react";
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [isWindowPanel, setIsWindowPanel] = useState(true);
-  const [isTabIndex, setIsTabIndex] = useState(0);
+  const [isTabIndex, setIsTabIndex] = useState(1);
 
   const globalContextValue = {
     isAdminMode,
