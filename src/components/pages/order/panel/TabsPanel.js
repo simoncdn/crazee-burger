@@ -100,10 +100,4 @@ const TabsPanelStyled = styled.div`
       font-weight: ${theme.fonts.weights.regular};
     }
   }
-  .window-panel {
-    display: block;
-    &.close {
-      display: none;
-    }
-  }
 `;

@@ -27,4 +27,11 @@ const PanelStyled = styled.div`
   bottom: 0;
   right: 0;
   left: 0;
+
+  .window-panel {
+    display: block;
+    &.close {
+      display: none;
+    }
+  }
 `;
