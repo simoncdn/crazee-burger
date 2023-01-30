@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { theme } from "../../../../theme";
 import GlobalContext from "../../../context/GlobalContext";
 import PrimaryButton from "../../../reusable-ui/PrimaryButton";
-import { useEffect } from "react";
 
 export default function TabsPanel() {
   const { isWindowPanel, setIsWindowPanel, isTabIndex, setIsTabIndex } =
