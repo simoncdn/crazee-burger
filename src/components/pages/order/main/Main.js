@@ -21,7 +21,7 @@ export default function Main() {
 const MainStyled = styled.div`
   flex: 1;
   background: ${theme.colors.background_white};
-  z-index: 100;
+
   display: grid;
   grid-template-columns: 1fr;
   overflow-y: scroll;
