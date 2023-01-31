@@ -3,9 +3,8 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { MdModeEditOutline } from "react-icons/md";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import styled from "styled-components";
-import { theme } from "../../../../theme";
 import GlobalContext from "../../../context/GlobalContext";
-import PrimaryButton from "../../../reusable-ui/PrimaryButton";
+import PanelButton from "../../../reusable-ui/PanelButton";
 
 export default function TabsPanel() {
   const { isWindowPanel, setIsWindowPanel, isTabIndex, setIsTabIndex } =
@@ -13,7 +12,7 @@ export default function TabsPanel() {
 
   const tabs = [
     {
-      index: 0,
+      // index: 0,
       label: "",
       icon: isWindowPanel ? (
         <FiChevronDown className="icon" />
@@ -55,7 +54,7 @@ export default function TabsPanel() {
   return (
     <TabsPanelStyled>
       {tabs.map(({ index, label, icon, onClick, className }) => (
-        <PrimaryButton
+        <PanelButton
           key={index}
           label={label}
           Icon={icon}
@@ -67,37 +66,11 @@ export default function TabsPanel() {
   );
 }
 
-const TabsPanelStyled = styled.div`
+const TabsPanelStyled = styled.nav`
   display: flex;
   height: 42px;
   width: 100%;
   align-items: center;
   padding-left: 70px;
   position: absolute;
-  .tab {
-    width: auto;
-    height: 42px;
-    border-radius: 5px 5px 0px 0px;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    align-items: center;
-    margin-left: 1px;
-    border: 1px solid ${theme.colors.greyLight};
-    background-color: ${theme.colors.white};
-    font-weight: ${theme.fonts.weights.regular};
-    font-size: ${theme.fonts.size.P1};
-    color: ${theme.colors.greyMedium};
-    z-index: 2;
-    :nth-child(2),
-    :nth-child(3) {
-      gap: 12px;
-    }
-    &.active {
-      color: ${theme.colors.white};
-      background-color: ${theme.colors.background_dark};
-      border: 1px solid ${theme.colors.background_dark};
-      font-weight: ${theme.fonts.weights.regular};
-    }
-  }
 `;
