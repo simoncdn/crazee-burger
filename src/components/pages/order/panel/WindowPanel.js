@@ -22,13 +22,14 @@ const WindowPanelStyled = styled.div`
   bottom: 0;
   background-color: ${theme.colors.white};
   box-shadow: 0px -10px 20px 2px rgba(0, 0, 0, 0.2) inset;
+  border-top: 1px solid ${theme.colors.greyLight};
+  z-index: 10;
   .content {
     width: 100%;
     height: 100%;
     :nth-child(1),
     :nth-child(2) {
       box-shadow: 0px -2px 8px -2px rgba(0, 0, 0, 0.2);
-      border-top: 1px solid ${theme.colors.greyLight};
     }
     &.actived {
       display: block;

@@ -68,9 +68,9 @@ export default function TabsPanel() {
 
 const TabsPanelStyled = styled.nav`
   display: flex;
-  height: 42px;
+  height: 43px;
   width: 100%;
   align-items: center;
   padding-left: 70px;
-  position: absolute;
+  position: relative;
 `;
