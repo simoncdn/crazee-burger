@@ -2,7 +2,7 @@
 
 Crazee-burger is a web application of a fastfood delivery platform.
 I develop this project on a lead developer supervision.
-This project is in development so you haven't all of the features.
+This project is in development so you haven't all features.
 
 In this project, I discovered agile methodology (SCRUM), State managment with Context(hook), Styled-components, and the branching system "GitHubFlow".
 
@@ -18,10 +18,10 @@ In this project I use :
   - Context
 
 
-You can clone this repository with this command: 
+Clone this repository with this command: 
 =>  https://github.com/simoncdn/crazee-burger.git
 
-and install the depencies whith : 
+Install the depencies whith : 
 => npm install (nameofthedependence)
 
 and start the localhost : 
