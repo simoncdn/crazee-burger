@@ -13,7 +13,7 @@ export default function Card({ title, image, leftDescription }) {
         <div className="description">
           <div className="left-description">{leftDescription}</div>
           <div className="right-description">
-            <PrimaryButton className="primary-button" label={"Ajouter"} />
+            <PrimaryButton classname="primary-button" label={"Ajouter"} />
           </div>
         </div>
       </div>
@@ -30,7 +30,6 @@ const CardStyled = styled.div`
   box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
   border-radius: ${theme.borderRadius.extraRound};
   background-color: ${theme.colors.white};
-
   .image {
     width: 100%;
     height: auto;
