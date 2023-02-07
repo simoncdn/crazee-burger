@@ -26,6 +26,7 @@ const PanelButtonStyled = styled.button`
   font-weight: ${theme.fonts.weights.regular};
   font-size: ${theme.fonts.size.P1};
   color: ${theme.colors.greyMedium};
+  z-index: 10;
   :nth-child(2),
   :nth-child(3) {
     gap: 12px;
@@ -33,7 +34,6 @@ const PanelButtonStyled = styled.button`
   :hover {
     text-decoration: underline;
     border-bottom: 2px solid ${theme.colors.white};
-    z-index: 20;
   }
   &.active {
     height: 43px;
@@ -41,7 +41,6 @@ const PanelButtonStyled = styled.button`
     background-color: ${theme.colors.background_dark};
     border: 1px solid ${theme.colors.background_dark};
     border-bottom: 2px solid ${theme.colors.background_dark};
-    z-index: 20;
     font-weight: ${theme.fonts.weights.regular};
     transform: translateY(0);
   }
