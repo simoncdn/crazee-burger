@@ -4,7 +4,7 @@ Crazee-burger is a web application of a fastfood delivery platform.
 I develop this project on a lead developer supervision.
 This project is in development so you haven't all of the features.
 
-In this project, I discovered agility methodology (SCRUM), State managment with Context(hook), Styled-components, and the branching system "GitHubFlow".
+In this project, I discovered agile methodology (SCRUM), State managment with Context(hook), Styled-components, and the branching system "GitHubFlow".
 
 You can see the result on vercel : https://crazee-burger-brown.vercel.app/
 
