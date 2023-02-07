@@ -8,7 +8,7 @@ In this project, I discovered agile methodology (SCRUM), State managment with Co
 
 You can see the result on vercel : https://crazee-burger-brown.vercel.app/
 
-## Depencies
+## Dependencies
 
 In this project I use : 
 
