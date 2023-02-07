@@ -5,6 +5,6 @@ export default createContext({
   setIsAdminMode: () => {},
   isWindowPanel: true,
   setIsWindowPanel: () => {},
-  isTabIndex: 0,
+  isTabIndex: "add",
   setIsTabIndex: () => {},
 });

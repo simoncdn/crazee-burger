@@ -11,7 +11,7 @@ export default function Main() {
   return (
     <MainStyled>
       <Menu />
-      <div className={isAdminMode ? "open" : "close"}>
+      <div className={isAdminMode ? "" : "close"}>
         <Panel className={isWindowPanel ? "max-height" : "min-height"} />
       </div>
     </MainStyled>
@@ -26,9 +26,6 @@ const MainStyled = styled.div`
   grid-template-columns: 1fr;
   overflow-y: scroll;
   box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset;
-  .open {
-    display: block;
-  }
   .close {
     display: none;
   }

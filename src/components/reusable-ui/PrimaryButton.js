@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { theme } from "../../theme";
 
-export default function PrimaryButton({ label, Icon }) {
+export default function PrimaryButton({ label, Icon, classname }) {
   return (
-    <PrimaryButtonStyled>
+    <PrimaryButtonStyled className={classname}>
       <span>{label}</span>
       {Icon && Icon}
     </PrimaryButtonStyled>
@@ -40,7 +40,7 @@ const PrimaryButtonStyled = styled.button`
   :active {
     color: ${theme.colors.white};
     background-color: ${theme.colors.primary_burger};
-    border: 1px solid ${theme.colors.primary_burger};
+    /* border: 1px solid ${theme.colors.primary_burger}; */
   }
 
   &.is-disabled {

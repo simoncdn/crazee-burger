@@ -11,8 +11,7 @@ export default function PanelButton({ label, Icon, className, onClick }) {
 }
 
 const PanelButtonStyled = styled.button`
-  width: auto;
-  height: 100%;
+  height: 43px;
   border-radius: 5px 5px 0px 0px;
   display: flex;
   justify-content: center;
@@ -20,28 +19,26 @@ const PanelButtonStyled = styled.button`
   margin-left: 1px;
   padding: 18px 24px;
   cursor: pointer;
-  border: 1px solid ${theme.colors.greyLight};
-  border-bottom: 2px solid ${theme.colors.greyLight};
-  background-color: ${theme.colors.white};
-  font-weight: ${theme.fonts.weights.regular};
   font-size: ${theme.fonts.size.P1};
-  color: ${theme.colors.greyMedium};
   z-index: 10;
-  :nth-child(2),
-  :nth-child(3) {
-    gap: 12px;
-  }
+  gap: 12px;
+  color: ${theme.colors.white};
+  background-color: ${theme.colors.background_dark};
+  border: 1px solid ${theme.colors.background_dark};
+  border-bottom: 2px solid ${theme.colors.background_dark};
+  font-weight: ${theme.fonts.weights.regular};
+  transform: translateY(-1px);
   :hover {
     text-decoration: underline;
-    border-bottom: 2px solid ${theme.colors.white};
   }
-  &.active {
-    height: 43px;
-    color: ${theme.colors.white};
-    background-color: ${theme.colors.background_dark};
-    border: 1px solid ${theme.colors.background_dark};
-    border-bottom: 2px solid ${theme.colors.background_dark};
+  &.unactivated {
+    border-bottom: 2px solid ${theme.colors.greyLight};
+    background-color: ${theme.colors.white};
     font-weight: ${theme.fonts.weights.regular};
-    transform: translateY(0);
+    color: ${theme.colors.greyMedium};
+    border: 1px solid ${theme.colors.greyLight};
+    :hover {
+      border-bottom: 1px solid ${theme.colors.white};
+    }
   }
 `;
