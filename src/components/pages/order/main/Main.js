@@ -6,14 +6,12 @@ import Menu from "./Menu";
 import { theme } from "../../../../theme";
 
 export default function Main() {
-  const { isWindowPanel, isAdminMode } = useContext(GlobalContext);
+  const { isAdminMode } = useContext(GlobalContext);
 
   return (
     <MainStyled>
       <Menu />
-      <div className={isAdminMode ? "" : "close"}>
-        <Panel className={isWindowPanel ? "max-height" : "min-height"} />
-      </div>
+      {isAdminMode ? <Panel /> : null}
     </MainStyled>
   );
 }
@@ -26,13 +24,4 @@ const MainStyled = styled.div`
   grid-template-columns: 1fr;
   overflow-y: scroll;
   box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset;
-  .close {
-    display: none;
-  }
-  .max-height {
-    height: 292px;
-  }
-  .min-height {
-    height: 42px;
-  }
 `;

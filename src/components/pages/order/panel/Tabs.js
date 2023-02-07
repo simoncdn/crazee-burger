@@ -1,28 +1,12 @@
 import React, { useContext } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
-import { MdModeEditOutline } from "react-icons/md";
 import styled from "styled-components";
 import GlobalContext from "../../../context/GlobalContext";
 import PanelButton from "../../../reusable-ui/PanelButton";
 import TogglePanelButton from "./TogglePanelButton";
-import WindowPanel from "./WindowPanel";
 
-export default function Tabs() {
-  const { isWindowPanel, setIsWindowPanel, isTabIndex, setIsTabIndex } =
+export default function Tabs({ tabs }) {
+  const { setIsWindowPanel, isTabIndex, setIsTabIndex } =
     useContext(GlobalContext);
-
-  const tabs = [
-    {
-      action: "add",
-      label: "Ajouter un produit",
-      icon: <AiOutlinePlus className="icon" />,
-    },
-    {
-      action: "modify",
-      label: "Modifier un produit",
-      icon: <MdModeEditOutline className="icon" />,
-    },
-  ];
 
   const changeTab = (action) => {
     setIsTabIndex(action);
@@ -42,12 +26,6 @@ export default function Tabs() {
           onClick={() => changeTab(tab.action)}
         />
       ))}
-
-      <WindowPanel
-        className={isWindowPanel ? "" : "close"}
-        tabs={tabs}
-        isTabIndex={isTabIndex}
-      />
     </TabsPanelStyled>
   );
 }
@@ -58,8 +36,4 @@ const TabsPanelStyled = styled.nav`
   position: relative;
   height: 100%;
   padding-left: 70px;
-
-  &.close {
-    display: none;
-  }
 `;

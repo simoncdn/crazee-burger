@@ -8,6 +8,7 @@ import GlobalContext from "../../../context/GlobalContext";
 
 export default function TogglePanelButton() {
   const { isWindowPanel, setIsWindowPanel } = useContext(GlobalContext);
+
   return (
     <TogglePanelButtonStyled
       onClick={() => setIsWindowPanel(!isWindowPanel)}
@@ -40,7 +41,7 @@ const TogglePanelButtonStyled = styled.button`
   font-size: ${theme.fonts.size.P1};
   color: ${theme.colors.greyMedium};
   z-index: 10;
-  transform: translateY(-1px);
+  transform: translateY(1px);
   :hover {
     border-bottom: 2px solid ${theme.colors.white};
   }

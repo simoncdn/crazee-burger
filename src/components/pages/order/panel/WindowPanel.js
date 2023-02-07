@@ -11,7 +11,7 @@ export default function WindowPanel({ className, tabs, isTabIndex }) {
           }
           key={index}
         >
-          {tab.action}
+          {tab.window}
         </div>
       ))}
     </WindowPanelStyled>
@@ -20,10 +20,10 @@ export default function WindowPanel({ className, tabs, isTabIndex }) {
 
 const WindowPanelStyled = styled.div`
   width: 100%;
-  height: 251px;
-  position: absolute;
+  height: 250px;
+  position: relative;
   right: 0;
-  left: 0px;
+  left: 0;
   bottom: 0;
   background-color: ${theme.colors.white};
   border-top: 1px solid ${theme.colors.greyLight};
