@@ -20,7 +20,7 @@ const PanelButtonStyled = styled.button`
   padding: 18px 24px;
   cursor: pointer;
   font-size: ${theme.fonts.size.P1};
-  gap: 12px;
+  gap: 13px;
   color: ${theme.colors.white};
   background-color: ${theme.colors.background_dark};
   border: 1px solid ${theme.colors.background_dark};
