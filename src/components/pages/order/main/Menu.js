@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
-import fakeData from "../../../../fakeData/fakeMenu";
+import GlobalContext from "../../../../context/GlobalContext";
 import { theme } from "../../../../theme";
 import { formatPrice } from "../../../../utils/maths";
 import Card from "../../../reusable-ui/Card";
 
 export default function Menu() {
-  const [menu, setMenu] = useState(fakeData);
+  const { data } = useContext(GlobalContext);
+
   return (
     <MenuStyled>
-      {menu.map((product) => (
+      {data.map((product) => (
         <Card
           key={product.id}
           title={product.title}
