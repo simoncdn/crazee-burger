@@ -4,11 +4,13 @@ import { theme } from "../../../theme";
 import Main from "./main/Main";
 import { useState } from "react";
 import GlobalContext from "../../../context/GlobalContext";
+import fakeMenu2 from "../../../fakeData/fakeMenu";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
+  const [data, setData] = useState(fakeMenu2);
 
   const globalContextValue = {
     isAdminMode,
@@ -17,6 +19,8 @@ export default function OrderPage() {
     setIsCollapsed,
     currentTabSelected,
     setCurrentTabSelected,
+    data,
+    setData,
   };
 
   return (
