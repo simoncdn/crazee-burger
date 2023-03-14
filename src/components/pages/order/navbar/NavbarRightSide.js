@@ -5,7 +5,7 @@ import AdminToast from "./AdminToast";
 import Profile from "./Profile";
 import ToggleButton from "../../../reusable-ui/ToggleButton";
 import { useContext } from "react";
-import GlobalContext from "../../../context/GlobalContext";
+import GlobalContext from "../../../../context/GlobalContext";
 
 export default function NavbarRightSide() {
   const { isAdminMode, setIsAdminMode } = useContext(GlobalContext);
