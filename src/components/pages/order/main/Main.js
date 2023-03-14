@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import GlobalContext from "../../../context/GlobalContext";
-import Panel from "../panel/Panel";
 import Menu from "./Menu";
 import { theme } from "../../../../theme";
+import Admin from "./admin/Admin";
+import GlobalContext from "../../../../context/GlobalContext";
 
 export default function Main() {
   const { isAdminMode } = useContext(GlobalContext);
@@ -11,7 +11,7 @@ export default function Main() {
   return (
     <MainStyled>
       <Menu />
-      {isAdminMode ? <Panel /> : null}
+      {isAdminMode && <Admin />}
     </MainStyled>
   );
 }
