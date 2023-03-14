@@ -2,21 +2,21 @@ import Navbar from "./navbar/Navbar";
 import styled from "styled-components";
 import { theme } from "../../../theme";
 import Main from "./main/Main";
-import GlobalContext from "../../context/GlobalContext";
 import { useState } from "react";
+import GlobalContext from "../../../context/GlobalContext";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
-  const [isWindowPanel, setIsWindowPanel] = useState(true);
-  const [isTabIndex, setIsTabIndex] = useState("add");
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [currentTabSelected, setCurrentTabSelected] = useState("add");
 
   const globalContextValue = {
     isAdminMode,
     setIsAdminMode,
-    isWindowPanel,
-    setIsWindowPanel,
-    isTabIndex,
-    setIsTabIndex,
+    isCollapsed,
+    setIsCollapsed,
+    currentTabSelected,
+    setCurrentTabSelected,
   };
 
   return (
