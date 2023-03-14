@@ -34,11 +34,7 @@ export default function AdmninTabs() {
           key={tab.index}
           label={tab.label}
           Icon={tab.Icon}
-          onClick={
-            tab.index === "chevronUpDown"
-              ? () => setIsCollapsed(!isCollapsed)
-              : () => selectTab(tab.index)
-          }
+          onClick={() => selectTab(tab.index)}
           className={currentTabSelected === tab.index ? "is-active" : ""}
         />
       ))}
