@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../../theme";
 import { FiCheck } from "react-icons/fi";
@@ -11,10 +10,11 @@ export default function SubmitButton({ isSuccess }) {
         label={"Ajouter un nouveau produit au menu"}
         classname="submit-btn"
       />
+
       {isSuccess && (
-        <div className="validation">
-          <FiCheck className="icon" />
-          <p>Ajouté avec succès !</p>
+        <div className="success-msg">
+          <FiCheck className="success-icon" />
+          <p className="success-txt">Ajouté avec succès !</p>
         </div>
       )}
     </SubmitButtonStyled>
@@ -22,16 +22,15 @@ export default function SubmitButton({ isSuccess }) {
 }
 
 const SubmitButtonStyled = styled.div`
-  grid-column-start: 2;
-  grid-column-end: 3;
+  grid-area: 4 / 2 / 5 / 3;
   height: 35px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 18px;
   .submit-btn {
     padding: 0px 24px;
-    height: 100%;
-    width: 40%;
-    font-size: ${theme.fonts.size.P0};
-    font-weight: ${theme.fonts.weights.semiBold};
+    font-size: ${theme.fonts.size.XS};
+    font-weight: ${theme.fonts.weights.bold};
     background-color: ${theme.colors.success};
     border: 1px solid ${theme.colors.success};
     :hover {
@@ -53,11 +52,19 @@ const SubmitButtonStyled = styled.div`
       }
     }
   }
-  .validation {
+  .success-msg {
     display: flex;
     justify-content: start;
     align-items: center;
-    margin-left: 20px;
-    animation: success 2s infinite;
+    gap: 8px;
+    .success-icon {
+      color: ${theme.colors.success};
+      border: 1px solid ${theme.colors.success};
+      border-radius: ${theme.borderRadius.extraRound};
+    }
+    .success-txt {
+      color: ${theme.colors.success};
+      font-size: ${theme.fonts.size.P0};
+    }
   }
 `;
