@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../../../theme";
 
-export default function ImagePreview({ defaultImageSource, inputData }) {
+export default function ImagePreview({ inputData }) {
   return (
     <ImpagePreviewStyled>
       {inputData === "" ? (

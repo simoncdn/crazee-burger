@@ -57,10 +57,7 @@ export default function AddForm() {
 
   return (
     <AddFormStyled onSubmit={handleSubmit}>
-      <ImagePreview
-        picture={defaultImageSource}
-        inputData={inputData.imageSource}
-      />
+      <ImagePreview inputData={inputData.imageSource} />
 
       <div className="inputs-fields">
         {inputsConfig.map((input, index) => (
