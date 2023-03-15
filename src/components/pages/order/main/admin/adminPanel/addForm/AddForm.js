@@ -99,13 +99,13 @@ const AddFormStyled = styled.form`
       display: flex;
       align-items: center;
       border-radius: 5px;
-      padding: 0px 14px;
+      padding: 0px 24px;
       margin: 0;
       height: 35px;
-      gap: ${theme.spacing.sm};
       background-color: ${theme.colors.background_white};
       .icon {
         color: ${theme.colors.greySemiDark};
+        margin-right: 15px;
       }
       input {
         width: 100%;
