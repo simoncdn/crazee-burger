@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import GlobalContext from "../../../../../../context/GlobalContext";
-
 import { theme } from "../../../../../../theme";
 import ImagePreview from "./ImagePreview";
 import { inputsConfig } from "./inputsConfig";
@@ -73,7 +72,7 @@ export default function AddForm() {
             Icon={input.icon}
             onChange={handleChange}
             pattern={input.name === "imageSource" ? input.pattern : null}
-            className="input"
+            className="addFormInput"
           />
         ))}
       </div>
@@ -86,29 +85,24 @@ export default function AddForm() {
 const AddFormStyled = styled.form`
   width: 80%;
   display: grid;
-  grid-column-gap: 20px;
-  grid-row-gap: 8px;
   padding: 40px 0px 45px 60px;
   grid-template-columns: 1fr 4fr;
   grid-template-rows: repeat(4, 35px);
+  grid-row-gap: ${theme.spacing.xs};
+  grid-column-gap: ${theme.spacing.md};
 
   .inputs-fields {
     display: grid;
-    gap: 8px;
-    width: 100%;
-    height: 100%;
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 4;
-    .input {
+    gap: ${theme.spacing.xs};
+    grid-area: 1 / 2 / 4 / 3;
+    .addFormInput {
       display: flex;
       align-items: center;
       border-radius: 5px;
-      gap: 12px;
       padding: 0px 14px;
       margin: 0;
       height: 35px;
+      gap: ${theme.spacing.sm};
       background-color: ${theme.colors.background_white};
       .icon {
         color: ${theme.colors.greySemiDark};
