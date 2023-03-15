@@ -49,7 +49,6 @@ const CardStyled = styled.div`
     width: 20px;
     height: 20px;
     border-radius: ${theme.borderRadius.extraRound};
-    z-index: 20;
     background-color: ${theme.colors.primary};
     display: flex;
     justify-content: center;
