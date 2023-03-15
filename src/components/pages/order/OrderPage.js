@@ -17,6 +17,13 @@ export default function OrderPage() {
     const menuUpdate = [productToAdd, ...menuCopy];
     setMenu(menuUpdate);
   };
+  const handleRemove = (productToRemove) => {
+    const menuCopy = [...menu];
+    const menuUpdate = menuCopy.filter(
+      (product) => product.id !== productToRemove
+    );
+    setMenu(menuUpdate);
+  };
 
   const globalContextValue = {
     isAdminMode,
@@ -28,6 +35,7 @@ export default function OrderPage() {
     menu,
     setMenu,
     handleAdd,
+    handleRemove,
   };
 
   return (
