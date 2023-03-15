@@ -13,6 +13,7 @@ export default function Menu() {
       {menu.map((product) => (
         <Card
           key={product.id}
+          id={product.id}
           title={product.title}
           image={product.imageSource}
           leftDescription={formatPrice(product.price)}
