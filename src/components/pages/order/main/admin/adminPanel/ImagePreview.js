@@ -25,13 +25,13 @@ export default function ImagePreview({ defaultImageSource, inputData }) {
 }
 
 const ImpagePreviewStyled = styled.div`
-  border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   text-align: center;
   grid-area: 1 / 1 / 4 / 2;
+  border-radius: ${theme.borderRadius.round};
   .image-found {
     width: 100%;
     height: 100%;

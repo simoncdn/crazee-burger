@@ -56,7 +56,7 @@ const SubmitButtonStyled = styled.div`
     display: flex;
     justify-content: start;
     align-items: center;
-    gap: 8px;
+    gap: ${theme.spacing.xs};
     .success-icon {
       color: ${theme.colors.success};
       border: 1px solid ${theme.colors.success};
