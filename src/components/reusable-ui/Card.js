@@ -1,10 +1,19 @@
 import styled from "styled-components";
 import { theme } from "../../theme/index";
 import PrimaryButton from "./PrimaryButton";
+import { RxCross2 } from "react-icons/rx";
+import { useContext } from "react";
+import GlobalContext from "../../context/GlobalContext";
 
-export default function Card({ title, image, leftDescription }) {
+export default function Card({ title, image, leftDescription, id }) {
+  const { isAdminMode, handleRemove } = useContext(GlobalContext);
   return (
     <CardStyled>
+      {isAdminMode && (
+        <button className="delete-btn" onClick={() => handleRemove(id)}>
+          <RxCross2 className="icon" />
+        </button>
+      )}
       <div className="image">
         <img src={image} alt={title} />
       </div>
@@ -30,6 +39,26 @@ const CardStyled = styled.div`
   box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
   border-radius: ${theme.borderRadius.extraRound};
   background-color: ${theme.colors.white};
+  position: relative;
+  .delete-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 20px;
+    margin-right: 20px;
+    width: 20px;
+    height: 20px;
+    border-radius: ${theme.borderRadius.extraRound};
+    z-index: 20;
+    background-color: ${theme.colors.primary};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    .icon {
+      color: ${theme.colors.white};
+    }
+  }
   .image {
     width: 100%;
     height: auto;
