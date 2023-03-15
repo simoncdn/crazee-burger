@@ -55,6 +55,7 @@ const CardStyled = styled.div`
     justify-content: center;
     align-items: center;
     border: none;
+    cursor: pointer;
     .icon {
       color: ${theme.colors.white};
     }
