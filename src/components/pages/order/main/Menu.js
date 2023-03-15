@@ -6,11 +6,11 @@ import { formatPrice } from "../../../../utils/maths";
 import Card from "../../../reusable-ui/Card";
 
 export default function Menu() {
-  const { data } = useContext(GlobalContext);
+  const { menu } = useContext(GlobalContext);
 
   return (
     <MenuStyled>
-      {data.map((product) => (
+      {menu.map((product) => (
         <Card
           key={product.id}
           title={product.title}
