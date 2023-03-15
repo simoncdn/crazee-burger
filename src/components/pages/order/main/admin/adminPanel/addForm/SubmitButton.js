@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { theme } from "../../../../../../theme";
+import { theme } from "../../../../../../../theme";
 import { FiCheck } from "react-icons/fi";
-import PrimaryButton from "../../../../../reusable-ui/PrimaryButton";
+import PrimaryButton from "../../../../../../reusable-ui/PrimaryButton";
 
 export default function SubmitButton({ isSuccess }) {
   return (

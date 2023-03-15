@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import GlobalContext from "../../../../../../context/GlobalContext";
-import { theme } from "../../../../../../theme";
+import GlobalContext from "../../../../../../../context/GlobalContext";
+import { theme } from "../../../../../../../theme";
 import ImagePreview from "./ImagePreview";
 import { inputsConfig } from "./inputsConfig";
-import TextInput from "../../../../../reusable-ui/TextInput";
+import TextInput from "../../../../../../reusable-ui/TextInput";
 import defaultImageSource from "./coming-soon.png";
-import { productDefault } from "../../../../../../fakeData/productDefault";
+import { productDefault } from "../../../../../../../fakeData/productDefault";
 import SubmitButton from "./SubmitButton";
 
 const initialState = {
