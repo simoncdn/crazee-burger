@@ -1,16 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import { theme } from "../../../../../../theme";
 
 export default function ImagePreview({ defaultImageSource, inputData }) {
   return (
     <ImpagePreviewStyled>
       {inputData === "" ? (
-        <div className="noImage">
+        <div className="image-undefined">
           <p>Aucune Image</p>
         </div>
       ) : (
         <div
-          className="image"
+          className="image-found"
           style={{
             backgroundImage: `url(${inputData})`,
             backgroundPosition: "center",
@@ -30,25 +31,23 @@ const ImpagePreviewStyled = styled.div`
   align-items: center;
   position: relative;
   text-align: center;
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 4;
-  .image {
+  grid-area: 1 / 1 / 4 / 2;
+  .image-found {
     width: 100%;
     height: 100%;
   }
-  .noImage {
+  .image-undefined {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid grey;
+    border: 1px solid ${theme.colors.greyLight};
     p {
       width: 100%;
       position: absolute;
-      color: lightgray;
+      font-size: ${theme.fonts.size.P0};
+      color: ${theme.colors.greySemiDark};
     }
   }
 `;
