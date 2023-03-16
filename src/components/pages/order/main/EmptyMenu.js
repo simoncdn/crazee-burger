@@ -7,7 +7,7 @@ export default function EmptyMenu() {
   return (
     <EmptyMenuStyled>
       <h3>Le menu est vide ?</h3>
-      <p>cliquez ci-dessous pour le réinitialiser</p>
+      <p>Cliquez ci-dessous pour le réinitialiser</p>
       <PrimaryButton
         label="Générer de nouveaux produits"
         classname="empty-button"
@@ -23,7 +23,7 @@ const EmptyMenuStyled = styled.div`
   align-items: center;
   h3,
   p {
-    text-transform: capitalize;
+    text-transform: uppercase;
     font-family: "Amatic SC";
     font-size: ${theme.fonts.size.P4};
     color: ${theme.colors.greyBlue};
