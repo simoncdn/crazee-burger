@@ -1,16 +1,32 @@
-import React from "react";
 import Navbar from "./navbar/Navbar";
 import styled from "styled-components";
 import { theme } from "../../../theme";
 import Main from "./main/Main";
+import { useState } from "react";
+import GlobalContext from "../../../context/GlobalContext";
 
 export default function OrderPage() {
+  const [isAdminMode, setIsAdminMode] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [currentTabSelected, setCurrentTabSelected] = useState("add");
+
+  const globalContextValue = {
+    isAdminMode,
+    setIsAdminMode,
+    isCollapsed,
+    setIsCollapsed,
+    currentTabSelected,
+    setCurrentTabSelected,
+  };
+
   return (
     <OrderPageStyled>
-      <div className="container">
-        <Navbar />
-        <Main />
-      </div>
+      <GlobalContext.Provider value={globalContextValue}>
+        <div className="container">
+          <Navbar />
+          <Main />
+        </div>
+      </GlobalContext.Provider>
     </OrderPageStyled>
   );
 }
