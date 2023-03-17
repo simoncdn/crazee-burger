@@ -2,15 +2,18 @@ import styled from "styled-components";
 import { theme } from "../../theme/index";
 import PrimaryButton from "./PrimaryButton";
 import { RxCross2 } from "react-icons/rx";
-import { useContext } from "react";
-import GlobalContext from "../../context/GlobalContext";
 
-export default function Card({ title, image, leftDescription, id }) {
-  const { isAdminMode, handleRemove } = useContext(GlobalContext);
+export default function Card({
+  title,
+  image,
+  leftDescription,
+  hasDeleteButton,
+  handleRemove,
+}) {
   return (
     <CardStyled>
-      {isAdminMode && (
-        <button className="delete-btn" onClick={() => handleRemove(id)}>
+      {hasDeleteButton && (
+        <button className="delete-btn" onClick={handleRemove}>
           <RxCross2 className="icon" />
         </button>
       )}
