@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { theme } from "../../../../theme";
 import PrimaryButton from "../../../reusable-ui/PrimaryButton";
 
-export default function EmptyMenu() {
+export default function EmptyMenu({ refreshMenu }) {
   return (
     <EmptyMenuStyled>
       <h3>Le menu est vide ?</h3>
@@ -11,6 +11,7 @@ export default function EmptyMenu() {
       <PrimaryButton
         label="Générer de nouveaux produits"
         classname="empty-button"
+        onClick={refreshMenu}
       />
     </EmptyMenuStyled>
   );
