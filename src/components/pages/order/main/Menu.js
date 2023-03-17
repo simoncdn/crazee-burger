@@ -4,12 +4,16 @@ import GlobalContext from "../../../../context/GlobalContext";
 import { theme } from "../../../../theme";
 import { formatPrice } from "../../../../utils/maths";
 import Card from "../../../reusable-ui/Card";
-
+import EmptyMenu from "./EmptyMenu";
 const IMAGE_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
-  const { menu, isAdminMode, handleRemove } = useContext(GlobalContext);
+  const { menu, isAdminMode, handleRemove, refreshMenu } =
+    useContext(GlobalContext);
 
+  if (menu.length === 0) {
+    return <EmptyMenu refreshMenu={refreshMenu} />;
+  }
   return (
     <MenuStyled>
       {menu.map(({ id, title, imageSource, price }) => (

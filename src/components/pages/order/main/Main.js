@@ -4,14 +4,13 @@ import Menu from "./Menu";
 import { theme } from "../../../../theme";
 import Admin from "./admin/Admin";
 import GlobalContext from "../../../../context/GlobalContext";
-import EmptyMenu from "./EmptyMenu";
 
 export default function Main() {
-  const { menu, isAdminMode } = useContext(GlobalContext);
+  const { isAdminMode } = useContext(GlobalContext);
 
   return (
     <MainStyled>
-      {menu.length > 0 ? <Menu /> : <EmptyMenu />}
+      <Menu />
       {isAdminMode && <Admin />}
     </MainStyled>
   );
