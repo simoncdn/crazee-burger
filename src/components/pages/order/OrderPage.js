@@ -24,6 +24,9 @@ export default function OrderPage() {
     );
     setMenu(menuUpdate);
   };
+  const refreshMenu = () => {
+    setMenu(fakeMenu.MEDIUM);
+  };
 
   const globalContextValue = {
     isAdminMode,
@@ -36,6 +39,7 @@ export default function OrderPage() {
     setMenu,
     handleAdd,
     handleRemove,
+    refreshMenu,
   };
 
   return (
