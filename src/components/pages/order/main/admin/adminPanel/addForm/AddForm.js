@@ -1,11 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import GlobalContext from "../../../../../../../context/GlobalContext";
 import { theme } from "../../../../../../../theme";
 import ImagePreview from "./ImagePreview";
 import { inputsConfig } from "./inputsConfig";
 import TextInput from "../../../../../../reusable-ui/TextInput";
-import defaultImageSource from "./coming-soon.png";
 import { productDefault } from "../../../../../../../fakeData/productDefault";
 import SubmitButton from "./SubmitButton";
 
@@ -32,28 +31,18 @@ export default function AddForm() {
       ...productDefault,
       id: currentId + 1,
       title: inputData.title,
-      imageSource:
-        inputData.imageSource === ""
-          ? defaultImageSource
-          : inputData.imageSource,
-      price:
-        typeof parseInt(inputData.price) === "number" ? inputData.price : "Nan",
+      imageSource: inputData.imageSource,
+      price: inputData.price ? inputData.price : 0,
     };
 
     handleAdd(newProduct);
     setInputData(initialState);
-    e.target.reset();
-    setIsSuccess(true);
-  };
 
-  useEffect(() => {
-    let timer = setTimeout(() => {
+    setIsSuccess(true);
+    setTimeout(() => {
       setIsSuccess(false);
     }, 2000);
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [isSuccess]);
+  };
 
   return (
     <AddFormStyled onSubmit={handleSubmit}>
@@ -66,6 +55,7 @@ export default function AddForm() {
             type={input.type}
             name={input.name}
             placeholder={input.placeholder}
+            value={inputData[input.name]}
             Icon={input.icon}
             onChange={handleChange}
             pattern={input.name === "imageSource" ? input.pattern : null}

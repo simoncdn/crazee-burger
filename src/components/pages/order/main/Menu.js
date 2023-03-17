@@ -5,18 +5,21 @@ import { theme } from "../../../../theme";
 import { formatPrice } from "../../../../utils/maths";
 import Card from "../../../reusable-ui/Card";
 
+const IMAGE_DEFAULT = "/images/coming-soon.png";
+
 export default function Menu() {
-  const { menu } = useContext(GlobalContext);
+  const { menu, isAdminMode, handleRemove } = useContext(GlobalContext);
 
   return (
     <MenuStyled>
-      {menu.map((product) => (
+      {menu.map(({ id, title, imageSource, price }) => (
         <Card
-          key={product.id}
-          id={product.id}
-          title={product.title}
-          image={product.imageSource}
-          leftDescription={formatPrice(product.price)}
+          key={id}
+          title={title}
+          image={imageSource ? imageSource : IMAGE_DEFAULT}
+          leftDescription={formatPrice(price)}
+          hasDeleteButton={isAdminMode}
+          handleRemove={() => handleRemove(id)}
         />
       ))}
     </MenuStyled>
