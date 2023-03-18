@@ -34,12 +34,14 @@ export default function LoginForm() {
         placeholder={"Entrez votre prénom"}
         type={"text"}
         required
+        variant="normal"
         Icon={<BsPersonCircle className="icon" />}
       />
 
       <PrimaryButton
         label={"Accéder à mon espace"}
         Icon={<IoChevronForward className="icon" />}
+        variant="normal"
       />
     </LoginFormStyled>
   );

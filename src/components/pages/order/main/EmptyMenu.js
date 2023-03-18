@@ -12,6 +12,7 @@ export default function EmptyMenu({ refreshMenu }) {
         label="Générer de nouveaux produits"
         classname="empty-button"
         onClick={refreshMenu}
+        variant="normal"
       />
     </EmptyMenuStyled>
   );
