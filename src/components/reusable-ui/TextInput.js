@@ -51,21 +51,23 @@ const minimalistStyle = css`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 55px;
   border-radius: ${theme.borderRadius.round};
-  padding: 18px 24px;
-  margin: 18px 0;
   background-color: ${theme.colors.background_white};
+  padding: 0px 24px;
+  margin: 0;
+  height: 35px;
+
   .icon {
     color: ${theme.colors.greySemiDark};
     font-size: ${theme.fonts.size.P0};
-    margin-right: 8px;
+    margin-right: 15px;
   }
   input {
     font-size: ${theme.fonts.size.P0};
     color: ${theme.colors.dark};
     border: none;
     width: 100%;
+    background-color: ${theme.colors.background_white};
     &::placeholder {
       color: ${theme.colors.greySemiDark};
       background-color: ${theme.colors.background_white};

@@ -10,6 +10,9 @@ import SubmitMessage from "./SubmitMessage";
 import Button from "../../../../../../reusable-ui/Button";
 
 const initialState = {
+  idTitle: crypto.randomUUID(),
+  idImageSource: crypto.randomUUID(),
+  idPrice: crypto.randomUUID(),
   title: "",
   imageSource: "",
   price: 0,
@@ -33,7 +36,7 @@ export default function AddForm() {
       imageSource: inputData.imageSource,
       price: inputData.price,
     };
-
+    console.log(newProduct);
     handleAdd(newProduct);
     setInputData(initialState);
 
@@ -43,27 +46,28 @@ export default function AddForm() {
     }, 2000);
   };
 
+  const inputs = getInputsConfig(inputData);
   return (
     <AddFormStyled onSubmit={handleSubmit}>
       <ImagePreview inputData={inputData.imageSource} />
 
       <div className="inputs-fields">
-        {getInputsConfig(inputData).map(
-          ({ id, type, name, placeholder, value, Icon, pattern }) => (
+        {inputs.map(({ id, type, name, placeholder, value, Icon, pattern }) => {
+          console.log(id);
+          return (
             <TextInput
               key={id}
               type={type}
               name={name}
-              placeholder={placeholder}
               value={value}
+              placeholder={placeholder}
+              pattern={name === "imageSource" ? pattern : null}
               Icon={Icon}
               onChange={handleChange}
-              pattern={name === "imageSource" ? pattern : null}
-              className="addFormInput"
               variant="minimalist"
             />
-          )
-        )}
+          );
+        })}
       </div>
 
       <div className="submit-button">
@@ -91,14 +95,6 @@ const AddFormStyled = styled.form`
     display: grid;
     gap: ${theme.spacing.xs};
     grid-area: 1 / 2 / 4 / 3;
-    .addFormInput {
-      padding: 0px 24px;
-      margin: 0;
-      height: 35px;
-      .icon {
-        margin-right: 15px;
-      }
-    }
   }
 
   .submit-button {

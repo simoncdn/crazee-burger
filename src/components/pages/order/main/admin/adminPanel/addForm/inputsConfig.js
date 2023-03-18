@@ -4,7 +4,7 @@ import { MdOutlineEuro } from "react-icons/md";
 
 export const getInputsConfig = (inputData) => [
   {
-    id: crypto.randomUUID(),
+    id: inputData.idTitle,
     name: "title",
     type: "text",
     value: inputData.title,
@@ -12,7 +12,7 @@ export const getInputsConfig = (inputData) => [
     Icon: <FaHamburger className="icon" />,
   },
   {
-    id: crypto.randomUUID(),
+    id: inputData.idImageSource,
     name: "imageSource",
     type: "url",
     value: inputData.imageSource,
@@ -22,7 +22,7 @@ export const getInputsConfig = (inputData) => [
     Icon: <BsFillCameraFill className="icon" />,
   },
   {
-    id: crypto.randomUUID(),
+    id: inputData.idPrice,
     name: "price",
     type: "text",
     value: inputData.price ? inputData.price : "",
