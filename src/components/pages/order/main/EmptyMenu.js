@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../theme";
-import PrimaryButton from "../../../reusable-ui/PrimaryButton";
+import Button from "../../../reusable-ui/Button";
 
 export default function EmptyMenu({ refreshMenu }) {
   return (
     <EmptyMenuStyled>
       <h3>Le menu est vide ?</h3>
       <p>Cliquez ci-dessous pour le réinitialiser</p>
-      <PrimaryButton
+      <Button
         label="Générer de nouveaux produits"
         classname="empty-button"
         onClick={refreshMenu}

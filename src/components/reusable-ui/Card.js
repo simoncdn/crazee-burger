@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { theme } from "../../theme/index";
-import PrimaryButton from "./PrimaryButton";
 import { RxCross2 } from "react-icons/rx";
+import Button from "./Button";
 
 export default function Card({
   title,
@@ -25,7 +25,11 @@ export default function Card({
         <div className="description">
           <div className="left-description">{leftDescription}</div>
           <div className="right-description">
-            <PrimaryButton classname="primary-button" label={"Ajouter"} />
+            <Button
+              classname="primary-button"
+              label={"Ajouter"}
+              variant="normal"
+            />
           </div>
         </div>
       </div>

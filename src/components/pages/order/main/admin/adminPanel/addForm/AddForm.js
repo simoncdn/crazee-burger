@@ -3,19 +3,19 @@ import styled from "styled-components";
 import GlobalContext from "../../../../../../../context/GlobalContext";
 import { theme } from "../../../../../../../theme";
 import ImagePreview from "./ImagePreview";
-import { inputsConfig } from "./inputsConfig";
+import { getInputsConfig } from "./inputsConfig";
 import TextInput from "../../../../../../reusable-ui/TextInput";
 import { productDefault } from "../../../../../../../fakeData/productDefault";
-import SubmitButton from "./SubmitButton";
+import SubmitMessage from "./SubmitMessage";
+import Button from "../../../../../../reusable-ui/Button";
 
 const initialState = {
   title: "",
   imageSource: "",
-  price: "",
+  price: 0,
 };
 export default function AddForm() {
-  const { menu, handleAdd } = useContext(GlobalContext);
-  const [currentId, setCurrentId] = useState(menu.length);
+  const { handleAdd } = useContext(GlobalContext);
   const [inputData, setInputData] = useState(initialState);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -25,14 +25,13 @@ export default function AddForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setCurrentId(currentId + 1);
 
     const newProduct = {
       ...productDefault,
-      id: currentId + 1,
+      id: crypto.randomUUID(),
       title: inputData.title,
       imageSource: inputData.imageSource,
-      price: inputData.price ? inputData.price : 0,
+      price: inputData.price,
     };
 
     handleAdd(newProduct);
@@ -49,22 +48,32 @@ export default function AddForm() {
       <ImagePreview inputData={inputData.imageSource} />
 
       <div className="inputs-fields">
-        {inputsConfig.map((input, index) => (
-          <TextInput
-            key={index}
-            type={input.type}
-            name={input.name}
-            placeholder={input.placeholder}
-            value={inputData[input.name]}
-            Icon={input.icon}
-            onChange={handleChange}
-            pattern={input.name === "imageSource" ? input.pattern : null}
-            className="addFormInput"
-          />
-        ))}
+        {getInputsConfig(inputData).map(
+          ({ id, type, name, placeholder, value, Icon, pattern }) => (
+            <TextInput
+              key={id}
+              type={type}
+              name={name}
+              placeholder={placeholder}
+              value={value}
+              Icon={Icon}
+              onChange={handleChange}
+              pattern={name === "imageSource" ? pattern : null}
+              className="addFormInput"
+              variant="minimalist"
+            />
+          )
+        )}
       </div>
 
-      <SubmitButton isSuccess={isSuccess} />
+      <div className="submit-button">
+        <Button
+          label={"Ajouter un nouveau produit au menu"}
+          classname="submit-btn"
+          variant="success"
+        />
+        {isSuccess && <SubmitMessage />}
+      </div>
     </AddFormStyled>
   );
 }
@@ -83,26 +92,20 @@ const AddFormStyled = styled.form`
     gap: ${theme.spacing.xs};
     grid-area: 1 / 2 / 4 / 3;
     .addFormInput {
-      display: flex;
-      align-items: center;
-      border-radius: 5px;
       padding: 0px 24px;
       margin: 0;
       height: 35px;
-      background-color: ${theme.colors.background_white};
       .icon {
-        color: ${theme.colors.greySemiDark};
         margin-right: 15px;
       }
-      input {
-        width: 100%;
-        border: none;
-        background-color: ${theme.colors.background_white};
-        &::placeholder {
-          color: ${theme.colors.greySemiDark};
-          background-color: ${theme.colors.background_white};
-        }
-      }
     }
+  }
+
+  .submit-button {
+    grid-area: 4 / 2 / 5 / 3;
+    height: 35px;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 18px;
   }
 `;
