@@ -9,36 +9,33 @@ import { productDefault } from "../../../../../../../fakeData/productDefault";
 import SubmitMessage from "./SubmitMessage";
 import Button from "../../../../../../reusable-ui/Button";
 
-const initialState = {
-  idTitle: crypto.randomUUID(),
-  idImageSource: crypto.randomUUID(),
-  idPrice: crypto.randomUUID(),
+const EMPTY_PRODUCT = {
+  id: "",
   title: "",
   imageSource: "",
   price: 0,
 };
 export default function AddForm() {
   const { handleAdd } = useContext(GlobalContext);
-  const [inputData, setInputData] = useState(initialState);
+  const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const handleChange = (e) => {
-    setInputData({ ...inputData, [e.target.name]: e.target.value });
+    setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newProduct = {
+    handleAdd({
       ...productDefault,
       id: crypto.randomUUID(),
-      title: inputData.title,
-      imageSource: inputData.imageSource,
-      price: inputData.price,
-    };
-    console.log(newProduct);
-    handleAdd(newProduct);
-    setInputData(initialState);
+      title: newProduct.title,
+      imageSource: newProduct.imageSource,
+      price: newProduct.price,
+    });
+
+    setNewProduct(EMPTY_PRODUCT);
 
     setIsSuccess(true);
     setTimeout(() => {
@@ -46,12 +43,13 @@ export default function AddForm() {
     }, 2000);
   };
 
-  const inputs = getInputsConfig(inputData);
+  const inputs = getInputsConfig(newProduct);
+
   return (
     <AddFormStyled onSubmit={handleSubmit}>
-      <ImagePreview inputData={inputData.imageSource} />
+      <ImagePreview imageSource={newProduct.imageSource} />
 
-      <div className="inputs-fields">
+      <div className="input-fields">
         {inputs.map(({ id, type, name, placeholder, value, Icon, pattern }) => {
           console.log(id);
           return (
@@ -70,10 +68,10 @@ export default function AddForm() {
         })}
       </div>
 
-      <div className="submit-button">
+      <div className="submit">
         <Button
           label={"Ajouter un nouveau produit au menu"}
-          classname="submit-btn"
+          classname="submit-button"
           variant="success"
         />
         {isSuccess && <SubmitMessage />}
@@ -83,25 +81,33 @@ export default function AddForm() {
 }
 
 const AddFormStyled = styled.form`
-  width: 80%;
-  display: grid;
-  padding: 40px 0px 45px 60px;
-  grid-template-columns: 1fr 4fr;
-  grid-template-rows: repeat(4, 35px);
-  grid-row-gap: ${theme.spacing.xs};
-  grid-column-gap: ${theme.spacing.md};
+  height: 100%;
+  width: 70%;
 
-  .inputs-fields {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: repeat(4, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 8px;
+
+  .input-fields {
+    grid-area: 1 / 2 / 4 / -1;
+
     display: grid;
-    gap: ${theme.spacing.xs};
-    grid-area: 1 / 2 / 4 / 3;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-row-gap: 8px;
   }
 
-  .submit-button {
-    grid-area: 4 / 2 / 5 / 3;
-    height: 35px;
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    gap: 18px;
+  .submit {
+    grid-area: 4 / 2 / -1 / -1;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 3px;
+
+    .submit-button {
+      height: 100%;
+    }
   }
 `;

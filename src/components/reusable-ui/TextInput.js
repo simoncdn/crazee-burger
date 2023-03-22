@@ -18,7 +18,7 @@ export default function TextInput({
 }
 
 const InputStyled = styled.div`
-  ${({ variant }) => extraStyle[variant]}
+  ${({ variant }) => inputStyle[variant]}
 `;
 
 const normalStyle = css`
@@ -75,7 +75,7 @@ const minimalistStyle = css`
   }
 `;
 
-const extraStyle = {
+const inputStyle = {
   normal: normalStyle,
   minimalist: minimalistStyle,
 };

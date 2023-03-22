@@ -44,12 +44,14 @@ export default function AdmninTabs() {
 
 const AdminTabsStyled = styled.nav`
   display: flex;
+  position: absolute;
+  top: -43px;
+  left: 5%;
 
   .is-active {
     background: ${theme.colors.background_dark};
-    color: ${theme.colors.white};
     border-color: ${theme.colors.background_dark};
-    border-bottom: 1px;
+    color: ${theme.colors.white};
   }
 
   button {

@@ -9,22 +9,18 @@ export default function Button({
   variant = "normal",
 }) {
   return (
-    <PrimaryButtonStyled
-      className={classname}
-      onClick={onClick}
-      variant={variant}
-    >
+    <ButtonStyled className={classname} onClick={onClick} variant={variant}>
       <span>{label}</span>
-      {Icon && Icon}
-    </PrimaryButtonStyled>
+      {Icon && <div className="icon">{Icon}</div>}
+    </ButtonStyled>
   );
 }
 
-const PrimaryButtonStyled = styled.button`
-  ${({ variant }) => extraStyle[variant]}
+const ButtonStyled = styled.button`
+  ${({ variant }) => buttonStyle[variant]}
 `;
 
-const buttonStyle = css`
+const normalStyle = css`
   width: 100%;
   display: inline-flex;
   justify-content: center;
@@ -77,55 +73,28 @@ const buttonStyle = css`
   }
 `;
 
-const successButtonStyle = css`
-  width: 100%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  position: relative;
-  white-space: nowrap;
-  text-decoration: none;
-  line-height: 1;
-  border-radius: ${theme.borderRadius.round};
-  color: ${theme.colors.white};
+const successStyle = css`
   cursor: pointer;
-  padding: 0px 24px;
-  font-size: ${theme.fonts.size.XS};
-  font-weight: ${theme.fonts.weights.bold};
-  background-color: ${theme.colors.success};
+  color: ${theme.colors.white};
+  background: ${theme.colors.success};
   border: 1px solid ${theme.colors.success};
+  border-radius: ${theme.borderRadius.round};
+  height: 35px;
+  padding: 0 1.5em;
+  font-weight: ${theme.fonts.weights.semiBold};
   :hover {
-    background-color: ${theme.colors.white};
+    background: ${theme.colors.white};
     color: ${theme.colors.success};
     border: 1px solid ${theme.colors.success};
-    transition: all 200ms ease-out;
   }
   :active {
     color: ${theme.colors.white};
-    background-color: ${theme.colors.success};
-  }
-  &.is-disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-  &.with-focus {
-    border: 1px solid white;
-    background-color: ${theme.colors.white};
-    color: ${theme.colors.success};
-    :hover {
-      color: ${theme.colors.white};
-      background-color: ${theme.colors.succes};
-      border: 1px solid ${theme.colors.white};
-    }
-    :active {
-      background-color: ${theme.colors.white};
-      color: ${theme.colors.success};
-    }
+    background: ${theme.colors.success};
+    border: 1px solid ${theme.colors.success};
   }
 `;
 
-const extraStyle = {
-  normal: buttonStyle,
-  success: successButtonStyle,
+const buttonStyle = {
+  normal: normalStyle,
+  success: successStyle,
 };

@@ -3,15 +3,17 @@ import styled from "styled-components";
 import { theme } from "../../../../theme";
 import Button from "../../../reusable-ui/Button";
 
-export default function EmptyMenu({ refreshMenu }) {
+export default function EmptyMenu({ resetMenu }) {
   return (
     <EmptyMenuStyled>
-      <h3>Le menu est vide ?</h3>
-      <p>Cliquez ci-dessous pour le réinitialiser</p>
+      <span className="title">Le menu est vide ?</span>
+      <span className="description">
+        Cliquez ci-dessous pour le réinitialiser
+      </span>
       <Button
         label="Générer de nouveaux produits"
         classname="empty-button"
-        onClick={refreshMenu}
+        onClick={resetMenu}
         variant="normal"
       />
     </EmptyMenuStyled>
@@ -19,26 +21,28 @@ export default function EmptyMenu({ refreshMenu }) {
 }
 
 const EmptyMenuStyled = styled.div`
+  /* background-color: ${theme.colors.background_white}; */
+  box-shadow: ${theme.shadows.strong};
+  border-bottom-right-radius: ${theme.borderRadius.extraRound};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  h3,
-  p {
-    text-transform: uppercase;
-    font-family: "Amatic SC";
+  .title,
+  .description {
+    font-family: "Amatic SC", cursive;
     font-size: ${theme.fonts.size.P4};
     color: ${theme.colors.greyBlue};
   }
-  h3 {
+  .title {
     font-weight: ${theme.fonts.weights.bold};
   }
-  p {
-    margin-top: 21px;
-    margin-bottom: 31px;
+  .description {
+    margin-top: 20px;
   }
   .empty-button {
-    width: fit-content;
+    margin-top: 30px;
+    width: auto;
     font-size: ${theme.fonts.size.XS};
   }
 `;

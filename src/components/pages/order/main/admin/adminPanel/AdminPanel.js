@@ -14,10 +14,11 @@ export default function AdminPanel() {
 }
 
 const AdminPanelStyled = styled.div`
-  height: 251px;
-  border-bottom-left-radius: ${theme.borderRadius.extraRound};
-  border-bottom-right-radius: ${theme.borderRadius.extraRound};
+  height: 240px;
   background: ${theme.colors.white};
-  border-top: 1px solid ${theme.colors.greyLight};
+  border: 1px solid ${theme.colors.greyLight};
   box-shadow: ${theme.shadows.subtle};
+  box-sizing: border-box; // ajouter ça sinon ça fait grossir le panel
+  padding: 30px 5%; // ajouter au panel et non dans les form car sinon on va devoir le mettre dans les deux form : AddForm et EditForm
+  // les 5% c'est pour les aligner avec le tab.
 `;

@@ -2,52 +2,41 @@ import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../../../theme";
 
-export default function ImagePreview({ inputData }) {
+export default function ImagePreview({ imageSource }) {
   return (
     <ImpagePreviewStyled>
-      {inputData === "" ? (
-        <div className="image-undefined">
-          <p>Aucune Image</p>
-        </div>
+      {imageSource ? (
+        <img src={imageSource} alt="" />
       ) : (
-        <div
-          className="image-found"
-          style={{
-            backgroundImage: `url(${inputData})`,
-            backgroundPosition: "center",
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-          }}
-        ></div>
+        <div className="empty-image">Aucune image</div>
       )}
     </ImpagePreviewStyled>
   );
 }
 
 const ImpagePreviewStyled = styled.div`
+  grid-area: 1 / 1 / 4 / 2;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  text-align: center;
-  grid-area: 1 / 1 / 4 / 2;
-  border-radius: ${theme.borderRadius.round};
-  .image-found {
-    width: 100%;
+
+  .empty-image {
+    /* background-color: green; */
     height: 100%;
-  }
-  .image-undefined {
     width: 100%;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid ${theme.colors.greyLight};
-    p {
-      width: 100%;
-      position: absolute;
-      font-size: ${theme.fonts.size.P0};
-      color: ${theme.colors.greySemiDark};
-    }
+    line-height: 1.5;
+    color: ${theme.colors.greySemiDark};
+    border-radius: ${theme.borderRadius.round};
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
   }
 `;
