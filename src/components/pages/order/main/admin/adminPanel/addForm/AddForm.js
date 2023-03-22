@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import styled from "styled-components";
 import GlobalContext from "../../../../../../../context/GlobalContext";
-import { theme } from "../../../../../../../theme";
 import ImagePreview from "./ImagePreview";
 import { getInputsConfig } from "./inputsConfig";
 import TextInput from "../../../../../../reusable-ui/TextInput";
