@@ -8,11 +8,11 @@ import EmptyMenu from "./EmptyMenu";
 const IMAGE_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
-  const { menu, isAdminMode, handleRemove, refreshMenu } =
+  const { menu, isAdminMode, handleRemove, resetMenu } =
     useContext(GlobalContext);
 
   if (menu.length === 0) {
-    return <EmptyMenu refreshMenu={refreshMenu} />;
+    return <EmptyMenu resetMenu={resetMenu} />;
   }
   return (
     <MenuStyled>

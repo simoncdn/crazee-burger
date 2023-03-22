@@ -24,7 +24,7 @@ export default function OrderPage() {
     );
     setMenu(menuUpdate);
   };
-  const refreshMenu = () => {
+  const resetMenu = () => {
     setMenu(fakeMenu.MEDIUM);
   };
 
@@ -39,7 +39,7 @@ export default function OrderPage() {
     setMenu,
     handleAdd,
     handleRemove,
-    refreshMenu,
+    resetMenu,
   };
 
   return (
