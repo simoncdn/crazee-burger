@@ -4,7 +4,7 @@ import AdmninTabs from "./AdminTabs";
 import AdminPanel from "./adminPanel/AdminPanel";
 import GlobalContext from "../../../../../context/GlobalContext";
 
-export default function Admin({ className }) {
+export default function Admin() {
   const { isCollapsed } = useContext(GlobalContext);
 
   return (
