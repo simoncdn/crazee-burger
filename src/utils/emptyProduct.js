@@ -1,5 +1,5 @@
 export const EMPTY_PRODUCT = {
-  id: crypto.randomUUID(),
+  id: 0,
   imageSource: "",
   title: "",
   price: 0,

@@ -22,6 +22,7 @@ export default function AddForm() {
 
     handleAdd({
       ...newProduct,
+      id: crypto.randomUUID(),
     });
 
     setNewProduct(EMPTY_PRODUCT);
