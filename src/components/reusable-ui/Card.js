@@ -8,12 +8,12 @@ export default function Card({
   image,
   leftDescription,
   hasDeleteButton,
-  handleRemove,
+  onDelete,
 }) {
   return (
     <CardStyled>
       {hasDeleteButton && (
-        <button className="delete-btn" onClick={handleRemove}>
+        <button className="delete-btn" onClick={onDelete}>
           <RxCross2 className="icon" />
         </button>
       )}

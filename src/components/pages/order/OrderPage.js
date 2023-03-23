@@ -17,10 +17,10 @@ export default function OrderPage() {
     const menuUpdate = [productToAdd, ...menuCopy];
     setMenu(menuUpdate);
   };
-  const handleRemove = (productToRemove) => {
+  const handleRemove = (idProductToRemove) => {
     const menuCopy = [...menu];
     const menuUpdate = menuCopy.filter(
-      (product) => product.id !== productToRemove
+      (product) => product.id !== idProductToRemove
     );
     setMenu(menuUpdate);
   };
@@ -36,7 +36,6 @@ export default function OrderPage() {
     currentTabSelected,
     setCurrentTabSelected,
     menu,
-    setMenu,
     handleAdd,
     handleRemove,
     resetMenu,

@@ -23,7 +23,7 @@ export default function Menu() {
           image={imageSource ? imageSource : IMAGE_DEFAULT}
           leftDescription={formatPrice(price)}
           hasDeleteButton={isAdminMode}
-          handleRemove={() => handleRemove(id)}
+          onDelete={() => handleRemove(id)}
         />
       ))}
     </MenuStyled>

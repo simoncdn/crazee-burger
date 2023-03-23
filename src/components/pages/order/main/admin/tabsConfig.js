@@ -7,7 +7,7 @@ export const tabsConfig = [
     index: "add",
     label: "Ajouter un produit",
     Icon: <AiOutlinePlus />,
-    panel: <AddForm />,
+    Panel: <AddForm />,
   },
   {
     index: "edit",

@@ -10,14 +10,14 @@ export default function TextInput({
   ...restProps
 }) {
   return (
-    <InputStyled className={className} variant={variant}>
+    <TextInputStyled className={className} variant={variant}>
       {Icon && Icon}
       <input value={value} onChange={onChange} {...restProps} type="text" />
-    </InputStyled>
+    </TextInputStyled>
   );
 }
 
-const InputStyled = styled.div`
+const TextInputStyled = styled.div`
   ${({ variant }) => inputStyle[variant]}
 `;
 
