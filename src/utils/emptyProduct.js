@@ -1,5 +1,5 @@
-export const productDefault = {
-  id: 0,
+export const EMPTY_PRODUCT = {
+  id: crypto.randomUUID(),
   imageSource: "",
   title: "",
   price: 0,

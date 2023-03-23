@@ -4,16 +4,10 @@ import GlobalContext from "../../../../../../../context/GlobalContext";
 import ImagePreview from "./ImagePreview";
 import { getInputsConfig } from "./inputsConfig";
 import TextInput from "../../../../../../reusable-ui/TextInput";
-import { productDefault } from "../../../../../../../fakeData/productDefault";
+import { EMPTY_PRODUCT } from "../../../../../../../utils/emptyProduct";
 import SubmitMessage from "./SubmitMessage";
 import Button from "../../../../../../reusable-ui/Button";
 
-const EMPTY_PRODUCT = {
-  id: "",
-  title: "",
-  imageSource: "",
-  price: 0,
-};
 export default function AddForm() {
   const { handleAdd } = useContext(GlobalContext);
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
@@ -27,11 +21,7 @@ export default function AddForm() {
     e.preventDefault();
 
     handleAdd({
-      ...productDefault,
-      id: crypto.randomUUID(),
-      title: newProduct.title,
-      imageSource: newProduct.imageSource,
-      price: newProduct.price,
+      ...newProduct,
     });
 
     setNewProduct(EMPTY_PRODUCT);
@@ -46,11 +36,13 @@ export default function AddForm() {
 
   return (
     <AddFormStyled onSubmit={handleSubmit}>
-      <ImagePreview imageSource={newProduct.imageSource} />
+      <ImagePreview
+        imageSource={newProduct.imageSource}
+        title={newProduct.title}
+      />
 
       <div className="input-fields">
         {inputs.map(({ id, type, name, placeholder, value, Icon, pattern }) => {
-          console.log(id);
           return (
             <TextInput
               key={id}
