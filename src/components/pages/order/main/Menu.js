@@ -1,20 +1,29 @@
-import { useState } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
-import fakeData from "../../../../fakeData/fakeMenu";
+import GlobalContext from "../../../../context/GlobalContext";
 import { theme } from "../../../../theme";
 import { formatPrice } from "../../../../utils/maths";
 import Card from "../../../reusable-ui/Card";
+import EmptyMenu from "./EmptyMenu";
+const IMAGE_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
-  const [menu, setMenu] = useState(fakeData);
+  const { menu, isAdminMode, handleRemove, resetMenu } =
+    useContext(GlobalContext);
+
+  if (menu.length === 0) {
+    return <EmptyMenu resetMenu={resetMenu} />;
+  }
   return (
     <MenuStyled>
-      {menu.map((product) => (
+      {menu.map(({ id, title, imageSource, price }) => (
         <Card
-          key={product.id}
-          title={product.title}
-          image={product.imageSource}
-          leftDescription={formatPrice(product.price)}
+          key={id}
+          title={title}
+          image={imageSource ? imageSource : IMAGE_DEFAULT}
+          leftDescription={formatPrice(price)}
+          hasDeleteButton={isAdminMode}
+          onDelete={() => handleRemove(id)}
         />
       ))}
     </MenuStyled>

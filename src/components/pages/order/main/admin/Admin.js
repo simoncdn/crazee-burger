@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import AdmninTabs from "./AdminTabs";
-import AdminPanel from "./AdminPanel";
+import AdminPanel from "./adminPanel/AdminPanel";
 import GlobalContext from "../../../../../context/GlobalContext";
 
-export default function Admin({ className }) {
+export default function Admin() {
   const { isCollapsed } = useContext(GlobalContext);
 
   return (
@@ -20,4 +20,5 @@ const AdminStyled = styled.div`
   bottom: 0;
   right: 0;
   left: 0;
+  z-index: 3;
 `;

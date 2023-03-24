@@ -4,11 +4,29 @@ import { theme } from "../../../theme";
 import Main from "./main/Main";
 import { useState } from "react";
 import GlobalContext from "../../../context/GlobalContext";
+import { fakeMenu } from "../../../fakeData/fakeMenu";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
+  const [menu, setMenu] = useState(fakeMenu.MEDIUM);
+
+  const handleAdd = (productToAdd) => {
+    const menuCopy = [...menu];
+    const menuUpdate = [productToAdd, ...menuCopy];
+    setMenu(menuUpdate);
+  };
+  const handleRemove = (idProductToRemove) => {
+    const menuCopy = [...menu];
+    const menuUpdate = menuCopy.filter(
+      (product) => product.id !== idProductToRemove
+    );
+    setMenu(menuUpdate);
+  };
+  const resetMenu = () => {
+    setMenu(fakeMenu.MEDIUM);
+  };
 
   const globalContextValue = {
     isAdminMode,
@@ -17,6 +35,10 @@ export default function OrderPage() {
     setIsCollapsed,
     currentTabSelected,
     setCurrentTabSelected,
+    menu,
+    handleAdd,
+    handleRemove,
+    resetMenu,
   };
 
   return (
