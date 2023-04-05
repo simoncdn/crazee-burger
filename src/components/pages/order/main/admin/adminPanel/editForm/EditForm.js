@@ -39,6 +39,8 @@ export default function EditForm() {
           );
         })}
       </div>
+
+      <span>Cliquer sur un produit du menu pour le modifier en temps réel</span>
     </EditFormStyled>
   );
 }
@@ -60,5 +62,13 @@ const EditFormStyled = styled.div`
     grid-template-columns: 1fr;
     grid-template-rows: repeat(3, 1fr);
     grid-row-gap: 8px;
+  }
+
+  span {
+    grid-area: 4 / 2 / -1 / -1;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 3px;
   }
 `;
