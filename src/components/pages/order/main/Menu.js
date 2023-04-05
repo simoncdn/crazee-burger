@@ -30,10 +30,10 @@ export default function Menu() {
           leftDescription={formatPrice(price)}
           hasDeleteButton={isAdminMode}
           onDelete={() => handleRemove(id)}
-          onSelected={() => handleProduct(id)}
+          onSelected={isAdminMode ? () => handleProduct(id) : null}
           variant={isAdminMode ? "adminCard" : "normal"}
           className={
-            isAdminMode && productSelected.id === id ? "selected" : null
+            productSelected && productSelected.id === id ? "selected" : ""
           }
         />
       ))}
