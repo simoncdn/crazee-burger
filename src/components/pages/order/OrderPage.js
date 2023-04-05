@@ -25,18 +25,8 @@ export default function OrderPage() {
     );
     setMenu(menuUpdate);
   };
-  const handleProduct = (idProductSelected) => {
-    const menuCopy = [...menu];
-    const productSelected = menuCopy.find(
-      (product) => product.id === idProductSelected
-    );
-    setProductSelected(productSelected);
-    setCurrentTabSelected("edit");
-  };
-
   const handleEdit = (productToEdit) => {
     const menuCopy = [...menu];
-
     const menuUpdate = menuCopy.map((item) => {
       if (item.id === productToEdit.id) {
         return (item = productToEdit);
@@ -44,6 +34,14 @@ export default function OrderPage() {
       return item;
     });
     setMenu(menuUpdate);
+  };
+  const handleProduct = (idProductSelected) => {
+    const menuCopy = [...menu];
+    const productSelected = menuCopy.find(
+      (product) => product.id === idProductSelected
+    );
+    setProductSelected(productSelected);
+    setCurrentTabSelected("edit");
   };
 
   const resetMenu = () => {
