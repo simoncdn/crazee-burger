@@ -20,6 +20,7 @@ export default function EditForm() {
     handleEdit(productSelected);
   }, [productSelected]);
 
+  console.log(productSelected);
   return (
     <EditFormStyled>
       <ImagePreview
@@ -40,7 +41,7 @@ export default function EditForm() {
               Icon={Icon}
               onChange={handleChange}
               variant="minimalist"
-              autoFocus={name === "title" ? true : false}
+              autoFocus={name === "title" && true}
             />
           );
         })}
@@ -54,7 +55,6 @@ export default function EditForm() {
 const EditFormStyled = styled.div`
   height: 100%;
   width: 70%;
-
   display: grid;
   grid-template-columns: 1fr 3fr;
   grid-template-rows: repeat(4, 1fr);
