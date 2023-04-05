@@ -30,8 +30,8 @@ export default function OrderPage() {
     const productSelected = menuCopy.find(
       (product) => product.id === idProductSelected
     );
-
     setProductSelected(productSelected);
+    setCurrentTabSelected("edit");
   };
 
   const handleEdit = (productToEdit) => {
