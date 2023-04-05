@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from "react";
 import ImagePreview from "../addForm/ImagePreview";
 import TextInput from "../../../../../../reusable-ui/TextInput";
@@ -18,6 +17,7 @@ export default function EditForm() {
 
   useEffect(() => {
     handleEdit(productSelected);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productSelected]);
 
   return (

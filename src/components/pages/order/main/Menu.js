@@ -33,7 +33,7 @@ export default function Menu() {
           onSelected={isAdminMode ? () => handleProduct(id) : null}
           variant={isAdminMode ? "adminCard" : "normal"}
           className={
-            productSelected && productSelected.id === id ? "selected" : ""
+            productSelected && productSelected.id === id ? "selected" : null
           }
         />
       ))}
@@ -65,7 +65,6 @@ const MenuStyled = styled.div`
       :active {
         color: violet;
         background-color: ${theme.colors.white};
-        /* border: 1px solid ${theme.colors.primary_burger}; */
       }
     }
     .text-info {
