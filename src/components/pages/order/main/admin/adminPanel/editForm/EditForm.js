@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect } from "react";
 import ImagePreview from "../addForm/ImagePreview";
 import TextInput from "../../../../../../reusable-ui/TextInput";
 import { getInputsConfig } from "../addForm/inputsConfig";
@@ -6,14 +7,18 @@ import GlobalContext from "../../../../../../../context/GlobalContext";
 import styled from "styled-components";
 
 export default function EditForm() {
-  const { productSelected, setProductSelected } = useContext(GlobalContext);
+  const { productSelected, setProductSelected, handleEdit } =
+    useContext(GlobalContext);
 
   const inputs = getInputsConfig(productSelected);
 
   const handleChange = (e) => {
     setProductSelected({ ...productSelected, [e.target.name]: e.target.value });
   };
-  console.log(productSelected);
+
+  useEffect(() => {
+    handleEdit(productSelected);
+  }, [productSelected]);
 
   return (
     <EditFormStyled>

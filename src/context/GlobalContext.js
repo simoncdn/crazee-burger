@@ -16,7 +16,7 @@ export default createContext({
   handleRemove: () => {},
   resetMenu: () => {},
   handleProduct: () => {},
-
+  handleEdit: () => {},
   productSelected: false,
   setProductSelected: () => {},
 });
