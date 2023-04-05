@@ -10,7 +10,7 @@ export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
-  const [menu, setMenu] = useState(fakeMenu.SMALL);
+  const [menu, setMenu] = useState(fakeMenu.MEDIUM);
   const [productSelected, setProductSelected] = useState();
 
   const handleAdd = (productToAdd) => {
@@ -48,6 +48,7 @@ export default function OrderPage() {
 
   const resetMenu = () => {
     setMenu(fakeMenu.MEDIUM);
+    setProductSelected();
   };
 
   const globalContextValue = {
