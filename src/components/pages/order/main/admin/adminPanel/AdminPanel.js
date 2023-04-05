@@ -5,12 +5,18 @@ import { theme } from "../../../../../../theme";
 import { getTabSelected, tabsConfig } from "../tabsConfig";
 
 export default function AdminPanel() {
-  const { currentTabSelected } = useContext(GlobalContext);
+  const { currentTabSelected, productSelected } = useContext(GlobalContext);
 
   const tabs = tabsConfig;
   const tabSelected = getTabSelected(tabs, currentTabSelected);
 
-  return <AdminPanelStyled>{tabSelected.Panel}</AdminPanelStyled>;
+  return (
+    <AdminPanelStyled>
+      {currentTabSelected === "edit" && productSelected
+        ? tabSelected.Panel.edit
+        : tabSelected.Panel.default}
+    </AdminPanelStyled>
+  );
 }
 
 const AdminPanelStyled = styled.div`
