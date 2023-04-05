@@ -33,7 +33,9 @@ export default function Menu() {
           onSelected={isAdminMode ? () => handleProduct(id) : null}
           variant={isAdminMode ? "adminCard" : "normal"}
           className={
-            productSelected && productSelected.id === id ? "selected" : null
+            isAdminMode && productSelected && productSelected.id === id
+              ? "selected"
+              : null
           }
         />
       ))}
