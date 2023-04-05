@@ -8,8 +8,14 @@ import EmptyMenu from "./EmptyMenu";
 const IMAGE_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
-  const { menu, isAdminMode, handleRemove, resetMenu, handleProduct } =
-    useContext(GlobalContext);
+  const {
+    menu,
+    isAdminMode,
+    handleRemove,
+    resetMenu,
+    handleProduct,
+    productSelected,
+  } = useContext(GlobalContext);
 
   if (menu.length === 0) {
     return <EmptyMenu resetMenu={resetMenu} />;
@@ -25,6 +31,10 @@ export default function Menu() {
           hasDeleteButton={isAdminMode}
           onDelete={() => handleRemove(id)}
           onSelected={() => handleProduct(id)}
+          variant={isAdminMode ? "adminCard" : "normal"}
+          className={
+            isAdminMode && productSelected.id === id ? "selected" : null
+          }
         />
       ))}
     </MenuStyled>
@@ -40,4 +50,35 @@ const MenuStyled = styled.div`
   grid-row-gap: 60px;
   justify-items: center;
   background-color: transparent; // For the
+
+  .selected {
+    background-color: #ffa01b;
+    .delete-btn {
+      background-color: ${theme.colors.white};
+      cursor: pointer;
+      .icon {
+        color: ${theme.colors.primary};
+      }
+      :hover {
+        background-color: #e25549;
+      }
+      :active {
+        color: violet;
+        background-color: ${theme.colors.white};
+        /* border: 1px solid ${theme.colors.primary_burger}; */
+      }
+    }
+    .text-info {
+      display: grid;
+      grid-template-rows: 30% 70%;
+      padding: 5px;
+      .left-description {
+        color: white;
+      }
+      .primary-button {
+        background-color: ${theme.colors.white};
+        color: ${theme.colors.primary};
+      }
+    }
+  }
 `;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "../../theme/index";
 import { RxCross2 } from "react-icons/rx";
 import Button from "./Button";
@@ -10,9 +10,11 @@ export default function Card({
   hasDeleteButton,
   onSelected,
   onDelete,
+  className,
+  variant = "normal",
 }) {
   return (
-    <CardStyled onClick={onSelected}>
+    <CardStyled onClick={onSelected} variant={variant} className={className}>
       {hasDeleteButton && (
         <button className="delete-btn" onClick={onDelete}>
           <RxCross2 className="icon" />
@@ -48,6 +50,8 @@ const CardStyled = styled.div`
   border-radius: ${theme.borderRadius.extraRound};
   background-color: ${theme.colors.white};
   position: relative;
+  ${({ variant }) => cardStyle[variant]}
+
   .delete-btn {
     position: absolute;
     top: 0;
@@ -72,13 +76,13 @@ const CardStyled = styled.div`
     height: auto;
     margin-top: 30px;
     margin-bottom: 20px;
+    z-index: 1;
     img {
       height: 100%;
       width: 100%;
       object-fit: contain;
     }
   }
-
   .text-info {
     display: grid;
     grid-template-rows: 30% 70%;
@@ -129,3 +133,23 @@ const CardStyled = styled.div`
     }
   }
 `;
+
+const normalStyle = css``;
+
+const adminCardStyle = css`
+  :hover {
+    ::before {
+      content: "";
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      border-radius: 15px;
+      box-shadow: 0px 0px 8px 0px #ffa01b;
+    }
+  }
+`;
+
+const cardStyle = {
+  normal: normalStyle,
+  adminCard: adminCardStyle,
+};
