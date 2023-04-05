@@ -20,7 +20,6 @@ export default function EditForm() {
     handleEdit(productSelected);
   }, [productSelected]);
 
-  console.log(productSelected);
   return (
     <EditFormStyled>
       <ImagePreview
@@ -76,5 +75,7 @@ const EditFormStyled = styled.div`
     align-items: center;
     position: relative;
     top: 3px;
+    color: #ffa01b;
+    font-size: 15px;
   }
 `;
