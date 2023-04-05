@@ -8,7 +8,7 @@ import EmptyMenu from "./EmptyMenu";
 const IMAGE_DEFAULT = "/images/coming-soon.png";
 
 export default function Menu() {
-  const { menu, isAdminMode, handleRemove, resetMenu } =
+  const { menu, isAdminMode, handleRemove, resetMenu, handleProduct } =
     useContext(GlobalContext);
 
   if (menu.length === 0) {
@@ -24,6 +24,7 @@ export default function Menu() {
           leftDescription={formatPrice(price)}
           hasDeleteButton={isAdminMode}
           onDelete={() => handleRemove(id)}
+          onSelected={() => handleProduct(id)}
         />
       ))}
     </MenuStyled>
