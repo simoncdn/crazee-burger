@@ -138,6 +138,8 @@ const normalStyle = css``;
 
 const adminCardStyle = css`
   :hover {
+    scale: 1.1;
+    transition: all 300ms ease;
     ::before {
       content: "";
       width: 100%;
