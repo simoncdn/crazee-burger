@@ -24,6 +24,10 @@ export default function OrderPage() {
       (product) => product.id !== idProductToRemove
     );
     setMenu(menuUpdate);
+
+    if (productSelected && productSelected.id === idProductToRemove) {
+      setProductSelected();
+    }
   };
   const handleEdit = (productToEdit) => {
     const menuCopy = [...menu];
@@ -35,14 +39,20 @@ export default function OrderPage() {
     });
     setMenu(menuUpdate);
   };
+
   const handleProduct = (idProductSelected) => {
     const menuCopy = [...menu];
+    console.log(menu);
     const productSelected = menuCopy.find(
       (product) => product.id === idProductSelected
     );
-    setProductSelected(productSelected);
-    setCurrentTabSelected("edit");
-    setIsCollapsed(false);
+    if (productSelected) {
+      setProductSelected(productSelected);
+      setCurrentTabSelected("edit");
+      setIsCollapsed(false);
+    } else {
+      setProductSelected();
+    }
   };
 
   const resetMenu = () => {

@@ -16,7 +16,13 @@ export default function Card({
   return (
     <CardStyled onClick={onSelected} variant={variant} className={className}>
       {hasDeleteButton && (
-        <button className="delete-btn" onClick={onDelete}>
+        <button
+          className="delete-btn"
+          onClick={(event) => {
+            event.stopPropagation();
+            onDelete();
+          }}
+        >
           <RxCross2 className="icon" />
         </button>
       )}
@@ -51,7 +57,6 @@ const CardStyled = styled.div`
   background-color: ${theme.colors.white};
   position: relative;
   ${({ variant }) => cardStyle[variant]}
-
   .delete-btn {
     position: absolute;
     top: 0;
@@ -69,6 +74,9 @@ const CardStyled = styled.div`
     cursor: pointer;
     .icon {
       color: ${theme.colors.white};
+    }
+    :hover {
+      background-color: #e25549;
     }
   }
   .image {
@@ -139,7 +147,7 @@ const normalStyle = css``;
 const adminCardStyle = css`
   :hover {
     scale: 1.1;
-    transition: all 300ms ease;
+    transition: all 600ms ease;
     ::before {
       content: "";
       width: 100%;
