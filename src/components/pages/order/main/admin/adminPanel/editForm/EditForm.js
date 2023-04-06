@@ -46,7 +46,10 @@ export default function EditForm() {
         })}
       </div>
 
-      <span>Cliquer sur un produit du menu pour le modifier en temps réel</span>
+      <p>
+        Cliquer sur un produit du menu pour le modifier&nbsp;
+        <span>en temps réel</span>
+      </p>
     </EditFormStyled>
   );
 }
@@ -69,7 +72,7 @@ const EditFormStyled = styled.div`
     grid-row-gap: 8px;
   }
 
-  span {
+  p {
     grid-area: 4 / 2 / -1 / -1;
     display: flex;
     align-items: center;
@@ -77,5 +80,8 @@ const EditFormStyled = styled.div`
     top: 3px;
     color: #ffa01b;
     font-size: 15px;
+    span {
+      text-decoration: underline;
+    }
   }
 `;
