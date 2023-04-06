@@ -34,7 +34,9 @@ export default function Menu() {
           variant={isAdminMode ? "adminCard" : "normal"}
           adminMode={isAdminMode}
           variantBtn={
-            productSelected && productSelected.id === id ? "selected" : "normal"
+            isAdminMode && productSelected && productSelected.id === id
+              ? "selected"
+              : "normal"
           }
           className={
             isAdminMode && productSelected && productSelected.id === id
