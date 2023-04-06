@@ -11,6 +11,7 @@ export default function Card({
   onSelected,
   onDelete,
   className,
+  variantBtn,
   variant = "normal",
 }) {
   return (
@@ -37,7 +38,11 @@ export default function Card({
             <Button
               classname="primary-button"
               label={"Ajouter"}
-              variant="normal"
+              variant={variantBtn}
+              onClick={(event) => {
+                event.stopPropagation();
+                console.log("AddToBasket");
+              }}
             />
           </div>
         </div>
@@ -142,8 +147,6 @@ const CardStyled = styled.div`
   }
 `;
 
-const normalStyle = css``;
-
 const adminCardStyle = css`
   :hover {
     scale: 1.1;
@@ -160,6 +163,5 @@ const adminCardStyle = css`
 `;
 
 const cardStyle = {
-  normal: normalStyle,
   adminCard: adminCardStyle,
 };
