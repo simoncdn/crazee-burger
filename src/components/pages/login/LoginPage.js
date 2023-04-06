@@ -5,17 +5,17 @@ import Logo from "../../reusable-ui/Logo";
 import Alert from "../../alert/Alert";
 
 export default function LoginPage() {
-  const [isModalAlert, setIsModalAlert] = useState(true);
-  const closeModalALert = () => {
-    setIsModalAlert(false);
-    console.log(isModalAlert);
-  };
+  // const [isModalAlert, setIsModalAlert] = useState(true);
+  // const closeModalALert = () => {
+  //   setIsModalAlert(false);
+  //   console.log(isModalAlert);
+  // };
   return (
     <LoginPageStyled>
       <Logo className={"logo-login-page"} />
       <LoginForm />
 
-      {isModalAlert ? <Alert onClick={closeModalALert} /> : null}
+      {/* {isModalAlert ? <Alert onClick={closeModalALert} /> : null} */}
     </LoginPageStyled>
   );
 }

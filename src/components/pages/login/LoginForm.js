@@ -9,7 +9,7 @@ import TextInput from "../../reusable-ui/TextInput";
 import Button from "../../reusable-ui/Button";
 
 export default function LoginForm() {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("Simon");
   const navigate = useNavigate();
 
   const handleChange = (event) => {
