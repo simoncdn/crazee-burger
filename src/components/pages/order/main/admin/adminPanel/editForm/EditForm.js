@@ -17,6 +17,8 @@ export default function EditForm() {
 
   useEffect(() => {
     handleEdit(productSelected);
+    document.querySelectorAll("input")[1].focus();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productSelected]);
 
@@ -40,7 +42,7 @@ export default function EditForm() {
               Icon={Icon}
               onChange={handleChange}
               variant="minimalist"
-              autoFocus={name === "title" && true}
+              // autoFocus={name === "title" ? true : false}
             />
           );
         })}
