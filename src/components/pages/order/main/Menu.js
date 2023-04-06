@@ -32,10 +32,14 @@ export default function Menu() {
           onDelete={() => handleRemove(id)}
           onSelected={isAdminMode ? () => handleProduct(id) : null}
           variant={isAdminMode ? "adminCard" : "normal"}
+          adminMode={isAdminMode}
+          variantBtn={
+            productSelected && productSelected.id === id ? "selected" : "normal"
+          }
           className={
             isAdminMode && productSelected && productSelected.id === id
               ? "selected"
-              : null
+              : "normal"
           }
         />
       ))}
@@ -75,10 +79,6 @@ const MenuStyled = styled.div`
       padding: 5px;
       .left-description {
         color: white;
-      }
-      .primary-button {
-        background-color: ${theme.colors.white};
-        color: ${theme.colors.primary};
       }
     }
   }

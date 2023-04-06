@@ -42,7 +42,6 @@ export default function OrderPage() {
 
   const handleProduct = (idProductSelected) => {
     const menuCopy = [...menu];
-    console.log(menu);
     const productSelected = menuCopy.find(
       (product) => product.id === idProductSelected
     );
