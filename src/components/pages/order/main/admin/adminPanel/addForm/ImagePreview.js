@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { theme } from "../../../../../../../theme";
 
 export default function ImagePreview({ imageSource, title }) {
-  console.log(imageSource);
   return (
     <ImpagePreviewStyled>
       {imageSource ? (
