@@ -71,7 +71,6 @@ const MenuStyled = styled.div`
         background-color: #e25549;
       }
       :active {
-        color: violet;
         background-color: ${theme.colors.white};
       }
     }

@@ -83,6 +83,9 @@ const CardStyled = styled.div`
     :hover {
       background-color: #e25549;
     }
+    :active {
+      background-color: ${theme.colors.primary};
+    }
   }
   .image {
     width: 100%;
