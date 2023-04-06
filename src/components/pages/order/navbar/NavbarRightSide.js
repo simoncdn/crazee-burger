@@ -8,7 +8,8 @@ import { useContext } from "react";
 import GlobalContext from "../../../../context/GlobalContext";
 
 export default function NavbarRightSide() {
-  const { isAdminMode, setIsAdminMode } = useContext(GlobalContext);
+  const { isAdminMode, setIsAdminMode, setProductSelected } =
+    useContext(GlobalContext);
 
   const displayToastNotification = () => {
     if (!isAdminMode) {
@@ -24,6 +25,7 @@ export default function NavbarRightSide() {
       });
     }
     setIsAdminMode(!isAdminMode);
+    setProductSelected();
   };
 
   return (
