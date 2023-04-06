@@ -42,6 +42,7 @@ export default function OrderPage() {
     );
     setProductSelected(productSelected);
     setCurrentTabSelected("edit");
+    setIsCollapsed(false);
   };
 
   const resetMenu = () => {
