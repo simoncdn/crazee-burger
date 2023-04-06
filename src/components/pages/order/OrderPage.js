@@ -40,7 +40,9 @@ export default function OrderPage() {
     setMenu(menuUpdate);
   };
 
-  const handleProduct = (idProductSelected) => {
+  const handleProduct = (idProductSelected, event) => {
+    document.querySelectorAll("input")[1].focus();
+
     const menuCopy = [...menu];
     const productSelected = menuCopy.find(
       (product) => product.id === idProductSelected

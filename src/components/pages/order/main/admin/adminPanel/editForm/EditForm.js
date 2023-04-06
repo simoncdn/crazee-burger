@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import ImagePreview from "../addForm/ImagePreview";
 import TextInput from "../../../../../../reusable-ui/TextInput";
 import { getInputsConfig } from "../addForm/inputsConfig";
@@ -10,15 +10,12 @@ export default function EditForm() {
     useContext(GlobalContext);
 
   const inputs = getInputsConfig(productSelected);
-
   const handleChange = (e) => {
     setProductSelected({ ...productSelected, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
     handleEdit(productSelected);
-    document.querySelectorAll("input")[1].focus();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productSelected]);
 
@@ -30,22 +27,23 @@ export default function EditForm() {
       />
 
       <div className="input-fields">
-        {inputs.map(({ id, type, name, placeholder, value, Icon, pattern }) => {
-          return (
-            <TextInput
-              key={id}
-              type={type}
-              name={name}
-              value={value}
-              placeholder={placeholder}
-              pattern={name === "imageSource" ? pattern : null}
-              Icon={Icon}
-              onChange={handleChange}
-              variant="minimalist"
-              // autoFocus={name === "title" ? true : false}
-            />
-          );
-        })}
+        {inputs.map(
+          ({ id, type, name, placeholder, value, Icon, pattern, event }) => {
+            return (
+              <TextInput
+                key={id}
+                type={type}
+                name={name}
+                value={value}
+                placeholder={placeholder}
+                pattern={name === "imageSource" ? pattern : null}
+                Icon={Icon}
+                onChange={handleChange}
+                variant="minimalist"
+              />
+            );
+          }
+        )}
       </div>
 
       <p>
