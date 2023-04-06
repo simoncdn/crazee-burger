@@ -40,9 +40,7 @@ export default function OrderPage() {
     setMenu(menuUpdate);
   };
 
-  const handleProduct = (idProductSelected, event) => {
-    document.querySelectorAll("input")[1].focus();
-
+  const handleProduct = (idProductSelected) => {
     const menuCopy = [...menu];
     const productSelected = menuCopy.find(
       (product) => product.id === idProductSelected
@@ -51,6 +49,10 @@ export default function OrderPage() {
       setProductSelected(productSelected);
       setCurrentTabSelected("edit");
       setIsCollapsed(false);
+
+      if (document.querySelectorAll("input")[1]) {
+        document.querySelectorAll("input")[1].focus();
+      }
     } else {
       setProductSelected();
     }
