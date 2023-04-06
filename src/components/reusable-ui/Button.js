@@ -92,7 +92,7 @@ const selectedStyle = css`
   background-color: ${theme.colors.white};
   border: 1px solid ${theme.colors.white};
   cursor: pointer;
-  z-index: 10;
+
   :hover {
     background-color: ${theme.colors.primary_burger};
     color: ${theme.colors.white};
