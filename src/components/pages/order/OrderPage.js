@@ -27,10 +27,9 @@ export default function OrderPage() {
       (product) => product.id !== idProductToRemove
     );
     setMenu(menuUpdated);
-    if (productSelected.id !== idProductToRemove) {
-      return;
+    if (productSelected && productSelected.id === idProductToRemove) {
+      setProductSelected();
     }
-    setProductSelected();
   };
   const handleEdit = (productToEdit) => {
     const menuCopy = [...menu];
