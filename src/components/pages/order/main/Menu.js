@@ -20,6 +20,11 @@ export default function Menu() {
   if (menu.length === 0) {
     return <EmptyMenu resetMenu={resetMenu} />;
   }
+
+  const stopPropagation = (e) => {
+    e.stopPropagation();
+  };
+
   return (
     <MenuStyled>
       {menu.map(({ id, title, imageSource, price }) => (
@@ -29,10 +34,11 @@ export default function Menu() {
           image={imageSource ? imageSource : IMAGE_DEFAULT}
           leftDescription={formatPrice(price)}
           hasDeleteButton={isAdminMode}
-          onDelete={() => handleRemove(id)}
+          onDelete={(event) => handleRemove(id, event)}
           onSelected={isAdminMode ? () => handleProduct(id) : null}
           variant={isAdminMode ? "adminCard" : "normal"}
           adminMode={isAdminMode}
+          stopPropagation={(e) => stopPropagation(e)}
           variantBtn={
             isAdminMode && productSelected && productSelected.id === id
               ? "selected"

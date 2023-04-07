@@ -12,18 +12,17 @@ export default function Card({
   onDelete,
   className,
   variantBtn,
+  stopPropagation,
   variant = "normal",
 }) {
+  // const stopPropagation = (e) => {
+  //   e.stopPropagation();
+  // };
+
   return (
     <CardStyled onClick={onSelected} variant={variant} className={className}>
       {hasDeleteButton && (
-        <button
-          className="delete-btn"
-          onClick={(event) => {
-            event.stopPropagation();
-            onDelete();
-          }}
-        >
+        <button className="delete-btn" onClick={onDelete}>
           <RxCross2 className="icon" />
         </button>
       )}
@@ -39,7 +38,7 @@ export default function Card({
               classname="primary-button"
               label={"Ajouter"}
               variant={variantBtn}
-              onClick={(event) => event.stopPropagation()}
+              onClick={stopPropagation}
             />
           </div>
         </div>
