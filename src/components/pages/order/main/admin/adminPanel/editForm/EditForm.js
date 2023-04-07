@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect } from "react";
 import ImagePreview from "../addForm/ImagePreview";
 import TextInput from "../../../../../../reusable-ui/TextInput";
 import { getInputsConfig } from "../addForm/inputsConfig";
