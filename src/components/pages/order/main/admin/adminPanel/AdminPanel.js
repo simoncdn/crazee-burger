@@ -10,13 +10,7 @@ export default function AdminPanel() {
   const tabs = tabsConfig;
   const tabSelected = getTabSelected(tabs, currentTabSelected);
 
-  return (
-    <AdminPanelStyled>
-      {currentTabSelected === "edit" && productSelected
-        ? tabSelected.Panel.edit
-        : tabSelected.Panel.default}
-    </AdminPanelStyled>
-  );
+  return <AdminPanelStyled>{tabSelected.Panel}</AdminPanelStyled>;
 }
 
 const AdminPanelStyled = styled.div`
