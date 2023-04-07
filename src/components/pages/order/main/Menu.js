@@ -13,7 +13,7 @@ export default function Menu() {
     isAdminMode,
     handleRemove,
     resetMenu,
-    handleProduct,
+    handleSelectedProduct,
     productSelected,
   } = useContext(GlobalContext);
 
@@ -35,7 +35,7 @@ export default function Menu() {
           leftDescription={formatPrice(price)}
           hasDeleteButton={isAdminMode}
           onDelete={(event) => handleRemove(id, event)}
-          onSelected={isAdminMode ? () => handleProduct(id) : null}
+          onSelected={isAdminMode ? () => handleSelectedProduct(id) : null}
           variant={isAdminMode ? "adminCard" : "normal"}
           adminMode={isAdminMode}
           stopPropagation={(e) => stopPropagation(e)}
@@ -63,7 +63,7 @@ const MenuStyled = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-row-gap: 60px;
   justify-items: center;
-  background-color: transparent; // For the
+  background-color: transparent;
 
   .selected {
     background-color: #ffa01b;

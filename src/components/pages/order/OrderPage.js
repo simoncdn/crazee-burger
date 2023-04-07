@@ -43,7 +43,7 @@ export default function OrderPage() {
     setMenu(menuUpdated);
   };
 
-  const handleProduct = (idProductSelected) => {
+  const handleSelectedProduct = (idProductSelected) => {
     const menuCopy = [...menu];
     const productSelected = menuCopy.find(
       (product) => product.id === idProductSelected
@@ -76,7 +76,7 @@ export default function OrderPage() {
     handleAdd,
     handleRemove,
     resetMenu,
-    handleProduct,
+    handleSelectedProduct,
     handleEdit,
     productSelected,
     setProductSelected,
