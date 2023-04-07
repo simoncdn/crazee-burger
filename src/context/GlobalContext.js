@@ -20,4 +20,7 @@ export default createContext({
 
   productSelected: false,
   setProductSelected: () => {},
+
+  isInputTitleRef: null,
+  setIsInputTitleRef: () => {},
 });

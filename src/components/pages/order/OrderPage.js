@@ -12,22 +12,28 @@ export default function OrderPage() {
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
   const [menu, setMenu] = useState(fakeMenu.MEDIUM);
   const [productSelected, setProductSelected] = useState();
+  const [isInputTitleRef, setIsInputTitleRef] = useState();
 
   const handleAdd = (productToAdd) => {
     const menuCopy = [...menu];
     const menuUpdated = [productToAdd, ...menuCopy];
     setMenu(menuUpdated);
   };
-  const handleRemove = (idProductToRemove) => {
+  const handleRemove = (idProductToRemove, event) => {
+    event.stopPropagation();
+
     const menuCopy = [...menu];
     const menuUpdated = menuCopy.filter(
       (product) => product.id !== idProductToRemove
     );
     setMenu(menuUpdated);
-
-    if (productSelected && productSelected.id === idProductToRemove) {
-      setProductSelected();
+    if (productSelected.id !== idProductToRemove) {
+      return;
     }
+    setProductSelected();
+    // if (productSelected && productSelected.id === idProductToRemove) {
+    //   setProductSelected();
+    // }
   };
   const handleEdit = (productToEdit) => {
     const menuCopy = [...menu];
@@ -45,15 +51,14 @@ export default function OrderPage() {
     const productSelected = menuCopy.find(
       (product) => product.id === idProductSelected
     );
-    if (productSelected) {
-      setProductSelected(productSelected);
-      setCurrentTabSelected("edit");
-      setIsCollapsed(false);
+    setProductSelected(productSelected);
+    setCurrentTabSelected("edit");
+    setIsCollapsed(false);
 
-      if (document.querySelectorAll("input")[1]) {
-        document.querySelectorAll("input")[1].focus();
-      }
-    } else {
+    if (isInputTitleRef && isInputTitleRef.current) {
+      isInputTitleRef.current.focus();
+    }
+    if (!productSelected) {
       setProductSelected();
     }
   };
@@ -78,6 +83,8 @@ export default function OrderPage() {
     handleEdit,
     productSelected,
     setProductSelected,
+    isInputTitleRef,
+    setIsInputTitleRef,
   };
 
   return (

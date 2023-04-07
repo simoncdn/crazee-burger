@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import ImagePreview from "../addForm/ImagePreview";
 import TextInput from "../../../../../../reusable-ui/TextInput";
 import { getInputsConfig } from "../addForm/inputsConfig";
@@ -6,16 +6,22 @@ import GlobalContext from "../../../../../../../context/GlobalContext";
 import styled from "styled-components";
 
 export default function EditForm() {
-  const { productSelected, setProductSelected, handleEdit } =
-    useContext(GlobalContext);
+  const {
+    productSelected,
+    setProductSelected,
+    handleEdit,
+    setIsInputTitleRef,
+  } = useContext(GlobalContext);
 
   const inputs = getInputsConfig(productSelected);
   const handleChange = (e) => {
     setProductSelected({ ...productSelected, [e.target.name]: e.target.value });
   };
+  const inputRef = useRef(null);
 
   useEffect(() => {
     handleEdit(productSelected);
+    setIsInputTitleRef(inputRef);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productSelected]);
 
@@ -28,7 +34,7 @@ export default function EditForm() {
 
       <div className="input-fields">
         {inputs.map(
-          ({ id, type, name, placeholder, value, Icon, pattern, event }) => {
+          ({ id, type, name, placeholder, value, Icon, pattern, index }) => {
             return (
               <TextInput
                 key={id}
@@ -41,6 +47,7 @@ export default function EditForm() {
                 onChange={handleChange}
                 variant="minimalist"
                 autoFocus={name === "title" ? true : false}
+                inputRef={name === "title" ? inputRef : null}
               />
             );
           }

@@ -7,12 +7,19 @@ export default function TextInput({
   onChange,
   Icon,
   variant = "normal",
+  inputRef,
   ...restProps
 }) {
   return (
     <TextInputStyled className={className} variant={variant}>
       {Icon && Icon}
-      <input value={value} onChange={onChange} {...restProps} type="text" />
+      <input
+        value={value}
+        onChange={onChange}
+        type="text"
+        ref={inputRef}
+        {...restProps}
+      />
     </TextInputStyled>
   );
 }
