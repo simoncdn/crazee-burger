@@ -15,15 +15,15 @@ export default function OrderPage() {
 
   const handleAdd = (productToAdd) => {
     const menuCopy = [...menu];
-    const menuUpdate = [productToAdd, ...menuCopy];
-    setMenu(menuUpdate);
+    const menuUpdated = [productToAdd, ...menuCopy];
+    setMenu(menuUpdated);
   };
   const handleRemove = (idProductToRemove) => {
     const menuCopy = [...menu];
-    const menuUpdate = menuCopy.filter(
+    const menuUpdated = menuCopy.filter(
       (product) => product.id !== idProductToRemove
     );
-    setMenu(menuUpdate);
+    setMenu(menuUpdated);
 
     if (productSelected && productSelected.id === idProductToRemove) {
       setProductSelected();
@@ -31,13 +31,13 @@ export default function OrderPage() {
   };
   const handleEdit = (productToEdit) => {
     const menuCopy = [...menu];
-    const menuUpdate = menuCopy.map((item) => {
+    const menuUpdated = menuCopy.map((item) => {
       if (item.id === productToEdit.id) {
         return (item = productToEdit);
       }
       return item;
     });
-    setMenu(menuUpdate);
+    setMenu(menuUpdated);
   };
 
   const handleProduct = (idProductSelected) => {
