@@ -31,9 +31,6 @@ export default function OrderPage() {
       return;
     }
     setProductSelected();
-    // if (productSelected && productSelected.id === idProductToRemove) {
-    //   setProductSelected();
-    // }
   };
   const handleEdit = (productToEdit) => {
     const menuCopy = [...menu];
