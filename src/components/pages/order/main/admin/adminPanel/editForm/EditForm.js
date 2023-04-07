@@ -46,8 +46,7 @@ export default function EditForm() {
                 Icon={Icon}
                 onChange={handleChange}
                 variant="minimalist"
-                autoFocus={name === "title" ? true : false}
-                inputRef={name === "title" ? inputRef : null}
+                ref={name === "title" ? inputRef : null}
               />
             );
           }
