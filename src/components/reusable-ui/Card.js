@@ -39,10 +39,7 @@ export default function Card({
               classname="primary-button"
               label={"Ajouter"}
               variant={variantBtn}
-              onClick={(event) => {
-                event.stopPropagation();
-                console.log("AddToBasket");
-              }}
+              onClick={(event) => event.stopPropagation()}
             />
           </div>
         </div>
@@ -152,7 +149,7 @@ const CardStyled = styled.div`
 
 const adminCardStyle = css`
   :hover {
-    scale: 1.1;
+    scale: 1.05;
     transition: all 600ms ease;
     ::before {
       content: "";
