@@ -1,21 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { theme } from "../../../../theme";
 import Button from "../../../reusable-ui/Button";
+import GlobalContext from "../../../../context/GlobalContext";
 
 export default function EmptyMenu({ resetMenu }) {
+  const { isAdminMode } = useContext(GlobalContext);
+
   return (
     <EmptyMenuStyled>
-      <span className="title">Le menu est vide ?</span>
-      <span className="description">
-        Cliquez ci-dessous pour le réinitialiser
-      </span>
-      <Button
-        label="Générer de nouveaux produits"
-        classname="empty-button"
-        onClick={resetMenu}
-        variant="normal"
-      />
+      {isAdminMode ? (
+        <>
+          <span className="title">Le menu est vide ?</span>
+          <span className="description">
+            Cliquez ci-dessous pour le réinitialiser
+          </span>
+          <Button
+            label="Générer de nouveaux produits"
+            classname="empty-button"
+            onClick={resetMenu}
+            variant="normal"
+          />
+        </>
+      ) : (
+        <>
+          <span className="title">Victime de notre succès ! :D</span>
+          <span className="description">
+            De nouvelles recettes sont en cours de préparation.
+          </span>
+          <span className="description">À très vite !</span>
+        </>
+      )}
     </EmptyMenuStyled>
   );
 }
@@ -28,6 +43,7 @@ const EmptyMenuStyled = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   .title,
   .description {
     font-family: "Amatic SC", cursive;
