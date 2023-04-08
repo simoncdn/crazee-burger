@@ -13,7 +13,10 @@ export default function Menu() {
     isAdminMode,
     handleRemove,
     resetMenu,
-    handleSelectedProduct,
+    setCurrentTabSelected,
+    setIsCollapsed,
+    setProductSelected,
+    // handleSelectedProduct,
     productSelected,
   } = useContext(GlobalContext);
 
@@ -25,6 +28,22 @@ export default function Menu() {
     e.stopPropagation();
   };
 
+  const handleOnDelete = (event, id) => {
+    event.stopPropagation();
+    handleRemove(id);
+  };
+
+  const handleSelectedProduct = (idProductSelected) => {
+    if (!isAdminMode) return;
+
+    const productSelected = menu.find(
+      (product) => product.id === idProductSelected
+    );
+    setProductSelected(productSelected);
+    setCurrentTabSelected("edit");
+    setIsCollapsed(false);
+  };
+
   return (
     <MenuStyled>
       {menu.map(({ id, title, imageSource, price }) => (
@@ -34,8 +53,8 @@ export default function Menu() {
           image={imageSource ? imageSource : IMAGE_DEFAULT}
           leftDescription={formatPrice(price)}
           hasDeleteButton={isAdminMode}
-          onDelete={(event) => handleRemove(id, event)}
-          onSelected={isAdminMode ? () => handleSelectedProduct(id) : null}
+          onDelete={(event) => handleOnDelete(event, id)}
+          onSelected={() => handleSelectedProduct(id)}
           variant={isAdminMode ? "adminCard" : "normal"}
           adminMode={isAdminMode}
           stopPropagation={(e) => stopPropagation(e)}

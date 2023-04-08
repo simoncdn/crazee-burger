@@ -18,12 +18,12 @@ export default function EditForm() {
     setProductSelected({ ...productSelected, [e.target.name]: e.target.value });
   };
   const inputRef = useRef(null);
-
-  useEffect(() => {
-    handleEdit(productSelected);
-    setIsInputTitleRef(inputRef);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [productSelected]);
+  console.log(productSelected);
+  // useEffect(() => {
+  //   handleEdit(productSelected);
+  //   // setIsInputTitleRef(inputRef);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [productSelected]);
 
   return (
     <EditFormStyled>
