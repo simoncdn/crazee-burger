@@ -23,4 +23,6 @@ export default createContext({
 
   isInputTitleRef: null,
   setIsInputTitleRef: () => {},
+
+  titleEditBoxRef: {},
 });

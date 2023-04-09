@@ -2,7 +2,7 @@ import Navbar from "./navbar/Navbar";
 import styled from "styled-components";
 import { theme } from "../../../theme";
 import Main from "./main/Main";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import GlobalContext from "../../../context/GlobalContext";
 import { fakeMenu } from "../../../fakeData/fakeMenu";
 
@@ -13,6 +13,8 @@ export default function OrderPage() {
   const [menu, setMenu] = useState(fakeMenu.MEDIUM);
   const [productSelected, setProductSelected] = useState();
   const [isInputTitleRef, setIsInputTitleRef] = useState();
+
+  const titleEditBoxRef = useRef();
 
   const handleAdd = (productToAdd) => {
     const menuCopy = [...menu];
@@ -40,16 +42,6 @@ export default function OrderPage() {
     setMenu(menuUpdated);
   };
 
-  // const handleSelectedProduct = (idProductSelected) => {
-
-  //   if (isInputTitleRef && isInputTitleRef.current) {
-  //     isInputTitleRef.current.focus();
-  //   }
-  //   if (!productSelected) {
-  //     setProductSelected();
-  //   }
-  // };
-
   const resetMenu = () => {
     setMenu(fakeMenu.MEDIUM);
     setProductSelected();
@@ -72,6 +64,7 @@ export default function OrderPage() {
     setProductSelected,
     isInputTitleRef,
     setIsInputTitleRef,
+    titleEditBoxRef,
   };
 
   return (

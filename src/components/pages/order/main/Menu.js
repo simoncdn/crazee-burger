@@ -16,6 +16,7 @@ export default function Menu() {
     setCurrentTabSelected,
     setIsCollapsed,
     setProductSelected,
+    titleEditBoxRef,
     // handleSelectedProduct,
     productSelected,
   } = useContext(GlobalContext);
@@ -33,15 +34,17 @@ export default function Menu() {
     handleRemove(id);
   };
 
-  const handleSelectedProduct = (idProductSelected) => {
+  const handleSelectedProduct = async (idProductSelected) => {
     if (!isAdminMode) return;
 
     const productSelected = menu.find(
       (product) => product.id === idProductSelected
     );
-    setProductSelected(productSelected);
-    setCurrentTabSelected("edit");
-    setIsCollapsed(false);
+    await setProductSelected(productSelected);
+    await setCurrentTabSelected("edit");
+    await setIsCollapsed(false);
+
+    titleEditBoxRef.current.focus();
   };
 
   return (

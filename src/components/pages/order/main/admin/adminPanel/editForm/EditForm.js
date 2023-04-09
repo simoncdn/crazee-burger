@@ -11,14 +11,16 @@ export default function EditForm() {
     setProductSelected,
     handleEdit,
     setIsInputTitleRef,
+    titleEditBoxRef,
   } = useContext(GlobalContext);
 
   const inputs = getInputsConfig(productSelected);
   const handleChange = (e) => {
     setProductSelected({ ...productSelected, [e.target.name]: e.target.value });
+    handleEdit(productSelected);
   };
-  const inputRef = useRef(null);
-  console.log(productSelected);
+  // const inputRef = useRef(null);
+  // console.log(productSelected);
   // useEffect(() => {
   //   handleEdit(productSelected);
   //   // setIsInputTitleRef(inputRef);
@@ -46,7 +48,7 @@ export default function EditForm() {
                 Icon={Icon}
                 onChange={handleChange}
                 variant="minimalist"
-                ref={name === "title" ? inputRef : null}
+                ref={name === "title" ? titleEditBoxRef : null}
               />
             );
           }
