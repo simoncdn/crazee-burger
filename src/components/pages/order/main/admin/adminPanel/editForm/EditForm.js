@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext } from "react";
 import ImagePreview from "../addForm/ImagePreview";
 import TextInput from "../../../../../../reusable-ui/TextInput";
 import { getInputsConfig } from "../addForm/inputsConfig";
@@ -6,26 +6,18 @@ import GlobalContext from "../../../../../../../context/GlobalContext";
 import styled from "styled-components";
 
 export default function EditForm() {
-  const {
-    productSelected,
-    setProductSelected,
-    handleEdit,
-    setIsInputTitleRef,
-    titleEditBoxRef,
-  } = useContext(GlobalContext);
+  const { productSelected, setProductSelected, handleEdit, titleEditBoxRef } =
+    useContext(GlobalContext);
 
   const inputs = getInputsConfig(productSelected);
+
   const handleChange = (e) => {
-    setProductSelected({ ...productSelected, [e.target.name]: e.target.value });
-    handleEdit(productSelected);
+    setProductSelected({
+      ...productSelected,
+      [e.target.name]: e.target.value,
+    });
+    handleEdit(productSelected, e);
   };
-  // const inputRef = useRef(null);
-  // console.log(productSelected);
-  // useEffect(() => {
-  //   handleEdit(productSelected);
-  //   // setIsInputTitleRef(inputRef);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [productSelected]);
 
   return (
     <EditFormStyled>
@@ -35,24 +27,22 @@ export default function EditForm() {
       />
 
       <div className="input-fields">
-        {inputs.map(
-          ({ id, type, name, placeholder, value, Icon, pattern, index }) => {
-            return (
-              <TextInput
-                key={id}
-                type={type}
-                name={name}
-                value={value}
-                placeholder={placeholder}
-                pattern={name === "imageSource" ? pattern : null}
-                Icon={Icon}
-                onChange={handleChange}
-                variant="minimalist"
-                ref={name === "title" ? titleEditBoxRef : null}
-              />
-            );
-          }
-        )}
+        {inputs.map(({ id, type, name, placeholder, value, Icon, pattern }) => {
+          return (
+            <TextInput
+              key={id}
+              type={type}
+              name={name}
+              value={value}
+              placeholder={placeholder}
+              pattern={name === "imageSource" ? pattern : null}
+              Icon={Icon}
+              onChange={handleChange}
+              variant="minimalist"
+              ref={name === "title" ? titleEditBoxRef : null}
+            />
+          );
+        })}
       </div>
 
       <p>

@@ -12,7 +12,6 @@ export default function OrderPage() {
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
   const [menu, setMenu] = useState(fakeMenu.MEDIUM);
   const [productSelected, setProductSelected] = useState();
-  const [isInputTitleRef, setIsInputTitleRef] = useState();
 
   const titleEditBoxRef = useRef();
 
@@ -31,14 +30,13 @@ export default function OrderPage() {
       setProductSelected();
     }
   };
-  const handleEdit = (productToEdit) => {
+  const handleEdit = (productToEdit, event) => {
     const menuCopy = [...menu];
-    const menuUpdated = menuCopy.map((item) => {
-      if (item.id === productToEdit.id) {
-        return (item = productToEdit);
-      }
-      return item;
-    });
+    const menuUpdated = menuCopy.map((product) =>
+      product.id === productToEdit.id
+        ? { ...product, [event.target.name]: event.target.value }
+        : product
+    );
     setMenu(menuUpdated);
   };
 
@@ -62,8 +60,6 @@ export default function OrderPage() {
     handleEdit,
     productSelected,
     setProductSelected,
-    isInputTitleRef,
-    setIsInputTitleRef,
     titleEditBoxRef,
   };
 
