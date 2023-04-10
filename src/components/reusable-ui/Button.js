@@ -145,8 +145,30 @@ const successStyle = css`
   }
 `;
 
+const testStyle = css`
+  cursor: pointer;
+  color: ${theme.colors.white};
+  background: ${theme.colors.red};
+  border: 1px solid ${theme.colors.red};
+  border-radius: ${theme.borderRadius.round};
+  height: 35px;
+  padding: 0 1.5em;
+  font-weight: ${theme.fonts.weights.semiBold};
+  :hover {
+    background: ${theme.colors.white};
+    color: ${theme.colors.red};
+    border: 1px solid ${theme.colors.red};
+  }
+  :active {
+    color: ${theme.colors.white};
+    background: ${theme.colors.red};
+    border: 1px solid ${theme.colors.red};
+  }
+`;
+
 const buttonStyle = {
   normal: normalStyle,
   success: successStyle,
   selected: selectedStyle,
+  test: testStyle,
 };
