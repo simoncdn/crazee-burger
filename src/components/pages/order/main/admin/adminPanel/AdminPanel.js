@@ -5,7 +5,7 @@ import { theme } from "../../../../../../theme";
 import { getTabSelected, tabsConfig } from "../tabsConfig";
 
 export default function AdminPanel() {
-  const { currentTabSelected, productSelected } = useContext(GlobalContext);
+  const { currentTabSelected } = useContext(GlobalContext);
 
   const tabs = tabsConfig;
   const tabSelected = getTabSelected(tabs, currentTabSelected);

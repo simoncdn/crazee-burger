@@ -1,12 +1,9 @@
 import { useContext, useState } from "react";
 import styled from "styled-components";
 import GlobalContext from "../../../../../../../context/GlobalContext";
-import ImagePreview from "./ImagePreview";
-import { getInputsConfig } from "./inputsConfig";
-import TextInput from "../../../../../../reusable-ui/TextInput";
 import { EMPTY_PRODUCT } from "../../../../../../../utils/emptyProduct";
-import SubmitMessage from "./SubmitMessage";
-import Button from "../../../../../../reusable-ui/Button";
+import AdminForm from "../../../../../../reusable-ui/AdminForm";
+import { FiCheck } from "react-icons/fi";
 
 export default function AddForm() {
   const { handleAdd } = useContext(GlobalContext);
@@ -33,73 +30,22 @@ export default function AddForm() {
     }, 2000);
   };
 
-  const inputs = getInputsConfig(newProduct);
-
   return (
-    <AddFormStyled onSubmit={handleSubmit}>
-      <ImagePreview
-        imageSource={newProduct.imageSource}
-        title={newProduct.title}
+    <AddFormStyled>
+      <AdminForm
+        product={newProduct}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+        isSuccess={isSuccess}
+        buttonLabel="Ajouter un nouveau produit au menu"
+        buttonVariant="success"
+        submitLabel="Ajouté avec succès !"
+        submitIcon={<FiCheck />}
       />
-
-      <div className="input-fields">
-        {inputs.map(({ id, type, name, placeholder, value, Icon, pattern }) => {
-          return (
-            <TextInput
-              key={id}
-              type={type}
-              name={name}
-              value={value}
-              placeholder={placeholder}
-              pattern={name === "imageSource" ? pattern : null}
-              Icon={Icon}
-              onChange={handleChange}
-              variant="minimalist"
-            />
-          );
-        })}
-      </div>
-
-      <div className="submit">
-        <Button
-          label={"Ajouter un nouveau produit au menu"}
-          classname="submit-button"
-          variant="success"
-        />
-        {isSuccess && <SubmitMessage />}
-      </div>
     </AddFormStyled>
   );
 }
 
-const AddFormStyled = styled.form`
-  height: 100%;
+const AddFormStyled = styled.div`
   width: 70%;
-
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  grid-template-rows: repeat(4, 1fr);
-  grid-column-gap: 20px;
-  grid-row-gap: 8px;
-
-  .input-fields {
-    grid-area: 1 / 2 / 4 / -1;
-
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, 1fr);
-    grid-row-gap: 8px;
-  }
-
-  .submit {
-    grid-area: 4 / 2 / -1 / -1;
-    display: flex;
-    align-items: center;
-    position: relative;
-    top: 3px;
-
-    .submit-button {
-      height: 100%;
-    }
-  }
 `;

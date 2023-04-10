@@ -1,17 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { HiCursorClick } from "react-icons/hi";
 import styled from "styled-components";
 import { theme } from "../../../../../../../theme";
-import GlobalContext from "../../../../../../../context/GlobalContext";
-import EditForm from "./EditForm";
 
 export default function EmptyEdit() {
-  const { productSelected } = useContext(GlobalContext);
-
-  if (productSelected) {
-    return <EditForm />;
-  }
-
   return (
     <EmptyEditStyled>
       <span>Cliquer sur un produit pour le modifier</span>
