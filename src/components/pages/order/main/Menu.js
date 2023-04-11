@@ -57,20 +57,13 @@ export default function Menu() {
           leftDescription={formatPrice(price)}
           hasDeleteButton={isAdminMode}
           onDelete={(event) => handleOnDelete(event, id)}
-          onSelected={() => handleSelectedProduct(id)}
-          variant={isAdminMode ? "adminCard" : "normal"}
+          onSelected={isAdminMode ? () => handleSelectedProduct(id) : null}
+          variant={isAdminMode ? "admin" : ""}
+          className={
+            isAdminMode && productSelected?.id === id ? "selected" : "normal"
+          }
           adminMode={isAdminMode}
           stopPropagation={(e) => stopPropagation(e)}
-          variantBtn={
-            isAdminMode && productSelected && productSelected.id === id
-              ? "selected"
-              : "normal"
-          }
-          className={
-            isAdminMode && productSelected && productSelected.id === id
-              ? "selected"
-              : "normal"
-          }
         />
       ))}
     </MenuStyled>
@@ -86,29 +79,4 @@ const MenuStyled = styled.div`
   grid-row-gap: 60px;
   justify-items: center;
   background-color: transparent;
-
-  .selected {
-    background-color: #ffa01b;
-    .delete-btn {
-      background-color: ${theme.colors.white};
-      cursor: pointer;
-      .icon {
-        color: ${theme.colors.primary};
-      }
-      :hover {
-        background-color: #e25549;
-      }
-      :active {
-        background-color: ${theme.colors.white};
-      }
-    }
-    .text-info {
-      display: grid;
-      grid-template-rows: 30% 70%;
-      padding: 5px;
-      .left-description {
-        color: white;
-      }
-    }
-  }
 `;

@@ -10,15 +10,10 @@ export default function Card({
   hasDeleteButton,
   onSelected,
   onDelete,
-  className,
-  variantBtn,
+  variant,
   stopPropagation,
-  variant = "normal",
+  className,
 }) {
-  // const stopPropagation = (e) => {
-  //   e.stopPropagation();
-  // };
-
   return (
     <CardStyled onClick={onSelected} variant={variant} className={className}>
       {hasDeleteButton && (
@@ -37,7 +32,7 @@ export default function Card({
             <Button
               classname="primary-button"
               label={"Ajouter"}
-              variant={variantBtn}
+              variant={className}
               onClick={stopPropagation}
             />
           </div>
@@ -57,7 +52,13 @@ const CardStyled = styled.div`
   border-radius: ${theme.borderRadius.extraRound};
   background-color: ${theme.colors.white};
   position: relative;
-  ${({ variant }) => cardStyle[variant]}
+
+  :hover {
+    ${({ variant }) => cardStyle[variant]};
+  }
+  &.selected {
+    ${({ className }) => className === "selected" && cardStyle.selected};
+  }
   .delete-btn {
     position: absolute;
     top: 0;
@@ -146,21 +147,36 @@ const CardStyled = styled.div`
   }
 `;
 
-const adminCardStyle = css`
-  :hover {
-    scale: 1.05;
-    transition: all 600ms ease;
-    ::before {
-      content: "";
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      border-radius: 15px;
-      box-shadow: 0px 0px 8px 0px #ffa01b;
+const selectedStyle = css`
+  background-color: ${theme.colors.primary};
+  .delete-btn {
+    background-color: ${theme.colors.white};
+    .icon {
+      color: ${theme.colors.primary};
+    }
+    :hover {
+      background-color: ${theme.colors.red};
+    }
+    :active {
+      background-color: ${theme.colors.white};
+    }
+  }
+  .text-info {
+    .description {
+      .left-description {
+        color: ${theme.colors.white};
+      }
     }
   }
 `;
 
+const adminStyle = css`
+  box-shadow: 0px 0px 8px ${theme.colors.primary_halo};
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+`;
+
 const cardStyle = {
-  adminCard: adminCardStyle,
+  admin: adminStyle,
+  selected: selectedStyle,
 };
