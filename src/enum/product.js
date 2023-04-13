@@ -1,4 +1,4 @@
-export const EMPTY_PRODUCT = {
+export const EMPTY_PRODUCT = Object.freeze({
   id: 0,
   imageSource: "",
   title: "",
@@ -6,4 +6,4 @@ export const EMPTY_PRODUCT = {
   quantity: 0,
   isAvailable: true,
   isAdvertised: false,
-};
+});
