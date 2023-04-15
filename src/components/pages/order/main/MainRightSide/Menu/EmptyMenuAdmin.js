@@ -1,15 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { theme } from "../../../../theme";
+import { theme } from "../../../../../../theme";
+import Button from "../../../../../reusable-ui/Button";
 
-export default function EmptyMenuClient() {
+export default function EmptyMenuAdmin({ onReset }) {
   return (
     <EmptyMenuStyled>
-      <span className="title">Victime de notre succès ! :D</span>
+      <span className="title">Le menu est vide ?</span>
       <span className="description">
-        De nouvelles recettes sont en cours de préparation.
+        Cliquez ci-dessous pour le réinitialiser
       </span>
-      <span className="description">À très vite !</span>
+      <Button label={"Générer de nouveaux produits"} onClick={onReset} />
     </EmptyMenuStyled>
   );
 }
@@ -21,7 +22,7 @@ const EmptyMenuStyled = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center; // permet de diminuer la largeur du bouton resetMenu
+  align-items: center;
 
   .title,
   .description {
@@ -38,5 +39,11 @@ const EmptyMenuStyled = styled.div`
   .description {
     font-size: ${theme.fonts.size.P4};
     margin-top: 20px;
+  }
+
+  button {
+    margin-top: 30px;
+    font-size: ${theme.fonts.size.XS};
+    width: auto;
   }
 `;

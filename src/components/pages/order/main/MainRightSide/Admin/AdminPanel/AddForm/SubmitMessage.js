@@ -1,13 +1,12 @@
 import styled from "styled-components";
-import { theme } from "../../../../../../../theme";
-// import { FiCheck } from "react-icons/fi";
+import { theme } from "../../../../../../../../theme";
+import { FiCheck } from "react-icons/fi";
 
-export default function SubmitMessage({ submitLabel, Icon }) {
+export default function SubmitMessage() {
   return (
     <SubmitMessageStyled>
-      {/* <FiCheck className="icon" /> */}
-      {Icon && <div className="icon">{Icon}</div>}
-      <span className="message">{submitLabel}</span>
+      <FiCheck className="icon" />
+      <span className="message">Ajouté avec succès !</span>
     </SubmitMessageStyled>
   );
 }

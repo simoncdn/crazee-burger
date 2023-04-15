@@ -1,9 +1,9 @@
 import React from "react";
 import { HiCursorClick } from "react-icons/hi";
 import styled from "styled-components";
-import { theme } from "../../../../../../../theme";
+import { theme } from "../../../../../../../../theme";
 
-export default function EmptyEdit() {
+export default function HintEditMessage() {
   return (
     <EmptyEditStyled>
       <span>Cliquer sur un produit pour le modifier</span>

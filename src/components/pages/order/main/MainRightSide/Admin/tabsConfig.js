@@ -1,8 +1,8 @@
 import { AiOutlinePlus } from "react-icons/ai";
 import { MdModeEditOutline } from "react-icons/md";
-import AddForm from "./adminPanel/addForm/AddForm";
-import EditForm from "./adminPanel/editForm/EditForm";
-import EmptyEdit from "./adminPanel/editForm/EmptyEdit";
+import AddForm from "./AdminPanel/AddForm/AddForm";
+import EditForm from "./AdminPanel/EditForm/EditForm";
+import HintEditMessage from "./AdminPanel/EditForm/HintEditMessage";
 
 export const tabsConfig = (productBeingEdited) => [
   {
@@ -15,7 +15,7 @@ export const tabsConfig = (productBeingEdited) => [
     index: "edit",
     label: "Modifier un produit",
     Icon: <MdModeEditOutline />,
-    Panel: productBeingEdited ? <EditForm /> : <EmptyEdit />,
+    Panel: productBeingEdited ? <EditForm /> : <HintEditMessage />,
   },
 ];
 

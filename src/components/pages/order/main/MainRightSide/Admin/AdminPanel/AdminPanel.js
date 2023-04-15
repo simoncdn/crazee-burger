@@ -1,13 +1,16 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import GlobalContext from "../../../../../../context/GlobalContext";
-import { theme } from "../../../../../../theme";
+import GlobalContext from "../../../../../../../context/GlobalContext";
+import { theme } from "../../../../../../../theme";
 import { getTabSelected, tabsConfig } from "../tabsConfig";
+import { EMPTY_PRODUCT } from "../../../../../../../enum/product";
 
 export default function AdminPanel() {
-  const { currentTabSelected } = useContext(GlobalContext);
+  const { currentTabSelected, productSelected } = useContext(GlobalContext);
 
-  const tabs = tabsConfig;
+  const productBeingEdited = productSelected !== EMPTY_PRODUCT;
+
+  const tabs = tabsConfig(productBeingEdited);
   const tabSelected = getTabSelected(tabs, currentTabSelected);
 
   return <AdminPanelStyled>{tabSelected.Panel}</AdminPanelStyled>;
