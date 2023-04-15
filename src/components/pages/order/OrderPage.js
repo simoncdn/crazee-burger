@@ -5,44 +5,45 @@ import Main from "./main/Main";
 import { useRef, useState } from "react";
 import GlobalContext from "../../../context/GlobalContext";
 import { fakeMenu } from "../../../fakeData/fakeMenu";
+import { EMPTY_PRODUCT } from "../../../enum/product";
+import { deepClone } from "../../../utils/deepClone";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(true);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
   const [menu, setMenu] = useState(fakeMenu.MEDIUM);
-  const [productSelected, setProductSelected] = useState();
+  const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
 
   const titleEditBoxRef = useRef();
 
   const handleAdd = (productToAdd) => {
-    const menuCopy = [...menu];
+    const menuCopy = deepClone(menu);
     const menuUpdated = [productToAdd, ...menuCopy];
     setMenu(menuUpdated);
   };
   const handleRemove = (idProductToRemove) => {
-    const menuCopy = [...menu];
+    const menuCopy = deepClone(menu);
     const menuUpdated = menuCopy.filter(
       (product) => product.id !== idProductToRemove
     );
     setMenu(menuUpdated);
     if (productSelected && productSelected.id === idProductToRemove) {
-      setProductSelected();
+      setProductSelected(EMPTY_PRODUCT);
     }
   };
-  const handleEdit = (productToEdit, event) => {
-    const menuCopy = [...menu];
-    const menuUpdated = menuCopy.map((product) =>
-      product.id === productToEdit.id
-        ? { ...product, [event.target.name]: event.target.value }
-        : product
+  const handleEdit = (productToEdit) => {
+    const menuCopy = deepClone(menu);
+    const productTobeEdited = menuCopy.findIndex(
+      (product) => product.id === productToEdit.id
     );
-    setMenu(menuUpdated);
+    menuCopy[productTobeEdited] = productToEdit;
+    setMenu(menuCopy);
   };
 
   const resetMenu = () => {
     setMenu(fakeMenu.MEDIUM);
-    setProductSelected();
+    setProductSelected(EMPTY_PRODUCT);
   };
 
   const globalContextValue = {
@@ -56,7 +57,6 @@ export default function OrderPage() {
     handleAdd,
     handleRemove,
     resetMenu,
-    // handleSelectedProduct,
     handleEdit,
     productSelected,
     setProductSelected,
