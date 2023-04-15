@@ -8,12 +8,14 @@ import { EMPTY_PRODUCT } from "../../../../../../../enum/product";
 export default function AdminPanel() {
   const { currentTabSelected, productSelected } = useContext(GlobalContext);
 
-  const productBeingEdited = productSelected !== EMPTY_PRODUCT;
+  const hasAlreadyBeenClicked = productSelected !== EMPTY_PRODUCT;
 
-  const tabs = tabsConfig(productBeingEdited);
+  const tabs = tabsConfig(hasAlreadyBeenClicked);
   const tabSelected = getTabSelected(tabs, currentTabSelected);
 
-  return <AdminPanelStyled>{tabSelected.Panel}</AdminPanelStyled>;
+  return (
+    <AdminPanelStyled>{tabSelected && tabSelected.Panel}</AdminPanelStyled>
+  );
 }
 
 const AdminPanelStyled = styled.div`

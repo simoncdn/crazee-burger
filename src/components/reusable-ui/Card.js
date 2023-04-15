@@ -11,7 +11,6 @@ export default function Card({
   onClick,
   onDelete,
   isHoverable,
-  handleProductToBasket,
   isSelected,
 }) {
   return (
@@ -37,7 +36,7 @@ export default function Card({
               <Button
                 classname="primary-button"
                 label={"Ajouter"}
-                onClick={handleProductToBasket}
+                onClick={(event) => event.stopPropagation()}
               />
             </div>
           </div>
