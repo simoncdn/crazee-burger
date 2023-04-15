@@ -24,64 +24,58 @@ const TextInput = React.forwardRef(
 export default TextInput;
 
 const TextInputStyled = styled.div`
-  ${({ variant }) => inputStyle[variant]}
-`;
-
-const normalStyle = css`
+  border-radius: ${theme.borderRadius.round};
   display: flex;
   align-items: center;
-  width: 100%;
-  height: 55px;
-  border-radius: ${theme.borderRadius.round};
-  padding: 18px 24px;
-  margin: 18px 0;
+
+  .icon {
+    font-size: ${theme.fonts.size.SM};
+    margin: 0 13px 0 8px;
+    display: flex; // to center icon vertically
+  }
+
+  input {
+    border: none;
+    font-size: ${theme.fonts.size.SM};
+    width: 100%;
+
+    &::placeholder {
+      color: ${theme.colors.greyMedium};
+    }
+  }
+  ${({ variant }) => extraStyle[variant]}
+`;
+
+const extraStyleNormal = css`
   background-color: ${theme.colors.white};
-  .icon {
-    color: ${theme.colors.greySemiDark};
-    font-size: ${theme.fonts.size.P0};
-    margin-right: 8px;
-  }
+  padding: 18px 28px;
+  color: ${theme.colors.greySemiDark};
+
   input {
-    font-size: ${theme.fonts.size.P0};
     color: ${theme.colors.dark};
-    border: none;
-    width: 100%;
+
     &::placeholder {
-      color: ${theme.colors.greyLight};
-      background-color: ${theme.colors.white};
+      background: ${theme.colors.white};
     }
   }
 `;
 
-const minimalistStyle = css`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  border-radius: ${theme.borderRadius.round};
+const extraStyleMinimalist = css`
   background-color: ${theme.colors.background_white};
-  padding: 0px 24px;
-  margin: 0;
-  height: 35px;
+  padding: 8px 16px;
+  color: ${theme.colors.greyBlue};
 
-  .icon {
-    color: ${theme.colors.greySemiDark};
-    font-size: ${theme.fonts.size.P0};
-    margin-right: 15px;
-  }
   input {
-    font-size: ${theme.fonts.size.P0};
+    background: ${theme.colors.background_white};
     color: ${theme.colors.dark};
-    border: none;
-    width: 100%;
-    background-color: ${theme.colors.background_white};
-    &::placeholder {
-      color: ${theme.colors.greySemiDark};
-      background-color: ${theme.colors.background_white};
+
+    &:focus {
+      outline: 0;
     }
   }
 `;
 
-const inputStyle = {
-  normal: normalStyle,
-  minimalist: minimalistStyle,
+const extraStyle = {
+  normal: extraStyleNormal,
+  minimalist: extraStyleMinimalist,
 };
