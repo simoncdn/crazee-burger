@@ -7,9 +7,10 @@ import GlobalContext from "../../../context/GlobalContext";
 import { fakeMenu } from "../../../fakeData/fakeMenu";
 import { EMPTY_PRODUCT } from "../../../enum/product";
 import { deepClone } from "../../../utils/deepClone";
+import { focusOnRef } from "../../../utils/focusOnRef";
 
 export default function OrderPage() {
-  const [isAdminMode, setIsAdminMode] = useState(true);
+  const [isAdminMode, setIsAdminMode] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
   const [menu, setMenu] = useState(fakeMenu.MEDIUM);
@@ -31,6 +32,7 @@ export default function OrderPage() {
     if (productSelected && productSelected.id === idProductToRemove) {
       setProductSelected(EMPTY_PRODUCT);
     }
+    focusOnRef(titleEditRef);
   };
   const handleEdit = (productToEdit) => {
     const menuCopy = deepClone(menu);

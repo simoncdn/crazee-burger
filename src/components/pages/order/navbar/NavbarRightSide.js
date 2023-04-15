@@ -6,11 +6,13 @@ import Profile from "./Profile";
 import ToggleButton from "../../../reusable-ui/ToggleButton";
 import { useContext } from "react";
 import GlobalContext from "../../../../context/GlobalContext";
+import { focusOnRef } from "../../../../utils/focusOnRef";
 
 export default function NavbarRightSide() {
-  const { isAdminMode, setIsAdminMode } = useContext(GlobalContext);
+  const { isAdminMode, setIsAdminMode, titleEditRef } =
+    useContext(GlobalContext);
 
-  const displayToastNotification = () => {
+  const displayToastNotification = async () => {
     if (!isAdminMode) {
       toast.info("Mode admin activé", {
         theme: "dark",
@@ -23,7 +25,8 @@ export default function NavbarRightSide() {
         progress: undefined,
       });
     }
-    setIsAdminMode(!isAdminMode);
+    await setIsAdminMode(!isAdminMode);
+    focusOnRef(titleEditRef);
   };
 
   return (
