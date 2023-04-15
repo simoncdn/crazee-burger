@@ -4,7 +4,7 @@ import AdminForm from "../../../../../../../reusable-ui/AdminForm";
 import InfoEditMessage from "./InfoEditMessage";
 
 export default function EditForm() {
-  const { productSelected, setProductSelected, handleEdit, titleEditBoxRef } =
+  const { productSelected, setProductSelected, handleEdit, titleEditRef } =
     useContext(GlobalContext);
 
   const handleChange = (e) => {
@@ -20,7 +20,7 @@ export default function EditForm() {
     <AdminForm
       product={productSelected}
       onChange={handleChange}
-      titleEditBoxRef={titleEditBoxRef}
+      ref={titleEditRef}
     >
       <InfoEditMessage />
     </AdminForm>

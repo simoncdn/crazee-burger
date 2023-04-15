@@ -15,7 +15,7 @@ export default function OrderPage() {
   const [menu, setMenu] = useState(fakeMenu.MEDIUM);
   const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
 
-  const titleEditBoxRef = useRef();
+  const titleEditRef = useRef();
 
   const handleAdd = (productToAdd) => {
     const menuCopy = deepClone(menu);
@@ -60,7 +60,7 @@ export default function OrderPage() {
     handleEdit,
     productSelected,
     setProductSelected,
-    titleEditBoxRef,
+    titleEditRef,
   };
 
   return (
