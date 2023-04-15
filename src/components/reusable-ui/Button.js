@@ -73,64 +73,13 @@ const normalStyle = css`
   }
 `;
 
-const selectedStyle = css`
-  width: 100%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  position: relative;
-  white-space: nowrap;
-  text-decoration: none;
-  line-height: 1;
-
-  padding: 18px 24px;
-  border-radius: ${theme.borderRadius.round};
-  font-size: ${theme.fonts.size.P0};
-  font-weight: ${theme.fonts.weights.heavy};
-  color: ${theme.colors.primary_burger};
-  background-color: ${theme.colors.white};
-  border: 1px solid ${theme.colors.white};
-  cursor: pointer;
-
-  :hover {
-    background-color: ${theme.colors.primary_burger};
-    color: ${theme.colors.white};
-    border: 1px solid ${theme.colors.white};
-    transition: all 200ms ease-out;
-  }
-
-  :active {
-    color: ${theme.colors.primary_burger};
-    background-color: ${theme.colors.white};
-  }
-
-  &.is-disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-  &.with-focus {
-    background-color: ${theme.colors.white};
-    color: ${theme.colors.primary};
-    :hover {
-      color: ${theme.colors.white};
-      background-color: ${theme.colors.primary};
-      border: 1px solid ${theme.colors.white};
-    }
-    :active {
-      background-color: ${theme.colors.white};
-      color: ${theme.colors.primary};
-    }
-  }
-`;
-
 const successStyle = css`
   cursor: pointer;
   color: ${theme.colors.white};
   background: ${theme.colors.success};
   border: 1px solid ${theme.colors.success};
   border-radius: ${theme.borderRadius.round};
-  height: 35px;
+  height: 100%;
   padding: 0 1.5em;
   font-weight: ${theme.fonts.weights.semiBold};
   :hover {
@@ -145,30 +94,7 @@ const successStyle = css`
   }
 `;
 
-const testStyle = css`
-  cursor: pointer;
-  color: ${theme.colors.white};
-  background: ${theme.colors.red};
-  border: 1px solid ${theme.colors.red};
-  border-radius: ${theme.borderRadius.round};
-  height: 35px;
-  padding: 0 1.5em;
-  font-weight: ${theme.fonts.weights.semiBold};
-  :hover {
-    background: ${theme.colors.white};
-    color: ${theme.colors.red};
-    border: 1px solid ${theme.colors.red};
-  }
-  :active {
-    color: ${theme.colors.white};
-    background: ${theme.colors.red};
-    border: 1px solid ${theme.colors.red};
-  }
-`;
-
 const buttonStyle = {
   normal: normalStyle,
   success: successStyle,
-  selected: selectedStyle,
-  test: testStyle,
 };
