@@ -40,6 +40,7 @@ const normalStyle = css`
   border: 1px solid ${theme.colors.primary_burger};
   cursor: pointer;
 
+  gap: 15px;
   :hover {
     background-color: ${theme.colors.white};
     color: ${theme.colors.primary_burger};
@@ -70,6 +71,11 @@ const normalStyle = css`
       background-color: ${theme.colors.white};
       color: ${theme.colors.primary};
     }
+  }
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 

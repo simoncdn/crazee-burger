@@ -27,16 +27,16 @@ const TextInputStyled = styled.div`
   border-radius: ${theme.borderRadius.round};
   display: flex;
   align-items: center;
-
+  background-color: red;
   .icon {
-    font-size: ${theme.fonts.size.SM};
+    font-size: ${theme.fonts.size.P0};
     margin: 0 13px 0 8px;
     display: flex; // to center icon vertically
   }
 
   input {
     border: none;
-    font-size: ${theme.fonts.size.SM};
+    font-size: ${theme.fonts.size.P0};
     width: 100%;
 
     &::placeholder {
@@ -50,10 +50,9 @@ const extraStyleNormal = css`
   background-color: ${theme.colors.white};
   padding: 18px 28px;
   color: ${theme.colors.greySemiDark};
-
+  gap: 15px;
   input {
     color: ${theme.colors.dark};
-
     &::placeholder {
       background: ${theme.colors.white};
     }

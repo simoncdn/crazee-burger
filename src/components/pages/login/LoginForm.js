@@ -39,7 +39,11 @@ export default function LoginForm() {
         Icon={<BsPersonCircle />}
       />
 
-      <Button label={"Accéder à mon espace"} Icon={<IoChevronForward />} />
+      <Button
+        label={"Accéder à mon espace"}
+        Icon={<IoChevronForward />}
+        variant={"normal"}
+      />
     </LoginFormStyled>
   );
 }
