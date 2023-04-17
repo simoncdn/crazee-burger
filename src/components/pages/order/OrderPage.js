@@ -15,6 +15,7 @@ export default function OrderPage() {
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
   const [menu, setMenu] = useState(fakeMenu.MEDIUM);
   const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
+  const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
 
   const titleEditRef = useRef();
 
@@ -63,6 +64,8 @@ export default function OrderPage() {
     productSelected,
     setProductSelected,
     titleEditRef,
+    newProduct,
+    setNewProduct,
   };
 
   return (

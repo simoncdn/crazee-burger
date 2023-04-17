@@ -5,8 +5,7 @@ import AdminForm from "../../../../../../../reusable-ui/AdminForm";
 import SubmitButton from "./SubmitButton";
 
 export default function AddForm() {
-  const { handleAdd } = useContext(GlobalContext);
-  const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
+  const { handleAdd, newProduct, setNewProduct } = useContext(GlobalContext);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const handleChange = (e) => {
