@@ -10,8 +10,11 @@ export default function Main() {
 
   return (
     <MainStyled>
-      <Menu />
-      {isAdminMode && <Admin />}
+      <div className="basket"></div>
+      <div className="right-side">
+        <Menu />
+        {isAdminMode && <Admin />}
+      </div>
     </MainStyled>
   );
 }
@@ -20,7 +23,17 @@ const MainStyled = styled.div`
   flex: 1;
   background: ${theme.colors.background_white};
   display: grid;
-  grid-template-columns: 1fr;
-  overflow-y: scroll;
+  grid-template-columns: 25% 1fr;
+  overflow: hidden;
   box-shadow: ${theme.shadows.strong};
+  .basket {
+    background: black;
+  }
+  .right-side {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+  }
 `;
