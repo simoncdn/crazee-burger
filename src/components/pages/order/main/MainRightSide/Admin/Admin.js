@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import AdmninTabs from "./AdminTabs";
-import AdminPanel from "./adminPanel/AdminPanel";
-import GlobalContext from "../../../../../context/GlobalContext";
+import AdminPanel from "./AdminPanel/AdminPanel";
+import GlobalContext from "../../../../../../context/GlobalContext";
 
 export default function Admin() {
   const { isCollapsed } = useContext(GlobalContext);

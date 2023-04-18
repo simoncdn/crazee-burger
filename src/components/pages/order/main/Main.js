@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import Menu from "./Menu";
 import { theme } from "../../../../theme";
-import Admin from "./admin/Admin";
+import Admin from "./MainRightSide/Admin/Admin";
 import GlobalContext from "../../../../context/GlobalContext";
+import Menu from "./MainRightSide/Menu/Menu";
 
 export default function Main() {
   const { isAdminMode } = useContext(GlobalContext);

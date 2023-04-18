@@ -2,28 +2,48 @@ import Navbar from "./navbar/Navbar";
 import styled from "styled-components";
 import { theme } from "../../../theme";
 import Main from "./main/Main";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import GlobalContext from "../../../context/GlobalContext";
 import { fakeMenu } from "../../../fakeData/fakeMenu";
+import { EMPTY_PRODUCT } from "../../../enum/product";
+import { deepClone } from "../../../utils/deepClone";
+import { focusOnRef } from "../../../utils/focusOnRef";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
   const [menu, setMenu] = useState(fakeMenu.MEDIUM);
+  const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
+  const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
+
+  const titleEditRef = useRef();
 
   const handleAdd = (productToAdd) => {
-    const menuCopy = [...menu];
-    const menuUpdate = [productToAdd, ...menuCopy];
-    setMenu(menuUpdate);
+    const menuCopy = deepClone(menu);
+    const menuUpdated = [productToAdd, ...menuCopy];
+    setMenu(menuUpdated);
   };
   const handleRemove = (idProductToRemove) => {
-    const menuCopy = [...menu];
-    const menuUpdate = menuCopy.filter(
+    const menuCopy = deepClone(menu);
+    const menuUpdated = menuCopy.filter(
       (product) => product.id !== idProductToRemove
     );
-    setMenu(menuUpdate);
+    setMenu(menuUpdated);
+    if (productSelected && productSelected.id === idProductToRemove) {
+      setProductSelected(EMPTY_PRODUCT);
+    }
+    focusOnRef(titleEditRef);
   };
+  const handleEdit = (productToEdit) => {
+    const menuCopy = deepClone(menu);
+    const productTobeEdited = menuCopy.findIndex(
+      (product) => product.id === productToEdit.id
+    );
+    menuCopy[productTobeEdited] = productToEdit;
+    setMenu(menuCopy);
+  };
+
   const resetMenu = () => {
     setMenu(fakeMenu.MEDIUM);
   };
@@ -39,6 +59,12 @@ export default function OrderPage() {
     handleAdd,
     handleRemove,
     resetMenu,
+    handleEdit,
+    productSelected,
+    setProductSelected,
+    titleEditRef,
+    newProduct,
+    setNewProduct,
   };
 
   return (

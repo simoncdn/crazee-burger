@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
-import Tab from "../../../../reusable-ui/Tab";
-import GlobalContext from "../../../../../context/GlobalContext";
+import Tab from "../../../../../reusable-ui/Tab";
+import GlobalContext from "../../../../../../context/GlobalContext";
 import { tabsConfig } from "./tabsConfig";
-import { theme } from "../../../../../theme";
+import { theme } from "../../../../../../theme";
+import { focusOnRef } from "../../../../../../utils/focusOnRef";
 
 export default function AdmninTabs() {
   const {
@@ -12,21 +13,28 @@ export default function AdmninTabs() {
     setIsCollapsed,
     currentTabSelected,
     setCurrentTabSelected,
+    titleEditRef,
   } = useContext(GlobalContext);
 
-  const selectTab = (tabSelected) => {
-    setIsCollapsed(false); // ouvre moi le panel dans tous les cas
-    setCurrentTabSelected(tabSelected); // réactualise l'onglet sélectionné
+  const selectTab = async (tabSelected) => {
+    await setIsCollapsed(false); // ouvre moi le panel dans tous les cas
+    await setCurrentTabSelected(tabSelected); // réactualise l'onglet sélectionné
+    focusOnRef(titleEditRef);
   };
 
-  const tabs = tabsConfig;
+  const onCollapseClick = async () => {
+    await setIsCollapsed(!isCollapsed);
+    focusOnRef(titleEditRef);
+  };
+
+  const tabs = tabsConfig();
 
   // affichage
   return (
     <AdminTabsStyled>
       <Tab
         Icon={isCollapsed ? <FiChevronUp /> : <FiChevronDown />}
-        onClick={() => setIsCollapsed(!isCollapsed)}
+        onClick={() => onCollapseClick()}
         className={isCollapsed ? "is-active" : ""}
       />
       {tabs.map((tab) => (

@@ -9,7 +9,7 @@ import TextInput from "../../reusable-ui/TextInput";
 import Button from "../../reusable-ui/Button";
 
 export default function LoginForm() {
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("Simon");
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -35,13 +35,14 @@ export default function LoginForm() {
         type={"text"}
         required
         variant="normal"
-        Icon={<BsPersonCircle className="icon" />}
+        className="input-login"
+        Icon={<BsPersonCircle />}
       />
 
       <Button
         label={"Accéder à mon espace"}
-        Icon={<IoChevronForward className="icon" />}
-        variant="normal"
+        Icon={<IoChevronForward />}
+        variant={"normal"}
       />
     </LoginFormStyled>
   );
@@ -75,12 +76,7 @@ const LoginFormStyled = styled.form`
     border: 1.5px solid ${theme.colors.loginline};
     margin-bottom: ${theme.gridUnit * 5}px;
   }
-
-  .icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: ${theme.fonts.size.P0};
-    margin-left: 10px;
+  .input-login {
+    margin: 18px 0; // must be handled in Parent
   }
 `;

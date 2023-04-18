@@ -35,7 +35,7 @@ const ImpagePreviewStyled = styled.div`
 
   img {
     width: 100%;
-    height: 100%;
+    height: 100px;
     object-fit: contain;
     object-position: center;
   }
