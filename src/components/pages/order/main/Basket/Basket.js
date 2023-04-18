@@ -22,7 +22,8 @@ export default function Basket() {
 const BasketStyled = styled.div`
   display: flex;
   flex-direction: column;
-  box-shadow: ${theme.shadows.strong};
+  /* box-shadow: ${theme.shadows.strong}; */
+  box-shadow: 8px 0px 20px 8px rgba(0, 0, 0, 0.2) inset; // alternative plus proche de la maquette
   background-color: ${theme.colors.background_white};
   .body {
     flex: 1;
