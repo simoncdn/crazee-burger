@@ -46,7 +46,6 @@ export default function OrderPage() {
 
   const resetMenu = () => {
     setMenu(fakeMenu.MEDIUM);
-    setProductSelected(EMPTY_PRODUCT);
   };
 
   const globalContextValue = {

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { theme } from "../../../../../../../../theme";
 
 export default function InfoEditMessage() {
   return (
@@ -18,7 +19,7 @@ const EditMessageStyled = styled.div`
   position: relative;
   top: 3px;
   height: 35px;
-  color: #ffa01b;
+  color: ${theme.colors.primary};
   font-size: 15px;
   span {
     text-decoration: underline;
