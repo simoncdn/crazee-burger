@@ -4,13 +4,14 @@ import { theme } from "../../../../theme";
 import Admin from "./MainRightSide/Admin/Admin";
 import GlobalContext from "../../../../context/GlobalContext";
 import Menu from "./MainRightSide/Menu/Menu";
+import Basket from "./Basket/Basket";
 
 export default function Main() {
   const { isAdminMode } = useContext(GlobalContext);
 
   return (
     <MainStyled>
-      <div className="basket"></div>
+      <Basket />
       <div className="right-side">
         <Menu />
         {isAdminMode && <Admin />}
@@ -26,9 +27,6 @@ const MainStyled = styled.div`
   grid-template-columns: 25% 1fr;
   overflow: hidden;
   box-shadow: ${theme.shadows.strong};
-  .basket {
-    background: black;
-  }
   .right-side {
     position: relative;
     display: flex;
