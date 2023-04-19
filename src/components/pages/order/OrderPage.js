@@ -8,6 +8,7 @@ import { fakeMenu } from "../../../fakeData/fakeMenu";
 import { EMPTY_PRODUCT } from "../../../enum/product";
 import { deepClone } from "../../../utils/deepClone";
 import { focusOnRef } from "../../../utils/focusOnRef";
+import { replaceFrenchCommaWithDot } from "../../../utils/maths";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
@@ -60,9 +61,9 @@ export default function OrderPage() {
   // CRUD BASKET //
   const addProductToBasket = (idProductToAdd) => {
     const basketCopy = deepClone(basketMenu);
-
     const productToAdd = menu.find((product) => product.id === idProductToAdd);
-    productToAdd.price = parseInt(productToAdd.price);
+
+    productToAdd.price = replaceFrenchCommaWithDot(productToAdd.price);
     productToAdd.quantity = 1;
     const basketUpdated = [productToAdd, ...basketCopy];
 
