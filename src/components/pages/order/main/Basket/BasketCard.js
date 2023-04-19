@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { theme } from "../../../../../theme";
+import { MdDeleteForever } from "react-icons/md";
 
 export default function BasketCard({
   title,
@@ -23,7 +24,7 @@ export default function BasketCard({
         <div className="right-description">x{quantity}</div>
       </div>
       <button className="delete" onClick={onDelete}>
-        <img src="/images/trash.svg" alt="trash icon" />
+        <MdDeleteForever />
       </button>
     </CardBasketStyled>
   );
@@ -57,6 +58,11 @@ const CardBasketStyled = styled.div`
       width: 68px;
       cursor: pointer;
       border: none;
+      color: white;
+      font-size: 20px;
+      :hover {
+        color: black;
+      }
     }
   }
   .image {
