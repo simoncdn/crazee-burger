@@ -38,8 +38,8 @@ export default function OrderPage() {
     }
 
     focusOnRef(titleEditRef);
-    setMenu(menuUpdated);
     deleteProductInBasket(idProductToRemove);
+    setMenu(menuUpdated);
     updateTotalPriceOnRemove(idProductToRemove);
   };
 
@@ -59,7 +59,6 @@ export default function OrderPage() {
   // BASKET //
   const addProductToBasket = (idProductToAdd) => {
     const basketCopy = deepClone(basketMenu);
-    const menuCopy = deepClone(menu);
     const productToAdd = menu.find((product) => product.id === idProductToAdd);
 
     const productAlreadyAdded = basketCopy.find(
@@ -67,18 +66,17 @@ export default function OrderPage() {
     );
 
     if (!productAlreadyAdded) {
-      menuCopy[getIndex(idProductToAdd, menuCopy)].quantity = 1;
       productToAdd.quantity = 1;
       const basketUpdated = [productToAdd, ...basketCopy];
-      getTotalPrice(productToAdd.price);
-      setMenu(menuCopy);
       setBasketMenu(basketUpdated);
+      getTotalPrice(productToAdd.price);
       return;
     }
 
     updateProductQuantity(productToAdd);
     getTotalPrice(productToAdd.price);
   };
+
   const updateProductQuantity = (ProductToUpdate) => {
     const basketCopy = deepClone(basketMenu);
     const menuCopy = deepClone(menu);
@@ -92,11 +90,18 @@ export default function OrderPage() {
     setMenu(menuCopy);
     setBasketMenu(basketCopy);
   };
+  const removeProductQuantity = (IdProductToRemove) => {
+    const menuCopy = deepClone(menu);
+    const productIndexInMenu = getIndex(IdProductToRemove, menuCopy);
+    menuCopy[productIndexInMenu].quantity = 0;
+    setMenu(menuCopy);
+  };
 
   const deleteProductInBasket = (idProductToRemove) => {
     const basketUpdated = filterArray(idProductToRemove, basketMenu);
-    setBasketMenu(basketUpdated);
+    removeProductQuantity(idProductToRemove);
     updateTotalPriceOnRemove(idProductToRemove);
+    setBasketMenu(basketUpdated);
   };
 
   const getTotalPrice = (productPrice) => {
@@ -109,6 +114,7 @@ export default function OrderPage() {
     const totalPriceCopy = totalPrice;
     const findProduct = basketMenu.find((product) => product.id === productId);
 
+    if (!findProduct) return;
     const newTotalPrice =
       totalPriceCopy - findProduct.quantity * findProduct.price;
     setTotalPrice(newTotalPrice);
