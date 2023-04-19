@@ -35,6 +35,11 @@ export default function BasketBody() {
     focusOnRef(titleEditRef);
   };
 
+  const handleDelete = (event, id) => {
+    event.stopPropagation();
+    deleteProductInBasket(id);
+  };
+
   return (
     <BasketBodyStyled>
       {basketMenu.map(({ id, title, imageSource, price, quantity }) => (
@@ -44,7 +49,7 @@ export default function BasketBody() {
           image={imageSource ? imageSource : IMAGE_DEFAULT}
           price={formatPrice(price)}
           quantity={quantity}
-          onDelete={() => deleteProductInBasket(id)}
+          onDelete={(event) => handleDelete(event, id)}
           onClick={() => handleProductSelected(id)}
           isSelected={isAdminMode && productSelected?.id === id && true}
         />
