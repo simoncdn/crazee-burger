@@ -9,6 +9,8 @@ import { EMPTY_PRODUCT } from "../../../enum/product";
 import { deepClone } from "../../../utils/deepClone";
 import { focusOnRef } from "../../../utils/focusOnRef";
 import { replaceFrenchCommaWithDot } from "../../../utils/maths";
+import { getIndex } from "../../../utils/getIndex";
+import { filterArray } from "../../../utils/filterArray";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
@@ -30,19 +32,15 @@ export default function OrderPage() {
     setMenu(menuUpdated);
   };
   const handleRemove = (idProductToRemove) => {
-    const menuCopy = deepClone(menu);
-    const menuUpdated = menuCopy.filter(
-      (product) => product.id !== idProductToRemove
-    );
-    setMenu(menuUpdated);
+    const menuUpdated = filterArray(idProductToRemove, menu);
     if (productSelected && productSelected.id === idProductToRemove) {
       setProductSelected(EMPTY_PRODUCT);
     }
 
     focusOnRef(titleEditRef);
-
+    setMenu(menuUpdated);
     deleteProductInBasket(idProductToRemove);
-    updatePrice(idProductToRemove);
+    updateTotalPriceOnRemove(idProductToRemove);
   };
 
   const handleEdit = (productToEdit) => {
@@ -58,51 +56,56 @@ export default function OrderPage() {
     setMenu(fakeMenu.MEDIUM);
   };
 
-  // CRUD BASKET //
+  // BASKET //
   const addProductToBasket = (idProductToAdd) => {
     const basketCopy = deepClone(basketMenu);
+    const menuCopy = deepClone(menu);
     const productToAdd = menu.find((product) => product.id === idProductToAdd);
-
-    productToAdd.price = replaceFrenchCommaWithDot(productToAdd.price);
-    productToAdd.quantity = 1;
-    const basketUpdated = [productToAdd, ...basketCopy];
-
-    setBasketMenu(basketUpdated);
-    getPrice(productToAdd.price);
 
     const productAlreadyAdded = basketCopy.find(
       (product) => product.id === idProductToAdd
     );
-    if (productAlreadyAdded) {
-      return updateProductQuantity(productAlreadyAdded);
+
+    if (!productAlreadyAdded) {
+      menuCopy[getIndex(idProductToAdd, menuCopy)].quantity = 1;
+      productToAdd.quantity = 1;
+      const basketUpdated = [productToAdd, ...basketCopy];
+      getTotalPrice(productToAdd.price);
+      setMenu(menuCopy);
+      setBasketMenu(basketUpdated);
+      return;
     }
+
+    updateProductQuantity(productToAdd);
+    getTotalPrice(productToAdd.price);
   };
   const updateProductQuantity = (ProductToUpdate) => {
     const basketCopy = deepClone(basketMenu);
-    const productIndex = basketCopy.findIndex(
-      (product) => product.id === ProductToUpdate.id
-    );
-    basketCopy[productIndex].quantity += 1;
+    const menuCopy = deepClone(menu);
+
+    const productIndexInBasket = getIndex(ProductToUpdate.id, basketCopy);
+    const productIndexInMenu = getIndex(ProductToUpdate.id, menuCopy);
+
+    basketCopy[productIndexInBasket].quantity += 1;
+    menuCopy[productIndexInMenu].quantity += 1;
+
+    setMenu(menuCopy);
     setBasketMenu(basketCopy);
-    getPrice(ProductToUpdate.price);
   };
 
   const deleteProductInBasket = (idProductToRemove) => {
-    const basketMenuCopy = deepClone(basketMenu);
-    const basketUpdated = basketMenuCopy.filter(
-      (product) => product.id !== idProductToRemove
-    );
+    const basketUpdated = filterArray(idProductToRemove, basketMenu);
     setBasketMenu(basketUpdated);
-    updatePrice(idProductToRemove);
+    updateTotalPriceOnRemove(idProductToRemove);
   };
 
-  const getPrice = (productPrice) => {
+  const getTotalPrice = (productPrice) => {
     let newTotalPrice = totalPrice;
     newTotalPrice += productPrice;
     setTotalPrice(newTotalPrice);
   };
 
-  const updatePrice = (productId) => {
+  const updateTotalPriceOnRemove = (productId) => {
     const totalPriceCopy = totalPrice;
     const findProduct = basketMenu.find((product) => product.id === productId);
 
@@ -133,7 +136,7 @@ export default function OrderPage() {
     setBasketMenu,
     addProductToBasket,
     deleteProductInBasket,
-    updatePrice,
+    updateTotalPriceOnRemove,
     totalPrice,
     setTotalPrice,
   };
