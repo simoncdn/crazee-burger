@@ -21,6 +21,7 @@ export default function Menu() {
     setProductSelected,
     titleEditRef,
     productSelected,
+    addProductToBasket,
   } = useContext(GlobalContext);
 
   if (menu.length === 0) {
@@ -31,6 +32,11 @@ export default function Menu() {
   const handleOnDelete = (event, id) => {
     event.stopPropagation();
     handleRemove(id);
+  };
+
+  const handleToBasket = (event, product) => {
+    event.stopPropagation();
+    addProductToBasket(product);
   };
 
   const handleProductSelected = async (idProductSelected) => {
@@ -57,6 +63,7 @@ export default function Menu() {
           hasDeleteButton={isAdminMode}
           onDelete={(event) => handleOnDelete(event, id)}
           onClick={() => handleProductSelected(id)}
+          onButtonClick={(event) => handleToBasket(event, id)}
           isHoverable={isAdminMode}
           isSelected={productSelected?.id === id && true}
         />

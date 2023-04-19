@@ -23,4 +23,13 @@ export default createContext({
   setNewProduct: () => {},
 
   titleEditRef: {},
+
+  basketMenu: [],
+  setBasketMenu: () => {},
+  totalPrice: 0,
+  setTotalPrice: () => {},
+
+  addProductToBasket: () => {},
+  deleteProductInBasket: () => {},
+  updatePrice: () => {},
 });
