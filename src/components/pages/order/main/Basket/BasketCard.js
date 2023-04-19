@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "../../../../../theme";
 
 export default function BasketCard({
@@ -7,9 +7,11 @@ export default function BasketCard({
   price,
   onDelete,
   quantity,
+  onClick,
+  isSelected,
 }) {
   return (
-    <CardBasketStyled>
+    <CardBasketStyled onClick={onClick} isSelected={isSelected}>
       <div className="image">
         <img src={image} alt={title} />
       </div>
@@ -104,6 +106,25 @@ const CardBasketStyled = styled.div`
       color: ${theme.colors.primary};
       display: flex;
       align-items: center;
+    }
+  }
+  ${(props) => props.isSelected && selectedStyle};
+`;
+const selectedStyle = css`
+  background-color: ${theme.colors.primary};
+  .delete-btn {
+    background-color: ${theme.colors.white};
+    .icon {
+      color: ${theme.colors.primary};
+    }
+    :active {
+      background-color: ${theme.colors.white};
+    }
+  }
+  .text-info {
+    .left-description .price,
+    .right-description {
+      color: ${theme.colors.white};
     }
   }
 `;

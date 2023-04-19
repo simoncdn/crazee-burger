@@ -4,12 +4,36 @@ import { formatPrice } from "../../../../../utils/maths";
 import GlobalContext from "../../../../../context/GlobalContext";
 import EmptyBasket from "./EmptyBasket";
 import BasketCard from "./BasketCard";
+import { focusOnRef } from "../../../../../utils/focusOnRef";
 
 export default function BasketBody() {
-  const { basketMenu, deleteProductInBasket } = useContext(GlobalContext);
+  const {
+    basketMenu,
+    deleteProductInBasket,
+    setProductSelected,
+    setCurrentTabSelected,
+    setIsCollapsed,
+    isAdminMode,
+    menu,
+    titleEditRef,
+    productSelected,
+  } = useContext(GlobalContext);
   const IMAGE_DEFAULT = "/images/coming-soon.png";
 
   if (basketMenu.length === 0) return <EmptyBasket />;
+
+  const handleProductSelected = async (idProductSelected) => {
+    if (!isAdminMode) return;
+
+    const productSelected = menu.find(
+      (product) => product.id === idProductSelected
+    );
+    await setProductSelected(productSelected);
+    await setCurrentTabSelected("edit");
+    await setIsCollapsed(false);
+
+    focusOnRef(titleEditRef);
+  };
 
   return (
     <BasketBodyStyled>
@@ -21,6 +45,8 @@ export default function BasketBody() {
           price={formatPrice(price)}
           quantity={quantity}
           onDelete={() => deleteProductInBasket(id)}
+          onClick={() => handleProductSelected(id)}
+          isSelected={isAdminMode && productSelected?.id === id && true}
         />
       ))}
     </BasketBodyStyled>
