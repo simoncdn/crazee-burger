@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../theme";
+import GlobalContext from "../../../../../context/GlobalContext";
+import { formatPrice } from "../../../../../utils/maths";
+import BasketBody from "./BasketBody";
 
 export default function Basket() {
+  const { totalPrice } = useContext(GlobalContext);
+
   return (
     <BasketStyled>
       <div className="total">
-        <span>Total</span>
-        <span>0,00 €</span>
+        Total
+        <span>{formatPrice(totalPrice)}</span>
       </div>
-      <div className="body">
-        <span>Votre commande est vide.</span>
-      </div>
+
+      <BasketBody />
+
       <div className="footer">
         <span>Codé avec ❤️ et React.js</span>
       </div>
@@ -25,16 +30,7 @@ const BasketStyled = styled.div`
   /* box-shadow: ${theme.shadows.strong}; */
   box-shadow: 8px 0px 20px 8px rgba(0, 0, 0, 0.2) inset; // alternative plus proche de la maquette
   background-color: ${theme.colors.background_white};
-  .body {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: ${theme.fonts.family.stylish};
-    font-size: ${theme.fonts.size.P4};
-    color: ${theme.colors.greyBlue};
-    background: transparent;
-  }
+  overflow-y: hidden;
 
   .total,
   .footer {
@@ -50,6 +46,9 @@ const BasketStyled = styled.div`
     font-family: ${theme.fonts.family.stylish};
     color: ${theme.colors.primary};
     font-size: ${theme.fonts.size.P4};
+    span {
+      font-weight: ${theme.fonts.weights.bold};
+    }
   }
 
   .footer {
