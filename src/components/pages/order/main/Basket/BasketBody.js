@@ -45,7 +45,7 @@ const BasketBodyStyled = styled.div`
   overflow-y: scroll;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(12, 86px);
+  grid-template-rows: repeat(9, 86px);
   grid-row-gap: 20px;
   padding: 20px 16px;
   ::-webkit-scrollbar {
