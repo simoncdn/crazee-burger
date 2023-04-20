@@ -8,6 +8,9 @@ import { fakeMenu } from "../../../fakeData/fakeMenu";
 import { EMPTY_PRODUCT } from "../../../enum/product";
 import { deepClone } from "../../../utils/deepClone";
 import { focusOnRef } from "../../../utils/focusOnRef";
+import { getIndex } from "../../../utils/getIndex";
+import { filter } from "../../../utils/filter";
+import { find } from "../../../utils/find";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(true);
@@ -29,9 +32,7 @@ export default function OrderPage() {
     setMenu(menuUpdated);
   };
   const handleRemove = (idProductToRemove) => {
-    const menuUpdated = menu.filter(
-      (product) => product.id !== idProductToRemove
-    );
+    const menuUpdated = filter(idProductToRemove, menu);
 
     if (productSelected && productSelected.id === idProductToRemove) {
       setProductSelected(EMPTY_PRODUCT);
@@ -39,18 +40,16 @@ export default function OrderPage() {
 
     focusOnRef(titleEditRef);
     setMenu(menuUpdated);
-    deleteProductInBasket(idProductToRemove);
+    deleteBasketProduct(idProductToRemove);
   };
 
   const handleEdit = (productToEdit) => {
-    const productTobeEdited = menu.findIndex(
-      (product) => product.id === productToEdit.id
-    );
-    const productInBasket = basketMenu.findIndex(
-      (product) => product.id === productToEdit.id
-    );
+    const productInBasket = getIndex(productToEdit.id, basketMenu);
+    const productTobeEdited = getIndex(productToEdit.id, menu);
+
     menu[productTobeEdited] = productToEdit;
     basketMenu[productInBasket] = productToEdit;
+
     setMenu(menu);
     setBasketMenu(basketMenu);
   };
@@ -63,11 +62,9 @@ export default function OrderPage() {
 
   const addProductToBasket = (idProductToAdd) => {
     const basketCopy = deepClone(basketMenu);
-    const productToAdd = menu.find((product) => product.id === idProductToAdd);
 
-    const productAlreadyInBasket = basketMenu.find(
-      (product) => product.id === idProductToAdd
-    );
+    const productToAdd = find(idProductToAdd, menu);
+    const productAlreadyInBasket = find(idProductToAdd, basketMenu);
 
     if (!productAlreadyInBasket) {
       productToAdd.quantity = 1;
@@ -77,22 +74,29 @@ export default function OrderPage() {
     }
     updateProductQuantity(productAlreadyInBasket);
   };
-  const updateProductQuantity = (ProductToUpdate) => {
+
+  const updateProductQuantity = (productToUpdate) => {
     const basketCopy = deepClone(basketMenu);
-    const productIndex = basketMenu.findIndex(
-      (product) => product.id === ProductToUpdate.id
-    );
+    const productIndex = getIndex(productToUpdate.id, basketMenu);
     basketCopy[productIndex].quantity += 1;
     setBasketMenu(basketCopy);
   };
 
-  const deleteProductInBasket = (idProductToRemove) => {
-    const basketUpdated = basketMenu.filter(
-      (product) => product.id !== idProductToRemove
-    );
+  const deleteBasketProduct = (idProductToRemove) => {
+    const basketUpdated = filter(idProductToRemove, basketMenu);
     setBasketMenu(basketUpdated);
   };
 
+  const handleProductSelected = async (idProductSelected) => {
+    if (!isAdminMode) return;
+    const productSelected = find(idProductSelected, menu);
+
+    await setProductSelected(productSelected);
+    await setCurrentTabSelected("edit");
+    await setIsCollapsed(false);
+
+    focusOnRef(titleEditRef);
+  };
   const globalContextValue = {
     isAdminMode,
     setIsAdminMode,
@@ -114,10 +118,12 @@ export default function OrderPage() {
     basketMenu,
     setBasketMenu,
     addProductToBasket,
-    deleteProductInBasket,
+    deleteBasketProduct,
 
     totalPrice,
     setTotalPrice,
+
+    handleProductSelected,
   };
 
   return (
