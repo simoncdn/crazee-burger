@@ -6,8 +6,7 @@ import { formatPrice } from "../../../../../../utils/maths";
 import Card from "../../../../../reusable-ui/Card";
 import EmptyMenuAdmin from "./EmptyMenuAdmin";
 import EmptyMenuClient from "./EmptyMenuClient";
-
-const IMAGE_DEFAULT = "/images/coming-soon.png";
+import { IMAGE_DEFAULT } from "../../../../../../enum/imageDefault";
 
 export default function Menu() {
   const {

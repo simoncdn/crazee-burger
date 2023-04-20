@@ -4,6 +4,7 @@ import { formatPrice } from "../../../../../utils/maths";
 import GlobalContext from "../../../../../context/GlobalContext";
 import EmptyBasket from "./EmptyBasket";
 import BasketCard from "./BasketCard";
+import { IMAGE_DEFAULT } from "../../../../../enum/imageDefault";
 
 export default function BasketBody() {
   const {
@@ -13,7 +14,6 @@ export default function BasketBody() {
     productSelected,
     handleProductSelected,
   } = useContext(GlobalContext);
-  const IMAGE_DEFAULT = "/images/coming-soon.png";
 
   if (basketMenu.length === 0) return <EmptyBasket />;
 
