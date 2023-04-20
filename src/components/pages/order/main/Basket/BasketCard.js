@@ -43,7 +43,7 @@ const CardBasketStyled = styled.div`
   padding: 8px 16px;
   overflow: hidden;
   align-items: center;
-  cursor: ${(props) => (props.onClick ? "pointer" : "default")};
+  cursor: ${(props) => (props.onClick ? "pointer" : "")};
   .delete {
     display: none;
   }
