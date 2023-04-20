@@ -13,7 +13,7 @@ import { filter } from "../../../utils/filter";
 import { find } from "../../../utils/find";
 
 export default function OrderPage() {
-  const [isAdminMode, setIsAdminMode] = useState(true);
+  const [isAdminMode, setIsAdminMode] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
   const [menu, setMenu] = useState(fakeMenu.LARGE);
