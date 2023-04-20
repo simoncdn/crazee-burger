@@ -42,6 +42,8 @@ const CardBasketStyled = styled.div`
   gap: 14px;
   padding: 8px 16px;
   overflow: hidden;
+  cursor: pointer;
+  align-items: center;
   .delete {
     display: none;
   }
