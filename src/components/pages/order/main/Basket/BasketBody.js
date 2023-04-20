@@ -32,7 +32,7 @@ export default function BasketBody() {
           price={formatPrice(price)}
           quantity={quantity}
           onDelete={(event) => handleDelete(event, id)}
-          onClick={() => handleProductSelected(id)}
+          onClick={isAdminMode ? () => handleProductSelected(id) : null}
           isSelected={isAdminMode && productSelected?.id === id && true}
         />
       ))}
