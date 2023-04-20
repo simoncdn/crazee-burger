@@ -11,12 +11,12 @@ import {
 export default function Basket() {
   const { basketMenu } = useContext(GlobalContext);
 
-  const updateTotalPrice = basketMenu.reduce((acc, product) => {
+  const updateTotalPrice = basketMenu.reduce((total, product) => {
     const price = replaceFrenchCommaWithDot(product.price);
 
-    if (isNaN(price)) return acc;
-    acc += price * product.quantity;
-    return acc;
+    if (isNaN(price)) return total;
+    total += price * product.quantity;
+    return total;
   }, 0);
 
   return (
