@@ -4,40 +4,22 @@ import { formatPrice } from "../../../../../utils/maths";
 import GlobalContext from "../../../../../context/GlobalContext";
 import EmptyBasket from "./EmptyBasket";
 import BasketCard from "./BasketCard";
-import { focusOnRef } from "../../../../../utils/focusOnRef";
 
 export default function BasketBody() {
   const {
     basketMenu,
-    deleteProductInBasket,
-    setProductSelected,
-    setCurrentTabSelected,
-    setIsCollapsed,
+    deleteBasketProduct,
     isAdminMode,
-    menu,
-    titleEditRef,
     productSelected,
+    handleProductSelected,
   } = useContext(GlobalContext);
   const IMAGE_DEFAULT = "/images/coming-soon.png";
 
   if (basketMenu.length === 0) return <EmptyBasket />;
 
-  const handleProductSelected = async (idProductSelected) => {
-    if (!isAdminMode) return;
-
-    const productSelected = menu.find(
-      (product) => product.id === idProductSelected
-    );
-    await setProductSelected(productSelected);
-    await setCurrentTabSelected("edit");
-    await setIsCollapsed(false);
-
-    focusOnRef(titleEditRef);
-  };
-
   const handleDelete = (event, id) => {
     event.stopPropagation();
-    deleteProductInBasket(id);
+    deleteBasketProduct(id);
   };
 
   return (
@@ -66,4 +48,7 @@ const BasketBodyStyled = styled.div`
   grid-template-rows: repeat(8, 86px);
   grid-row-gap: 20px;
   padding: 20px 16px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;

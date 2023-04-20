@@ -30,6 +30,6 @@ export default createContext({
   setTotalPrice: () => {},
 
   addProductToBasket: () => {},
-  deleteProductInBasket: () => {},
-  updatePrice: () => {},
+  deleteBasketProduct: () => {},
+  handleProductSelected: () => {},
 });

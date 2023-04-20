@@ -6,7 +6,6 @@ import { formatPrice } from "../../../../../../utils/maths";
 import Card from "../../../../../reusable-ui/Card";
 import EmptyMenuAdmin from "./EmptyMenuAdmin";
 import EmptyMenuClient from "./EmptyMenuClient";
-import { focusOnRef } from "../../../../../../utils/focusOnRef";
 
 const IMAGE_DEFAULT = "/images/coming-soon.png";
 
@@ -16,12 +15,9 @@ export default function Menu() {
     isAdminMode,
     handleRemove,
     resetMenu,
-    setCurrentTabSelected,
-    setIsCollapsed,
-    setProductSelected,
-    titleEditRef,
     productSelected,
     addProductToBasket,
+    handleProductSelected,
   } = useContext(GlobalContext);
 
   if (menu.length === 0) {
@@ -34,22 +30,9 @@ export default function Menu() {
     handleRemove(id);
   };
 
-  const handleToBasket = (event, product) => {
+  const handleProductToBasket = (event, product) => {
     event.stopPropagation();
     addProductToBasket(product);
-  };
-
-  const handleProductSelected = async (idProductSelected) => {
-    if (!isAdminMode) return;
-
-    const productSelected = menu.find(
-      (product) => product.id === idProductSelected
-    );
-    await setProductSelected(productSelected);
-    await setCurrentTabSelected("edit");
-    await setIsCollapsed(false);
-
-    focusOnRef(titleEditRef);
   };
 
   return (
@@ -63,7 +46,7 @@ export default function Menu() {
           hasDeleteButton={isAdminMode}
           onDelete={(event) => handleOnDelete(event, id)}
           onClick={() => handleProductSelected(id)}
-          onButtonClick={(event) => handleToBasket(event, id)}
+          onButtonClick={(event) => handleProductToBasket(event, id)}
           isHoverable={isAdminMode}
           isSelected={productSelected?.id === id && true}
         />
