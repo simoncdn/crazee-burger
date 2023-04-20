@@ -91,6 +91,7 @@ const CardBasketStyled = styled.div`
       text-overflow: ellipsis;
       .title {
         width: 90%;
+        min-height: 30px;
         position: relative;
         font-family: ${theme.fonts.family.stylish};
         overflow: hidden;
