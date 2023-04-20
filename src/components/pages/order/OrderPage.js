@@ -117,11 +117,11 @@ export default function OrderPage() {
 
     basketMenu,
     setBasketMenu,
-    addProductToBasket,
-    deleteBasketProduct,
-
     totalPrice,
     setTotalPrice,
+
+    addProductToBasket,
+    deleteBasketProduct,
 
     handleProductSelected,
   };
