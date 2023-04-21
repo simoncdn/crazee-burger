@@ -4,7 +4,6 @@ import { formatPrice } from "../../../../../utils/maths";
 import GlobalContext from "../../../../../context/GlobalContext";
 import EmptyBasket from "./EmptyBasket";
 import BasketCard from "./BasketCard";
-import { IMAGE_DEFAULT } from "../../../../../enum/imageDefault";
 
 export default function BasketBody() {
   const {
@@ -28,7 +27,7 @@ export default function BasketBody() {
         <BasketCard
           key={id}
           title={title}
-          image={imageSource ? imageSource : IMAGE_DEFAULT}
+          image={imageSource(imageSource)}
           price={formatPrice(price)}
           quantity={quantity}
           onDelete={(event) => handleDelete(event, id)}

@@ -6,17 +6,23 @@ import { formatPrice } from "../../../../../../utils/maths";
 import Card from "../../../../../reusable-ui/Card";
 import EmptyMenuAdmin from "./EmptyMenuAdmin";
 import EmptyMenuClient from "./EmptyMenuClient";
-import { IMAGE_DEFAULT } from "../../../../../../enum/imageDefault";
+import { EMPTY_PRODUCT } from "../../../../../../enum/product";
+import { focusOnRef } from "../../../../../../utils/focusOnRef";
+import { find } from "../../../../../../utils/find";
+import { getImageSource } from "../../../../../../utils/getImageSource";
 
 export default function Menu() {
   const {
-    menu,
     isAdminMode,
     handleRemove,
-    resetMenu,
     productSelected,
     addProductToBasket,
     handleProductSelected,
+    setProductSelected,
+    menu,
+    titleEditRef,
+    resetMenu,
+    deleteBasketProduct,
   } = useContext(GlobalContext);
 
   if (menu.length === 0) {
@@ -27,11 +33,18 @@ export default function Menu() {
   const handleOnDelete = (event, id) => {
     event.stopPropagation();
     handleRemove(id);
+
+    if (productSelected && productSelected.id === id) {
+      setProductSelected(EMPTY_PRODUCT);
+    }
+    focusOnRef(titleEditRef);
+    deleteBasketProduct(id);
   };
 
-  const handleProductToBasket = (event, product) => {
+  const handleProductToBasket = (event, id) => {
     event.stopPropagation();
-    addProductToBasket(product);
+    const productToAdd = find(id, menu);
+    addProductToBasket(productToAdd);
   };
 
   return (
@@ -40,7 +53,7 @@ export default function Menu() {
         <Card
           key={id}
           title={title}
-          image={imageSource ? imageSource : IMAGE_DEFAULT}
+          image={getImageSource(imageSource)}
           leftDescription={formatPrice(price)}
           hasDeleteButton={isAdminMode}
           onDelete={(event) => handleOnDelete(event, id)}
