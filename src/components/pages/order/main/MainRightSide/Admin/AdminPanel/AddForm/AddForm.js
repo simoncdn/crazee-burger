@@ -1,12 +1,13 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import GlobalContext from "../../../../../../../../context/GlobalContext";
 import { EMPTY_PRODUCT } from "../../../../../../../../enum/product";
 import AdminForm from "../../../../../../../reusable-ui/AdminForm";
 import SubmitButton from "./SubmitButton";
+import { useDisplaySuccessMessage } from "../../../../../../../../hooks/useDisplaySuccessMessage";
 
 export default function AddForm() {
-  const { handleAdd, newProduct, setNewProduct } = useContext(GlobalContext);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const { newProduct, setNewProduct, handleAdd } = useContext(GlobalContext);
+  const { isSuccess, displaySuccessMessage } = useDisplaySuccessMessage();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,13 +23,6 @@ export default function AddForm() {
     });
     setNewProduct(EMPTY_PRODUCT);
     displaySuccessMessage();
-  };
-
-  const displaySuccessMessage = () => {
-    setIsSuccess(true);
-    setTimeout(() => {
-      setIsSuccess(false);
-    }, 2000);
   };
 
   return (
