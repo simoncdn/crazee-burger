@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../theme";
 
-export default function BasketTotal() {
+export default function BasketTotal({ totalPrice }) {
   return (
     <BasketTotalStyled>
       <span>Total</span>
-      <span>0,00 €</span>
+      <span>{totalPrice}</span>
     </BasketTotalStyled>
   );
 }
@@ -21,4 +21,6 @@ const BasketTotalStyled = styled.div`
   font-family: ${theme.fonts.family.stylish};
   color: ${theme.colors.primary};
   font-size: ${theme.fonts.size.P4};
+  font-weight: ${theme.fonts.weights.bold};
+  letter-spacing: 2px;
 `;
