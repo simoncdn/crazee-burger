@@ -70,8 +70,10 @@ const MenuStyled = styled.div`
   box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset;
   padding: 50px 50px 150px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-row-gap: 60px;
   justify-items: center;
   background-color: transparent;
+  overflow-y: scroll;
+  flex: 1;
 `;
