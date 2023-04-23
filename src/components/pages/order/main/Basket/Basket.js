@@ -5,7 +5,7 @@ import BasketTotal from "./BasketTotal";
 import BasketFooter from "./BasketFooter";
 import BasketBody from "./BasketBody";
 import { formatPrice } from "../../../../../utils/maths";
-import { GlobalContext } from "../../../../../context/GlobalState";
+import GlobalContext from "../../../../../context/GlobalContext";
 
 export default function Basket() {
   const { totalPrice } = useContext(GlobalContext);
