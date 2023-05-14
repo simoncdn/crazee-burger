@@ -1,19 +1,17 @@
 import { useState } from "react";
 import { fakeMenu } from "../fakeData/fakeMenu";
-import { deepClone } from "../utils/deepClone";
-import { filter } from "../utils/filter";
-import { getIndex } from "../utils/getIndex";
+import { deepClone, filter, getIndex } from "../utils/array";
 
-export const useMenu = (product) => {
+export const useMenu = () => {
   const [menu, setMenu] = useState(fakeMenu.LARGE);
 
   const handleAdd = (productToAdd) => {
     const menuCopy = deepClone(menu);
-    const menuUpdated = [product, ...menuCopy];
+    const menuUpdated = [productToAdd, ...menuCopy];
     setMenu(menuUpdated);
   };
 
-  const handleRemove = (idProductToRemove) => {
+  const handleDelete = (idProductToRemove) => {
     const menuUpdated = filter(idProductToRemove, menu);
     setMenu(menuUpdated);
   };
@@ -28,5 +26,5 @@ export const useMenu = (product) => {
     setMenu(fakeMenu.MEDIUM);
   };
 
-  return { handleAdd, handleRemove, handleEdit, resetMenu, menu };
+  return { handleAdd, handleDelete, handleEdit, resetMenu, menu };
 };
