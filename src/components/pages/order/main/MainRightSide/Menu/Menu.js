@@ -8,21 +8,21 @@ import EmptyMenuAdmin from "./EmptyMenuAdmin";
 import EmptyMenuClient from "./EmptyMenuClient";
 import { EMPTY_PRODUCT } from "../../../../../../enum/product";
 import { focusOnRef } from "../../../../../../utils/focusOnRef";
-import { find } from "../../../../../../utils/find";
 import { getImageSource } from "../../../../../../utils/getImageSource";
+import { find } from "../../../../../../utils/array";
 
 export default function Menu() {
   const {
     isAdminMode,
-    handleRemove,
+    handleDelete,
     productSelected,
-    addProductToBasket,
+    handleAddToBasket,
     handleProductSelected,
     setProductSelected,
     menu,
     titleEditRef,
     resetMenu,
-    deleteBasketProduct,
+    handleDeleteBasketProduct,
   } = useContext(GlobalContext);
 
   if (menu.length === 0) {
@@ -32,19 +32,20 @@ export default function Menu() {
 
   const handleOnDelete = (event, id) => {
     event.stopPropagation();
-    handleRemove(id);
 
     if (productSelected && productSelected.id === id) {
       setProductSelected(EMPTY_PRODUCT);
     }
+
+    handleDelete(id);
     focusOnRef(titleEditRef);
-    deleteBasketProduct(id);
+    handleDeleteBasketProduct(id);
   };
 
   const handleProductToBasket = (event, id) => {
     event.stopPropagation();
     const productToAdd = find(id, menu);
-    addProductToBasket(productToAdd);
+    handleAddToBasket(productToAdd);
   };
 
   return (
