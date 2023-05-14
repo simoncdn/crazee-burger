@@ -6,9 +6,9 @@ import { useRef, useState } from "react";
 import GlobalContext from "../../../context/GlobalContext";
 import { EMPTY_PRODUCT } from "../../../enum/product";
 import { focusOnRef } from "../../../utils/focusOnRef";
-import { find } from "../../../utils/find";
 import { useMenu } from "../../../hooks/useMenu";
 import { useBasket } from "../../../hooks/useBasket";
+import { find } from "../../../utils/array";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
@@ -19,15 +19,14 @@ export default function OrderPage() {
 
   const titleEditRef = useRef();
 
-  const { menu, handleAdd, handleRemove, resetMenu, handleEdit } =
+  const { menu, handleAdd, handleDelete, resetMenu, handleEdit } =
     useMenu(newProduct);
   const {
     basketMenu,
-    addProductToBasket,
-    updateProductQuantity,
-    deleteBasketProduct,
-    editProductToBasket,
-  } = useBasket(menu);
+    handleAddToBasket,
+    incrementBasketProductQuantity,
+    handleDeleteBasketProduct,
+  } = useBasket();
 
   const handleProductSelected = async (idProductSelected) => {
     if (!isAdminMode) return;
@@ -36,9 +35,9 @@ export default function OrderPage() {
     await setProductSelected(productSelected);
     await setCurrentTabSelected("edit");
     await setIsCollapsed(false);
-
     focusOnRef(titleEditRef);
   };
+
   const globalContextValue = {
     isAdminMode,
     setIsAdminMode,
@@ -46,22 +45,24 @@ export default function OrderPage() {
     setIsCollapsed,
     currentTabSelected,
     setCurrentTabSelected,
+
     menu,
     handleAdd,
-    handleRemove,
+    handleDelete,
     resetMenu,
     handleEdit,
+
+    titleEditRef,
+
     productSelected,
     setProductSelected,
-    titleEditRef,
     newProduct,
     setNewProduct,
 
     basketMenu,
-    addProductToBasket,
-    editProductToBasket,
-    deleteBasketProduct,
-    updateProductQuantity,
+    handleAddToBasket,
+    incrementBasketProductQuantity,
+    handleDeleteBasketProduct,
 
     handleProductSelected,
   };
