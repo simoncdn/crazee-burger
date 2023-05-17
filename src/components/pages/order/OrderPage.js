@@ -9,6 +9,7 @@ import { focusOnRef } from "../../../utils/focusOnRef";
 import { useMenu } from "../../../hooks/useMenu";
 import { useBasket } from "../../../hooks/useBasket";
 import { find } from "../../../utils/array";
+import { fakeMenu } from "../../../fakeData/fakeMenu";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
@@ -19,8 +20,9 @@ export default function OrderPage() {
 
   const titleEditRef = useRef();
 
-  const { menu, handleAdd, handleDelete, resetMenu, handleEdit } =
-    useMenu(newProduct);
+  const { menu, handleAdd, handleDelete, resetMenu, handleEdit } = useMenu(
+    fakeMenu.MEDIUM
+  );
   const {
     basketMenu,
     handleAddToBasket,
