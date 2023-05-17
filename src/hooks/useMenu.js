@@ -2,8 +2,8 @@ import { useState } from "react";
 import { fakeMenu } from "../fakeData/fakeMenu";
 import { deepClone, filter, getIndex } from "../utils/array";
 
-export const useMenu = () => {
-  const [menu, setMenu] = useState(fakeMenu.LARGE);
+export const useMenu = (products) => {
+  const [menu, setMenu] = useState(products || []);
 
   const handleAdd = (productToAdd) => {
     const menuCopy = deepClone(menu);
