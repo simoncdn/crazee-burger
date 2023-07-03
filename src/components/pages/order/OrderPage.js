@@ -8,6 +8,9 @@ import { fakeMenu } from "../../../fakeData/fakeMenu";
 import { EMPTY_PRODUCT } from "../../../enum/product";
 import { deepClone } from "../../../utils/deepClone";
 import { focusOnRef } from "../../../utils/focusOnRef";
+import { replaceFrenchCommaWithDot } from "../../../utils/maths";
+import { getIndex } from "../../../utils/getIndex";
+import { filterArray } from "../../../utils/filterArray";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
@@ -17,24 +20,29 @@ export default function OrderPage() {
   const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
 
+  const [basketMenu, setBasketMenu] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+
   const titleEditRef = useRef();
 
+  // CRUD MENU //
   const handleAdd = (productToAdd) => {
     const menuCopy = deepClone(menu);
     const menuUpdated = [productToAdd, ...menuCopy];
     setMenu(menuUpdated);
   };
   const handleRemove = (idProductToRemove) => {
-    const menuCopy = deepClone(menu);
-    const menuUpdated = menuCopy.filter(
-      (product) => product.id !== idProductToRemove
-    );
-    setMenu(menuUpdated);
+    const menuUpdated = filterArray(idProductToRemove, menu);
     if (productSelected && productSelected.id === idProductToRemove) {
       setProductSelected(EMPTY_PRODUCT);
     }
+
     focusOnRef(titleEditRef);
+    deleteProductInBasket(idProductToRemove);
+    setMenu(menuUpdated);
+    updateTotalPriceOnRemove(idProductToRemove);
   };
+
   const handleEdit = (productToEdit) => {
     const menuCopy = deepClone(menu);
     const productTobeEdited = menuCopy.findIndex(
@@ -46,6 +54,70 @@ export default function OrderPage() {
 
   const resetMenu = () => {
     setMenu(fakeMenu.MEDIUM);
+  };
+
+  // BASKET //
+  const addProductToBasket = (idProductToAdd) => {
+    const basketCopy = deepClone(basketMenu);
+    const productToAdd = menu.find((product) => product.id === idProductToAdd);
+
+    const productAlreadyAdded = basketCopy.find(
+      (product) => product.id === idProductToAdd
+    );
+
+    if (!productAlreadyAdded) {
+      productToAdd.quantity = 1;
+      const basketUpdated = [productToAdd, ...basketCopy];
+      setBasketMenu(basketUpdated);
+      getTotalPrice(productToAdd.price);
+      return;
+    }
+
+    updateProductQuantity(productToAdd);
+    getTotalPrice(productToAdd.price);
+  };
+
+  const updateProductQuantity = (ProductToUpdate) => {
+    const basketCopy = deepClone(basketMenu);
+    const menuCopy = deepClone(menu);
+
+    const productIndexInBasket = getIndex(ProductToUpdate.id, basketCopy);
+    const productIndexInMenu = getIndex(ProductToUpdate.id, menuCopy);
+
+    basketCopy[productIndexInBasket].quantity += 1;
+    menuCopy[productIndexInMenu].quantity += 1;
+
+    setMenu(menuCopy);
+    setBasketMenu(basketCopy);
+  };
+  const removeProductQuantity = (IdProductToRemove) => {
+    const menuCopy = deepClone(menu);
+    const productIndexInMenu = getIndex(IdProductToRemove, menuCopy);
+    menuCopy[productIndexInMenu].quantity = 0;
+    setMenu(menuCopy);
+  };
+
+  const deleteProductInBasket = (idProductToRemove) => {
+    const basketUpdated = filterArray(idProductToRemove, basketMenu);
+    removeProductQuantity(idProductToRemove);
+    updateTotalPriceOnRemove(idProductToRemove);
+    setBasketMenu(basketUpdated);
+  };
+
+  const getTotalPrice = (productPrice) => {
+    let newTotalPrice = totalPrice;
+    newTotalPrice += productPrice;
+    setTotalPrice(newTotalPrice);
+  };
+
+  const updateTotalPriceOnRemove = (productId) => {
+    const totalPriceCopy = totalPrice;
+    const findProduct = basketMenu.find((product) => product.id === productId);
+
+    if (!findProduct) return;
+    const newTotalPrice =
+      totalPriceCopy - findProduct.quantity * findProduct.price;
+    setTotalPrice(newTotalPrice);
   };
 
   const globalContextValue = {
@@ -65,6 +137,14 @@ export default function OrderPage() {
     titleEditRef,
     newProduct,
     setNewProduct,
+
+    basketMenu,
+    setBasketMenu,
+    addProductToBasket,
+    deleteProductInBasket,
+    updateTotalPriceOnRemove,
+    totalPrice,
+    setTotalPrice,
   };
 
   return (
