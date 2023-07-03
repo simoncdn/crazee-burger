@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 import GlobalContext from "../../../context/GlobalContext";
 import { EMPTY_PRODUCT } from "../../../enum/product";
 import { focusOnRef } from "../../../utils/focusOnRef";
+
 import { useMenu } from "../../../hooks/useMenu";
 import { useBasket } from "../../../hooks/useBasket";
 import { find } from "../../../utils/array";
@@ -38,6 +39,7 @@ export default function OrderPage() {
     await setCurrentTabSelected("edit");
     await setIsCollapsed(false);
     focusOnRef(titleEditRef);
+
   };
 
   const globalContextValue = {
@@ -62,6 +64,7 @@ export default function OrderPage() {
     setNewProduct,
 
     basketMenu,
+    
     handleAddToBasket,
     incrementBasketProductQuantity,
     handleDeleteBasketProduct,

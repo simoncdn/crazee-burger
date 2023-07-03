@@ -7,6 +7,7 @@ import BasketCard from "./BasketCard";
 import { getImageSource } from "../../../../../utils/getImageSource";
 import { find } from "../../../../../utils/array";
 
+
 export default function BasketBody() {
   const {
     basketMenu,
@@ -51,6 +52,13 @@ export default function BasketBody() {
 
 const BasketBodyStyled = styled.div`
   flex: 1;
+  justify-content: center;
+  align-items: center;
+  font-family: ${theme.fonts.family.stylish};
+  font-size: ${theme.fonts.size.P4};
+  color: ${theme.colors.greyBlue};
+  background: transparent;
+
   overflow-y: scroll;
   display: grid;
   grid-template-columns: 1fr;
