@@ -40,7 +40,6 @@ export default function OrderPage() {
     await setIsCollapsed(false);
 
     focusOnRef(titleEditRef);
-
   };
   const globalContextValue = {
     isAdminMode,
@@ -52,7 +51,7 @@ export default function OrderPage() {
 
     menu,
     handleAdd,
-    handleDelete,
+    handleRemove,
     resetMenu,
     handleEdit,
 

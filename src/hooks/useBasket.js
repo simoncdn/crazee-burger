@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { find } from "../utils/find";
-import { deepClone } from "../utils/deepClone";
 import { getIndex } from "../utils/getIndex";
 import { filter } from "../utils/filter";
 import { useParams } from "react-router-dom";
-
+import { deepClone } from "../utils/array";
 
 export const useBasket = () => {
   const [basketMenu, setBasketMenu] = useState([]);
