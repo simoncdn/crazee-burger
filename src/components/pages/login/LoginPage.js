@@ -4,17 +4,10 @@ import styled from "styled-components";
 import Logo from "../../reusable-ui/Logo";
 
 export default function LoginPage() {
-  // const [isModalAlert, setIsModalAlert] = useState(true);
-  // const closeModalALert = () => {
-  //   setIsModalAlert(false);
-  //   console.log(isModalAlert);
-  // };
   return (
     <LoginPageStyled>
       <Logo className={"logo-login-page"} />
       <LoginForm />
-
-      {/* {isModalAlert ? <Alert onClick={closeModalALert} /> : null} */}
     </LoginPageStyled>
   );
 }

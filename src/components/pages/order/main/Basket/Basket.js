@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../theme";
 import GlobalContext from "../../../../../context/GlobalContext";
@@ -27,8 +27,10 @@ export default function Basket() {
         <span>{formatPrice(updateTotalPrice)}</span>
       </div>
 
+
       <BasketBody />
-      <BasketFooter />
+
+      <Footer />
     </BasketStyled>
   );
 }

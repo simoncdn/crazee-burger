@@ -14,6 +14,7 @@ export const useMenu = (product) => {
   };
 
   const handleRemove = (idProductToRemove) => {
+
     const menuUpdated = filter(idProductToRemove, menu);
     setMenu(menuUpdated);
   };
@@ -29,4 +30,5 @@ export const useMenu = (product) => {
   };
 
   return { handleAdd, handleRemove, handleEdit, resetMenu, menu };
+
 };

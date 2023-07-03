@@ -11,12 +11,14 @@ import { focusOnRef } from "../../../../../../utils/focusOnRef";
 import { find } from "../../../../../../utils/find";
 import { getImageSource } from "../../../../../../utils/getImageSource";
 
+
 export default function Menu() {
   const {
     isAdminMode,
     handleRemove,
     productSelected,
     addProductToBasket,
+
     handleProductSelected,
     setProductSelected,
     menu,
@@ -34,11 +36,13 @@ export default function Menu() {
     event.stopPropagation();
     handleRemove(id);
 
+
     if (productSelected && productSelected.id === id) {
       setProductSelected(EMPTY_PRODUCT);
     }
     focusOnRef(titleEditRef);
     deleteBasketProduct(id);
+
   };
 
   const handleProductToBasket = (event, id) => {

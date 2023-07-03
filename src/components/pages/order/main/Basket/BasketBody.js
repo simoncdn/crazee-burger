@@ -11,6 +11,7 @@ export default function BasketBody() {
   const {
     basketMenu,
     deleteBasketProduct,
+
     isAdminMode,
     productSelected,
     handleProductSelected,
@@ -21,6 +22,7 @@ export default function BasketBody() {
   const handleDelete = (event, id) => {
     event.stopPropagation();
     deleteBasketProduct(id);
+
   };
 
   return (
@@ -37,6 +39,7 @@ export default function BasketBody() {
           isSelected={isAdminMode && productSelected?.id === id && true}
         />
       ))}
+
     </BasketBodyStyled>
   );
 }

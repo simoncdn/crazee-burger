@@ -19,7 +19,6 @@ export default function OrderPage() {
 
   const titleEditRef = useRef();
 
-
   const { menu, handleAdd, handleRemove, resetMenu, handleEdit } =
     useMenu(newProduct);
   const {
@@ -31,6 +30,7 @@ export default function OrderPage() {
   } = useBasket();
 
   // useLocalStorage(basketMenu);
+
   const handleProductSelected = async (idProductSelected) => {
     if (!isAdminMode) return;
     const productSelected = find(idProductSelected, menu);
@@ -49,18 +49,22 @@ export default function OrderPage() {
     setIsCollapsed,
     currentTabSelected,
     setCurrentTabSelected,
+
     menu,
     handleAdd,
-    handleRemove,
+    handleDelete,
     resetMenu,
     handleEdit,
+
+    titleEditRef,
+
     productSelected,
     setProductSelected,
-    titleEditRef,
     newProduct,
     setNewProduct,
 
     basketMenu,
+
     addProductToBasket,
 
     editProductToBasket,
@@ -68,7 +72,6 @@ export default function OrderPage() {
     updateProductQuantity,
 
     handleProductSelected,
-
   };
 
   return (
