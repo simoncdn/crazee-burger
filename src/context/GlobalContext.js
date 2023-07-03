@@ -10,26 +10,27 @@ export default createContext({
   currentTabSelected: false,
   setCurrentTabSelected: () => {},
 
-  menu: [],
-
-  handleAdd: () => {},
-  handleRemove: () => {},
-  handleEdit: () => {},
-  resetMenu: () => {},
-
   productSelected: {},
   setProductSelected: () => {},
+
   newProduct: {},
   setNewProduct: () => {},
 
   titleEditRef: {},
 
-  basketMenu: [],
-  setBasketMenu: () => {},
   totalPrice: 0,
   setTotalPrice: () => {},
 
-  addProductToBasket: () => {},
-  deleteProductInBasket: () => {},
-  updatePrice: () => {},
+  menu: [],
+  handleAdd: () => {},
+  handleDelete: () => {},
+  handleEdit: () => {},
+  resetMenu: () => {},
+
+  basketMenu: [],
+  handleAddToBasket: () => {},
+  handleDeleteBasketProduct: () => {},
+  incrementBasketProductQuantity: () => {},
+
+  handleProductSelected: () => {},
 });

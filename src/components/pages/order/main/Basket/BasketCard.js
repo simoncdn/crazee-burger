@@ -1,5 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { theme } from "../../../../../theme";
+import { MdDeleteForever } from "react-icons/md";
 
 export default function BasketCard({
   title,
@@ -7,9 +8,11 @@ export default function BasketCard({
   price,
   onDelete,
   quantity,
+  onClick,
+  isSelected,
 }) {
   return (
-    <CardBasketStyled>
+    <CardBasketStyled onClick={onClick} isSelected={isSelected}>
       <div className="image">
         <img src={image} alt={title} />
       </div>
@@ -21,7 +24,7 @@ export default function BasketCard({
         <div className="right-description">x{quantity}</div>
       </div>
       <button className="delete" onClick={onDelete}>
-        <img src="/images/trash.svg" alt="trash icon" />
+        <MdDeleteForever />
       </button>
     </CardBasketStyled>
   );
@@ -39,6 +42,8 @@ const CardBasketStyled = styled.div`
   gap: 14px;
   padding: 8px 16px;
   overflow: hidden;
+  align-items: center;
+  cursor: ${(props) => (props.onClick ? "pointer" : "")};
   .delete {
     display: none;
   }
@@ -55,6 +60,11 @@ const CardBasketStyled = styled.div`
       width: 68px;
       cursor: pointer;
       border: none;
+      color: white;
+      font-size: 20px;
+      :hover {
+        color: black;
+      }
     }
   }
   .image {
@@ -81,6 +91,7 @@ const CardBasketStyled = styled.div`
       text-overflow: ellipsis;
       .title {
         width: 90%;
+        min-height: 30px;
         position: relative;
         font-family: ${theme.fonts.family.stylish};
         overflow: hidden;
@@ -106,6 +117,25 @@ const CardBasketStyled = styled.div`
       display: flex;
       align-items: center;
       font-family: "Open Sans", sans-serif;
+    }
+  }
+  ${(props) => props.isSelected && selectedStyle};
+`;
+const selectedStyle = css`
+  background-color: ${theme.colors.primary};
+  .delete-btn {
+    background-color: ${theme.colors.white};
+    .icon {
+      color: ${theme.colors.primary};
+    }
+    :active {
+      background-color: ${theme.colors.white};
+    }
+  }
+  .text-info {
+    .left-description .price,
+    .right-description {
+      color: ${theme.colors.white};
     }
   }
 `;

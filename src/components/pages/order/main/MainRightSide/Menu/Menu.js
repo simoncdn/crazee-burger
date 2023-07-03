@@ -6,22 +6,23 @@ import { formatPrice } from "../../../../../../utils/maths";
 import Card from "../../../../../reusable-ui/Card";
 import EmptyMenuAdmin from "./EmptyMenuAdmin";
 import EmptyMenuClient from "./EmptyMenuClient";
+import { EMPTY_PRODUCT } from "../../../../../../enum/product";
 import { focusOnRef } from "../../../../../../utils/focusOnRef";
-
-const IMAGE_DEFAULT = "/images/coming-soon.png";
+import { getImageSource } from "../../../../../../utils/getImageSource";
+import { find } from "../../../../../../utils/array";
 
 export default function Menu() {
   const {
-    menu,
     isAdminMode,
-    handleRemove,
-    resetMenu,
-    setCurrentTabSelected,
-    setIsCollapsed,
-    setProductSelected,
-    titleEditRef,
+    handleDelete,
     productSelected,
-    addProductToBasket,
+    handleAddToBasket,
+    handleProductSelected,
+    setProductSelected,
+    menu,
+    titleEditRef,
+    resetMenu,
+    handleDeleteBasketProduct,
   } = useContext(GlobalContext);
 
   if (menu.length === 0) {
@@ -31,25 +32,20 @@ export default function Menu() {
 
   const handleOnDelete = (event, id) => {
     event.stopPropagation();
-    handleRemove(id);
-  };
 
-  const handleToBasket = (event, product) => {
-    event.stopPropagation();
-    addProductToBasket(product);
-  };
+    if (productSelected && productSelected.id === id) {
+      setProductSelected(EMPTY_PRODUCT);
+    }
 
-  const handleProductSelected = async (idProductSelected) => {
-    if (!isAdminMode) return;
-
-    const productSelected = menu.find(
-      (product) => product.id === idProductSelected
-    );
-    await setProductSelected(productSelected);
-    await setCurrentTabSelected("edit");
-    await setIsCollapsed(false);
-
+    handleDelete(id);
     focusOnRef(titleEditRef);
+    handleDeleteBasketProduct(id);
+  };
+
+  const handleProductToBasket = (event, id) => {
+    event.stopPropagation();
+    const productToAdd = find(id, menu);
+    handleAddToBasket(productToAdd);
   };
 
   return (
@@ -58,12 +54,12 @@ export default function Menu() {
         <Card
           key={id}
           title={title}
-          image={imageSource ? imageSource : IMAGE_DEFAULT}
+          image={getImageSource(imageSource)}
           leftDescription={formatPrice(price)}
           hasDeleteButton={isAdminMode}
           onDelete={(event) => handleOnDelete(event, id)}
           onClick={() => handleProductSelected(id)}
-          onButtonClick={(event) => handleToBasket(event, id)}
+          onButtonClick={(event) => handleProductToBasket(event, id)}
           isHoverable={isAdminMode}
           isSelected={productSelected?.id === id && true}
         />

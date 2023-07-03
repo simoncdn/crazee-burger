@@ -4,26 +4,48 @@ import { formatPrice } from "../../../../../utils/maths";
 import GlobalContext from "../../../../../context/GlobalContext";
 import EmptyBasket from "./EmptyBasket";
 import BasketCard from "./BasketCard";
+import { getImageSource } from "../../../../../utils/getImageSource";
+import { find } from "../../../../../utils/array";
 import { theme } from "../../../../../theme";
 
 export default function BasketBody() {
-  const { basketMenu, deleteProductInBasket } = useContext(GlobalContext);
-  const IMAGE_DEFAULT = "/images/coming-soon.png";
+  const {
+    basketMenu,
+    menu,
+    handleDeleteBasketProduct,
+    isAdminMode,
+    productSelected,
+    handleProductSelected,
+  } = useContext(GlobalContext);
 
   if (basketMenu.length === 0) return <EmptyBasket />;
 
+  const handleDelete = (event, id) => {
+    event.stopPropagation();
+    handleDeleteBasketProduct(id);
+  };
+
   return (
     <BasketBodyStyled>
-      {basketMenu.map(({ id, title, imageSource, price, quantity }) => (
-        <BasketCard
-          key={id}
-          title={title}
-          image={imageSource ? imageSource : IMAGE_DEFAULT}
-          price={formatPrice(price)}
-          quantity={quantity}
-          onDelete={() => deleteProductInBasket(id)}
-        />
-      ))}
+      {basketMenu.map((basketProduct) => {
+        const menuProduct = find(basketProduct.id, menu);
+        return (
+          <BasketCard
+            key={basketProduct.id}
+            title={menuProduct.title}
+            image={getImageSource(menuProduct.imageSource)}
+            price={formatPrice(menuProduct.price)}
+            quantity={basketProduct.quantity}
+            onDelete={(event) => handleDelete(event, basketProduct.id)}
+            onClick={
+              isAdminMode ? () => handleProductSelected(basketProduct.id) : null
+            }
+            isSelected={
+              isAdminMode && productSelected?.id === basketProduct.id && true
+            }
+          />
+        );
+      })}
     </BasketBodyStyled>
   );
 }
@@ -40,7 +62,10 @@ const BasketBodyStyled = styled.div`
   overflow-y: scroll;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(8, 86px);
+  grid-template-rows: repeat(9, 86px);
   grid-row-gap: 20px;
   padding: 20px 16px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;

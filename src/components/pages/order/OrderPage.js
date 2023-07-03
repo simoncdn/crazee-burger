@@ -4,120 +4,42 @@ import { theme } from "../../../theme";
 import Main from "./main/Main";
 import { useRef, useState } from "react";
 import GlobalContext from "../../../context/GlobalContext";
-import { fakeMenu } from "../../../fakeData/fakeMenu";
 import { EMPTY_PRODUCT } from "../../../enum/product";
-import { deepClone } from "../../../utils/deepClone";
 import { focusOnRef } from "../../../utils/focusOnRef";
-import { replaceFrenchCommaWithDot } from "../../../utils/maths";
-import { getIndex } from "../../../utils/getIndex";
-import { filterArray } from "../../../utils/filterArray";
+
+import { useMenu } from "../../../hooks/useMenu";
+import { useBasket } from "../../../hooks/useBasket";
+import { find } from "../../../utils/array";
+import { fakeMenu } from "../../../fakeData/fakeMenu";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
-  const [menu, setMenu] = useState(fakeMenu.LARGE);
   const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
 
-  const [basketMenu, setBasketMenu] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
-
   const titleEditRef = useRef();
 
-  // CRUD MENU //
-  const handleAdd = (productToAdd) => {
-    const menuCopy = deepClone(menu);
-    const menuUpdated = [productToAdd, ...menuCopy];
-    setMenu(menuUpdated);
-  };
-  const handleRemove = (idProductToRemove) => {
-    const menuUpdated = filterArray(idProductToRemove, menu);
-    if (productSelected && productSelected.id === idProductToRemove) {
-      setProductSelected(EMPTY_PRODUCT);
-    }
+  const { menu, handleAdd, handleDelete, resetMenu, handleEdit } = useMenu(
+    fakeMenu.MEDIUM
+  );
+  const {
+    basketMenu,
+    handleAddToBasket,
+    incrementBasketProductQuantity,
+    handleDeleteBasketProduct,
+  } = useBasket();
 
+  const handleProductSelected = async (idProductSelected) => {
+    if (!isAdminMode) return;
+    const productSelected = find(idProductSelected, menu);
+
+    await setProductSelected(productSelected);
+    await setCurrentTabSelected("edit");
+    await setIsCollapsed(false);
     focusOnRef(titleEditRef);
-    deleteProductInBasket(idProductToRemove);
-    setMenu(menuUpdated);
-    updateTotalPriceOnRemove(idProductToRemove);
-  };
 
-  const handleEdit = (productToEdit) => {
-    const menuCopy = deepClone(menu);
-    const productTobeEdited = menuCopy.findIndex(
-      (product) => product.id === productToEdit.id
-    );
-    menuCopy[productTobeEdited] = productToEdit;
-    setMenu(menuCopy);
-  };
-
-  const resetMenu = () => {
-    setMenu(fakeMenu.MEDIUM);
-  };
-
-  // BASKET //
-  const addProductToBasket = (idProductToAdd) => {
-    const basketCopy = deepClone(basketMenu);
-    const productToAdd = menu.find((product) => product.id === idProductToAdd);
-
-    const productAlreadyAdded = basketCopy.find(
-      (product) => product.id === idProductToAdd
-    );
-
-    if (!productAlreadyAdded) {
-      productToAdd.quantity = 1;
-      const basketUpdated = [productToAdd, ...basketCopy];
-      setBasketMenu(basketUpdated);
-      getTotalPrice(productToAdd.price);
-      return;
-    }
-
-    updateProductQuantity(productToAdd);
-    getTotalPrice(productToAdd.price);
-  };
-
-  const updateProductQuantity = (ProductToUpdate) => {
-    const basketCopy = deepClone(basketMenu);
-    const menuCopy = deepClone(menu);
-
-    const productIndexInBasket = getIndex(ProductToUpdate.id, basketCopy);
-    const productIndexInMenu = getIndex(ProductToUpdate.id, menuCopy);
-
-    basketCopy[productIndexInBasket].quantity += 1;
-    menuCopy[productIndexInMenu].quantity += 1;
-
-    setMenu(menuCopy);
-    setBasketMenu(basketCopy);
-  };
-  const removeProductQuantity = (IdProductToRemove) => {
-    const menuCopy = deepClone(menu);
-    const productIndexInMenu = getIndex(IdProductToRemove, menuCopy);
-    menuCopy[productIndexInMenu].quantity = 0;
-    setMenu(menuCopy);
-  };
-
-  const deleteProductInBasket = (idProductToRemove) => {
-    const basketUpdated = filterArray(idProductToRemove, basketMenu);
-    removeProductQuantity(idProductToRemove);
-    updateTotalPriceOnRemove(idProductToRemove);
-    setBasketMenu(basketUpdated);
-  };
-
-  const getTotalPrice = (productPrice) => {
-    let newTotalPrice = totalPrice;
-    newTotalPrice += productPrice;
-    setTotalPrice(newTotalPrice);
-  };
-
-  const updateTotalPriceOnRemove = (productId) => {
-    const totalPriceCopy = totalPrice;
-    const findProduct = basketMenu.find((product) => product.id === productId);
-
-    if (!findProduct) return;
-    const newTotalPrice =
-      totalPriceCopy - findProduct.quantity * findProduct.price;
-    setTotalPrice(newTotalPrice);
   };
 
   const globalContextValue = {
@@ -127,24 +49,27 @@ export default function OrderPage() {
     setIsCollapsed,
     currentTabSelected,
     setCurrentTabSelected,
+
     menu,
     handleAdd,
-    handleRemove,
+    handleDelete,
     resetMenu,
     handleEdit,
+
+    titleEditRef,
+
     productSelected,
     setProductSelected,
-    titleEditRef,
     newProduct,
     setNewProduct,
 
     basketMenu,
-    setBasketMenu,
-    addProductToBasket,
-    deleteProductInBasket,
-    updateTotalPriceOnRemove,
-    totalPrice,
-    setTotalPrice,
+    
+    handleAddToBasket,
+    incrementBasketProductQuantity,
+    handleDeleteBasketProduct,
+
+    handleProductSelected,
   };
 
   return (
