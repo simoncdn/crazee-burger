@@ -6,7 +6,7 @@ import EmptyBasket from "./EmptyBasket";
 import BasketCard from "./BasketCard";
 import { getImageSource } from "../../../../../utils/getImageSource";
 import { find } from "../../../../../utils/array";
-
+import { theme } from "../../../../../theme";
 
 export default function BasketBody() {
   const {
