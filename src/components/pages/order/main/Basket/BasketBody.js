@@ -5,6 +5,7 @@ import GlobalContext from "../../../../../context/GlobalContext";
 import EmptyBasket from "./EmptyBasket";
 import BasketCard from "./BasketCard";
 import { getImageSource } from "../../../../../utils/getImageSource";
+import { theme } from "../../../../../theme";
 
 export default function BasketBody() {
   const {

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import LoginForm from "./LoginForm";
 import styled from "styled-components";
 import Logo from "../../reusable-ui/Logo";
-import Alert from "../../alert/Alert";
 
 export default function LoginPage() {
   // const [isModalAlert, setIsModalAlert] = useState(true);

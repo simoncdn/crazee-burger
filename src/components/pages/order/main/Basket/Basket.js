@@ -7,6 +7,7 @@ import {
   formatPrice,
   replaceFrenchCommaWithDot,
 } from "../../../../../utils/maths";
+import BasketFooter from "./BasketFooter";
 
 export default function Basket() {
   const { basketMenu } = useContext(GlobalContext);
@@ -21,7 +22,6 @@ export default function Basket() {
 
   return (
     <BasketStyled>
-
       <div className="total">
         Total
         <span>{formatPrice(updateTotalPrice)}</span>
