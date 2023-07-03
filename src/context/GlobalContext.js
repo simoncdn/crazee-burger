@@ -21,16 +21,7 @@ export default createContext({
   totalPrice: 0,
   setTotalPrice: () => {},
 
-  menu: [],
-  handleAdd: () => {},
-  handleDelete: () => {},
-  handleEdit: () => {},
-  resetMenu: () => {},
-
-  basketMenu: [],
-  handleAddToBasket: () => {},
-  handleDeleteBasketProduct: () => {},
-  incrementBasketProductQuantity: () => {},
-
+  addProductToBasket: () => {},
+  deleteBasketProduct: () => {},
   handleProductSelected: () => {},
 });

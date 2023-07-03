@@ -1,17 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { theme } from "../../../../../theme";
+import GlobalContext from "../../../../../context/GlobalContext";
 import BasketBody from "./BasketBody";
-import Footer from "./Footer";
-import Total from "./Total";
+import {
+  formatPrice,
+  replaceFrenchCommaWithDot,
+} from "../../../../../utils/maths";
+import BasketFooter from "./BasketFooter";
+
 export default function Basket() {
+  const { basketMenu } = useContext(GlobalContext);
+
+  const updateTotalPrice = basketMenu.reduce((total, product) => {
+    const price = replaceFrenchCommaWithDot(product.price);
+
+    if (isNaN(price)) return total;
+    total += price * product.quantity;
+    return total;
+  }, 0);
+
   return (
     <BasketStyled>
-      <Total />
+      <div className="total">
+        Total
+        <span>{formatPrice(updateTotalPrice)}</span>
+      </div>
 
       <BasketBody />
 
-      <Footer />
+      <BasketFooter />
     </BasketStyled>
   );
 }

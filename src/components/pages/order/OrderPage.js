@@ -6,11 +6,9 @@ import { useRef, useState } from "react";
 import GlobalContext from "../../../context/GlobalContext";
 import { EMPTY_PRODUCT } from "../../../enum/product";
 import { focusOnRef } from "../../../utils/focusOnRef";
-
+import { find } from "../../../utils/find";
 import { useMenu } from "../../../hooks/useMenu";
 import { useBasket } from "../../../hooks/useBasket";
-import { find } from "../../../utils/array";
-import { fakeMenu } from "../../../fakeData/fakeMenu";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
@@ -21,15 +19,17 @@ export default function OrderPage() {
 
   const titleEditRef = useRef();
 
-  const { menu, handleAdd, handleDelete, resetMenu, handleEdit } = useMenu(
-    fakeMenu.MEDIUM
-  );
+  const { menu, handleAdd, handleRemove, resetMenu, handleEdit } =
+    useMenu(newProduct);
   const {
     basketMenu,
-    handleAddToBasket,
-    incrementBasketProductQuantity,
-    handleDeleteBasketProduct,
+    addProductToBasket,
+    updateProductQuantity,
+    deleteBasketProduct,
+    editProductToBasket,
   } = useBasket();
+
+  // useLocalStorage(basketMenu);
 
   const handleProductSelected = async (idProductSelected) => {
     if (!isAdminMode) return;
@@ -38,10 +38,9 @@ export default function OrderPage() {
     await setProductSelected(productSelected);
     await setCurrentTabSelected("edit");
     await setIsCollapsed(false);
+
     focusOnRef(titleEditRef);
-
   };
-
   const globalContextValue = {
     isAdminMode,
     setIsAdminMode,
@@ -52,7 +51,7 @@ export default function OrderPage() {
 
     menu,
     handleAdd,
-    handleDelete,
+    handleRemove,
     resetMenu,
     handleEdit,
 
@@ -64,10 +63,12 @@ export default function OrderPage() {
     setNewProduct,
 
     basketMenu,
-    
-    handleAddToBasket,
-    incrementBasketProductQuantity,
-    handleDeleteBasketProduct,
+
+    addProductToBasket,
+
+    editProductToBasket,
+    deleteBasketProduct,
+    updateProductQuantity,
 
     handleProductSelected,
   };
