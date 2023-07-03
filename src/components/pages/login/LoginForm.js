@@ -1,91 +1,82 @@
-import React from 'react'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import styled from "styled-components"
+import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { theme } from "../../../theme";
+import { IoChevronForward } from "react-icons/io5";
+import { BsPersonCircle } from "react-icons/bs";
+import TextInput from "../../reusable-ui/TextInput";
+import Button from "../../reusable-ui/Button";
 
 export default function LoginForm() {
-    const [username, setUsername] = useState("")
-    const navigate = useNavigate();
-    
-    const handleChange = (event) => {
-      setUsername(event.target.value)
-    }
-    
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      navigate(`order/${username}`)
-      setUsername("")
-    }
+  const [username, setUsername] = useState("Simon");
+  const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    navigate(`order/${username}`);
+    setUsername("");
+  };
 
   return (
-    <LoginFormStyled action='submit'
-      onSubmit={handleSubmit}>
-    
+    <LoginFormStyled action="submit" onSubmit={handleSubmit}>
       <h1>Bienvenue chez nous !</h1>
-      <br />
+      <hr />
       <h2>Connectez-vous</h2>
 
-      <input type="text" 
-        placeholder='Entrez votre prénom'
+      <TextInput
         value={username}
         onChange={handleChange}
+        placeholder={"Entrez votre prénom"}
+        type={"text"}
         required
+        variant="normal"
+        className="input-login"
+        Icon={<BsPersonCircle />}
       />
 
-      <button>Accéder à mon espace </button>
-
+      <Button
+        label={"Accéder à mon espace"}
+        Icon={<IoChevronForward />}
+        variant={"normal"}
+      />
     </LoginFormStyled>
-  )
+  );
 }
 
-const LoginFormStyled = styled.form `
-  z-index: 10;
-  positon: relative;
-  text-align: center;
+const LoginFormStyled = styled.form`
   display: flex;
   flex-direction: column;
-  width: 400px;
-  h1{
-    color: white;
-    font-family: 'Amatic SC';
-    font-size: 44px;
-    font-weight: 700;
+  text-align: center;
+  max-width: 500px;
+  min-width: 400px;
+  margin: 0px auto;
+  padding: 40px ${theme.spacing.lg};
+  font-family: "Amatic SC", cursive;
+
+  h1 {
+    color: ${theme.colors.white};
+    font-size: ${theme.fonts.size.P5};
+    font-weight: ${theme.fonts.weights.bold};
     padding: 30px 50px;
-    border-bottom: 3px solid orange;
   }
 
-  h2{
-    color: white;
-    font-family: 'Amatic SC';
-    font-size: 36px;
-    font-weight: 400;
-    margin: 15px;
+  h2 {
+    color: ${theme.colors.white};
+    font-size: ${theme.fonts.size.P4};
+    font-weight: ${theme.fonts.weights.regular};
+    margin: 20px 10px 10px;
   }
 
-  input{
-    border-radius: 5px;
-    width: 100%;
-    height: 55px;
-    padding: 15px 55px;
-    margin-bottom: 15px;
-    font-family: 'Open Sans';
-    ::placeholder{
-      color: light-grey;
-      font-family: 'Open Sans';
-      opacity: 0.5;
-    }
+  hr {
+    border: 1.5px solid ${theme.colors.loginline};
+    margin-bottom: ${theme.gridUnit * 5}px;
   }
-
-  button{
-    width: 100%;
-    height: 55px;
-    color: orange;
-    border: 1px solid orange;
-    border-radius: 5px;
-    padding: 15px 55px;
-    font-family: 'Open Sans';
-    font-weight: 700;
-    font-size: 14px;
+  .input-login {
+    margin: 18px 0; // must be handled in Parent
   }
-
-`
+`;
