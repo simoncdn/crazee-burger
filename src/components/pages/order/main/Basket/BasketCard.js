@@ -108,6 +108,7 @@ const CardBasketStyled = styled.div`
         font-weight: ${theme.fonts.weights.medium};
         color: ${theme.colors.primary};
         font-size: ${theme.fonts.size.P0};
+        font-family: "Open Sans", sans-serif;
       }
     }
     .right-description {
@@ -115,6 +116,7 @@ const CardBasketStyled = styled.div`
       color: ${theme.colors.primary};
       display: flex;
       align-items: center;
+      font-family: "Open Sans", sans-serif;
     }
   }
   ${(props) => props.isSelected && selectedStyle};

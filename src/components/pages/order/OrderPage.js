@@ -19,6 +19,7 @@ export default function OrderPage() {
 
   const titleEditRef = useRef();
 
+
   const { menu, handleAdd, handleRemove, resetMenu, handleEdit } =
     useMenu(newProduct);
   const {
@@ -39,6 +40,7 @@ export default function OrderPage() {
     await setIsCollapsed(false);
 
     focusOnRef(titleEditRef);
+
   };
   const globalContextValue = {
     isAdminMode,
@@ -60,11 +62,13 @@ export default function OrderPage() {
 
     basketMenu,
     addProductToBasket,
+
     editProductToBasket,
     deleteBasketProduct,
     updateProductQuantity,
 
     handleProductSelected,
+
   };
 
   return (

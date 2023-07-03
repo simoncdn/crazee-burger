@@ -66,6 +66,7 @@ const shadows = {
   subtle: "0px -6px 8px -2px rgba(0, 0, 0, 0.1)",
   medium: "-8px 8px 20px 0px rgb(0 0 0 / 20%)",
   strong: "0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset",
+  basket: "inset 0px 0px 20px rgba(0, 0, 0, 0.2)",
 };
 
 export const theme = {
