@@ -18,7 +18,6 @@ export default function OrderPage() {
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
 
   const titleEditRef = useRef();
-
   const { menu, handleAdd, handleRemove, resetMenu, handleEdit } =
     useMenu(newProduct);
   const {
