@@ -28,9 +28,7 @@ export default function OrderPage() {
     deleteBasketProduct,
     editProductToBasket,
   } = useBasket();
-
   // useLocalStorage(basketMenu);
-
   const handleProductSelected = async (idProductSelected) => {
     if (!isAdminMode) return;
     const productSelected = find(idProductSelected, menu);

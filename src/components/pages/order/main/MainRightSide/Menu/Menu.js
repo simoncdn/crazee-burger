@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import GlobalContext from "../../../../../../context/GlobalContext";
-import { theme } from "../../../../../../theme";
 import { formatPrice } from "../../../../../../utils/maths";
 import Card from "../../../../../reusable-ui/Card";
 import EmptyMenuAdmin from "./EmptyMenuAdmin";
@@ -10,7 +9,6 @@ import { EMPTY_PRODUCT } from "../../../../../../enum/product";
 import { focusOnRef } from "../../../../../../utils/focusOnRef";
 import { find } from "../../../../../../utils/find";
 import { getImageSource } from "../../../../../../utils/getImageSource";
-
 
 export default function Menu() {
   const {
@@ -36,13 +34,11 @@ export default function Menu() {
     event.stopPropagation();
     handleRemove(id);
 
-
     if (productSelected && productSelected.id === id) {
       setProductSelected(EMPTY_PRODUCT);
     }
     focusOnRef(titleEditRef);
     deleteBasketProduct(id);
-
   };
 
   const handleProductToBasket = (event, id) => {
@@ -72,8 +68,7 @@ export default function Menu() {
 }
 
 const MenuStyled = styled.div`
-  /* background-color: ${theme.colors.background_white}; */
-  box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset;
+   box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset;
   padding: 50px 50px 150px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);

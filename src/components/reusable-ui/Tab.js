@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { theme } from "../../theme";
 
 export default function Tab({ label, Icon, className, onClick }) {
-  return (
+    return (
     <PanelButtonStyled className={className} onClick={onClick}>
       {Icon && <div className="icon">{Icon}</div>}
       {label && <span className="label">{label}</span>}
@@ -33,7 +33,6 @@ const PanelButtonStyled = styled.button`
   border-color: #e4e5e9;
   box-shadow: ${theme.shadows.subtle};
   border-radius: 5px 5px 0px 0px;
-
   .icon {
     display: flex;
   }

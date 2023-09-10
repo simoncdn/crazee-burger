@@ -8,6 +8,7 @@ import {
   replaceFrenchCommaWithDot,
 } from "../../../../../utils/maths";
 import BasketFooter from "./BasketFooter";
+import BasketTotal from "./BasketTotal";
 
 export default function Basket() {
   const { basketMenu } = useContext(GlobalContext);
@@ -22,10 +23,7 @@ export default function Basket() {
 
   return (
     <BasketStyled>
-      <div className="total">
-        Total
-        <span>{formatPrice(updateTotalPrice)}</span>
-      </div>
+      <BasketTotal totalPrice={formatPrice(updateTotalPrice)} />
 
       <BasketBody />
 
@@ -40,4 +38,5 @@ const BasketStyled = styled.div`
   background-color: ${theme.colors.background_white};
   box-shadow: ${theme.shadows.basket};
   overflow-y: hidden;
-`;
+`
+
