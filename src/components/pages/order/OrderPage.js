@@ -9,6 +9,7 @@ import { focusOnRef } from "../../../utils/focusOnRef";
 import { find } from "../../../utils/find";
 import { useMenu } from "../../../hooks/useMenu";
 import { useBasket } from "../../../hooks/useBasket";
+import {getUser, addUser} from "../../../api/user";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
@@ -17,6 +18,7 @@ export default function OrderPage() {
   const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
 
+  getUser("Alex");
   const titleEditRef = useRef();
   const { menu, handleAdd, handleRemove, resetMenu, handleEdit } =
     useMenu(newProduct);
@@ -37,6 +39,8 @@ export default function OrderPage() {
     await setIsCollapsed(false);
 
     focusOnRef(titleEditRef);
+    addUser("Abdel");
+    getUser("Abdel");
   };
   const globalContextValue = {
     isAdminMode,
