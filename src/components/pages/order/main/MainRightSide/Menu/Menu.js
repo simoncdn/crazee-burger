@@ -9,6 +9,7 @@ import { EMPTY_PRODUCT } from "../../../../../../enum/product";
 import { focusOnRef } from "../../../../../../utils/focusOnRef";
 import { find } from "../../../../../../utils/find";
 import { getImageSource } from "../../../../../../utils/getImageSource";
+import Loader from "../../../../../reusable-ui/Loader";
 
 export default function Menu() {
   const {
@@ -16,7 +17,7 @@ export default function Menu() {
     handleRemove,
     productSelected,
     addProductToBasket,
-
+    username,
     handleProductSelected,
     setProductSelected,
     menu,
@@ -25,14 +26,15 @@ export default function Menu() {
     deleteBasketProduct,
   } = useContext(GlobalContext);
 
-  if (menu.length === 0) {
+  if(!menu) return <Loader />;
+  if (menu?.length === 0) {
     if (!isAdminMode) return <EmptyMenuClient />;
     return <EmptyMenuAdmin onReset={resetMenu} />;
   }
 
   const handleOnDelete = (event, id) => {
     event.stopPropagation();
-    handleRemove(id);
+    handleRemove(username.username, id);
 
     if (productSelected && productSelected.id === id) {
       setProductSelected(EMPTY_PRODUCT);
