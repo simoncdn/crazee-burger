@@ -2,14 +2,15 @@ import Navbar from "./navbar/Navbar";
 import styled from "styled-components";
 import { theme } from "../../../theme";
 import Main from "./main/Main";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import GlobalContext from "../../../context/GlobalContext";
 import { EMPTY_PRODUCT } from "../../../enum/product";
 import { focusOnRef } from "../../../utils/focusOnRef";
 import { find } from "../../../utils/find";
 import { useMenu } from "../../../hooks/useMenu";
 import { useBasket } from "../../../hooks/useBasket";
-import {getUser, addUser} from "../../../api/user";
+import { useParams } from "react-router-dom";
+import { getMenu } from "../../../api/product";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
@@ -17,11 +18,10 @@ export default function OrderPage() {
   const [currentTabSelected, setCurrentTabSelected] = useState("add");
   const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
-
-  getUser("Alex");
   const titleEditRef = useRef();
-  const { menu, handleAdd, handleRemove, resetMenu, handleEdit } =
-    useMenu(newProduct);
+  const username = useParams();
+  const { menu, setMenu, handleAdd, handleRemove, resetMenu, handleEdit } =
+    useMenu();
   const {
     basketMenu,
     addProductToBasket,
@@ -39,10 +39,10 @@ export default function OrderPage() {
     await setIsCollapsed(false);
 
     focusOnRef(titleEditRef);
-    addUser("Abdel");
-    getUser("Abdel");
   };
   const globalContextValue = {
+    username,
+      
     isAdminMode,
     setIsAdminMode,
     isCollapsed,
@@ -51,6 +51,7 @@ export default function OrderPage() {
     setCurrentTabSelected,
 
     menu,
+    setMenu,
     handleAdd,
     handleRemove,
     resetMenu,
@@ -61,6 +62,7 @@ export default function OrderPage() {
     productSelected,
     setProductSelected,
     newProduct,
+
     setNewProduct,
 
     basketMenu,
@@ -73,6 +75,16 @@ export default function OrderPage() {
 
     handleProductSelected,
   };
+
+  useEffect(() => {
+      const initializeMenu = async (userId) => {
+        const menu = await getMenu(userId);
+        setMenu(menu);
+      }
+      if(username){
+          initializeMenu(username.username);
+      }
+  }, [username]);
 
   return (
     <OrderPageStyled>

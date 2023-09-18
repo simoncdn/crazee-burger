@@ -10,6 +10,7 @@ export default function EditForm() {
     handleEdit,
     titleEditRef,
     editProductToBasket,
+    username,
   } = useContext(GlobalContext);
 
   const handleChange = (e) => {
@@ -18,7 +19,7 @@ export default function EditForm() {
     const productBeingEdited = { ...productSelected, [name]: value };
 
     setProductSelected(productBeingEdited);
-    handleEdit(productBeingEdited);
+    handleEdit(username.username, productBeingEdited);
     editProductToBasket(productBeingEdited);
   };
 

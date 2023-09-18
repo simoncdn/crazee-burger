@@ -1,29 +1,32 @@
-import { collection , getDocs, addDoc } from "firebase/firestore";
+import {  getDoc, setDoc, doc } from "firebase/firestore";
 import { db } from "./api";
+import { fakeMenu } from "../fakeData/fakeMenu";
 
 export const getUser = async (userId) => {
-    const querySnapshot = await getDocs(collection(db, "users"));
-    querySnapshot.forEach((doc) => {
-        if(doc.exists()){
-            return console.log("Document data:", doc.data());
-        } else {
-            console.log("No such document!");
-        }
-    });
-}
+    const docRef = doc(db, "users", userId);
+    const docSnap = await getDoc(docRef);
 
+    if (docSnap.exists()) {
+        const userReceived = docSnap.data();
+        return userReceived;
+    }
+    else{
+        return null;
+    }
+};
 export const addUser = async (userId) => {
-    await addDoc(collection(db, "users"), {
+    const docRef = doc(db, "users", userId);
+    const user = {
         username: userId,
-        menu: {
-            "0": {
-                title: "Bonbon",
-                price: 1.5,
-            },
-            "1": {
-                title: "Chocolat",
-                price: 2.5,
-            },
-        }
-    });
+        menu: fakeMenu.MEDIUM
+    }
+
+    await setDoc(docRef, user);
+} 
+export const authenticateUser = async(userId) => {
+    const existingUser = await getUser(userId);
+    if (!existingUser) {
+        return addUser(userId);
+    }
+    return existingUser;
 }
