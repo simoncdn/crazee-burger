@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { fakeMenu } from "../fakeData/fakeMenu";
 import { filter } from "../utils/filter";
 import { getIndex } from "../utils/getIndex";
 import { deepClone } from "../utils/array";
@@ -28,8 +27,9 @@ export const useMenu = () => {
     syncBothMenu(userId, menu);
   };
 
-  const resetMenu = () => {
-    setMenu(fakeMenu.MEDIUM);
+  const resetMenu = (userId, newMenu) => {
+    setMenu(newMenu);
+    syncBothMenu(userId, newMenu);
   };
 
   return { handleAdd, handleRemove, setMenu, handleEdit, resetMenu, menu };

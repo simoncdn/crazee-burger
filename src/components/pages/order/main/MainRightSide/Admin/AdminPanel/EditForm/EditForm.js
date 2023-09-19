@@ -19,7 +19,7 @@ export default function EditForm() {
     const productBeingEdited = { ...productSelected, [name]: value };
 
     setProductSelected(productBeingEdited);
-    handleEdit(username.username, productBeingEdited);
+    handleEdit(username, productBeingEdited);
     editProductToBasket(productBeingEdited);
   };
 

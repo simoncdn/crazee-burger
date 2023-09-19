@@ -17,7 +17,7 @@ export default function AddForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    handleAdd(username.username,{
+    handleAdd(username,{
       ...newProduct,
       id: crypto.randomUUID(),
     });

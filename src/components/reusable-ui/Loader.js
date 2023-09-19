@@ -4,7 +4,7 @@ import { theme } from "../../theme";
 const Loader = () => {
     return (
        <LoaderStyled>
-              <p className="loader-text">Chargement...</p>
+              <p className="loader-text">Chargement ...</p>
         </LoaderStyled>
    ) 
 }

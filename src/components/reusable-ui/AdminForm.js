@@ -50,7 +50,6 @@ const AdminFormStyled = styled.form`
     grid-row-gap: 8px;
   }
   .form-footer {
-    /* background: green; */
     grid-area: 4 / -2 / -1 / -1;
     display: flex;
     align-items: center;

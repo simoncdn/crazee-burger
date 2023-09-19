@@ -19,7 +19,7 @@ export default function OrderPage() {
   const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
   const titleEditRef = useRef();
-  const username = useParams();
+  const username = useParams()?.username;
   const { menu, setMenu, handleAdd, handleRemove, resetMenu, handleEdit } =
     useMenu();
   const {
@@ -82,7 +82,7 @@ export default function OrderPage() {
         setMenu(menu);
       }
       if(username){
-          initializeMenu(username.username);
+          initializeMenu(username);
       }
   }, [username]);
 
