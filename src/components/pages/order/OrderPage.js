@@ -10,7 +10,7 @@ import { find } from "../../../utils/find";
 import { useMenu } from "../../../hooks/useMenu";
 import { useBasket } from "../../../hooks/useBasket";
 import { useParams } from "react-router-dom";
-import { getMenu } from "../../../api/product";
+import { initialiseUserSession } from "../../../utils/intialiseUserSession";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
@@ -19,11 +19,12 @@ export default function OrderPage() {
   const [productSelected, setProductSelected] = useState(EMPTY_PRODUCT);
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
   const titleEditRef = useRef();
-  const username = useParams()?.username;
+  const { username } = useParams();
   const { menu, setMenu, handleAdd, handleRemove, resetMenu, handleEdit } =
     useMenu();
   const {
     basketMenu,
+    setBasket,
     addProductToBasket,
     updateProductQuantity,
     deleteBasketProduct,
@@ -42,7 +43,7 @@ export default function OrderPage() {
   };
   const globalContextValue = {
     username,
-      
+
     isAdminMode,
     setIsAdminMode,
     isCollapsed,
@@ -77,14 +78,8 @@ export default function OrderPage() {
   };
 
   useEffect(() => {
-      const initializeMenu = async (userId) => {
-        const menu = await getMenu(userId);
-        setMenu(menu);
-      }
-      if(username){
-          initializeMenu(username);
-      }
-  }, [username]);
+    initialiseUserSession(username, setMenu, setBasket);
+  }, []);
 
   return (
     <OrderPageStyled>
