@@ -6,7 +6,7 @@ import SubmitButton from "./SubmitButton";
 import { useDisplaySuccessMessage } from "../../../../../../../../hooks/useDisplaySuccessMessage";
 
 export default function AddForm() {
-  const { newProduct, setNewProduct, handleAdd } = useContext(GlobalContext);
+  const { newProduct, setNewProduct, handleAdd, username } = useContext(GlobalContext);
   const { isSuccess, displaySuccessMessage } = useDisplaySuccessMessage();
 
   const handleChange = (e) => {
@@ -17,7 +17,7 @@ export default function AddForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    handleAdd({
+    handleAdd(username,{
       ...newProduct,
       id: crypto.randomUUID(),
     });

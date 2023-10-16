@@ -1,32 +1,36 @@
 import { useState } from "react";
-import { fakeMenu } from "../fakeData/fakeMenu";
 import { filter } from "../utils/filter";
 import { getIndex } from "../utils/getIndex";
 import { deepClone } from "../utils/array";
+import { syncBothMenu } from "../api/product";
 
-export const useMenu = (product) => {
-  const [menu, setMenu] = useState(fakeMenu.LARGE);
+export const useMenu = () => {
+  const [menu, setMenu] = useState();
 
-  const handleAdd = (productToAdd) => {
+  const handleAdd = (userId, productToAdd) => {
     const menuCopy = deepClone(menu);
-    const menuUpdated = [product, ...menuCopy];
+    const menuUpdated = [productToAdd, ...menuCopy];
     setMenu(menuUpdated);
+    syncBothMenu(userId, menuUpdated);
   };
 
-  const handleRemove = (idProductToRemove) => {
+  const handleRemove = (userId, idProductToRemove) => {
     const menuUpdated = filter(idProductToRemove, menu);
     setMenu(menuUpdated);
+    syncBothMenu(userId, menuUpdated);
   };
 
-  const handleEdit = (productToEdit) => {
+  const handleEdit = (userId, productToEdit) => {
     const productTobeEdited = getIndex(productToEdit.id, menu);
     menu[productTobeEdited] = productToEdit;
     setMenu(menu);
+    syncBothMenu(userId, menu);
   };
 
-  const resetMenu = () => {
-    setMenu(fakeMenu.MEDIUM);
+  const resetMenu = (userId, newMenu) => {
+    setMenu(newMenu);
+    syncBothMenu(userId, newMenu);
   };
 
-  return { handleAdd, handleRemove, handleEdit, resetMenu, menu };
+  return { handleAdd, handleRemove, setMenu, handleEdit, resetMenu, menu };
 };
