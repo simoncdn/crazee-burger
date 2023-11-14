@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import GlobalContext from "../../../../../../../../context/GlobalContext";
-import AdminForm from "../../../../../../../reusable-ui/AdminForm";
 import InfoEditMessage from "./InfoEditMessage";
+import SavingMessage from "./SavingMessage";
+import { useDisplaySuccessMessage } from "../../../../../../../../hooks/useDisplaySuccessMessage";
+import Form from "../Form/Form";
 
 export default function EditForm() {
   const {
@@ -9,27 +11,43 @@ export default function EditForm() {
     setProductSelected,
     handleEdit,
     titleEditRef,
-    editProductToBasket,
     username,
   } = useContext(GlobalContext);
+  const [valueOnFocus, setvalueOnFocus] = useState();
+  const { isSuccess: isSaved, displaySuccessMessage } =
+    useDisplaySuccessMessage();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (event) => {
+    const { name, value } = event.target;
 
-    const productBeingEdited = { ...productSelected, [name]: value };
+    const productBeingUpdated = {
+      ...productSelected,
+      [name]: value,
+    };
+    setProductSelected(productBeingUpdated);
+    handleEdit(productBeingUpdated, username);
+  };
 
-    setProductSelected(productBeingEdited);
-    handleEdit(username, productBeingEdited);
-    editProductToBasket(productBeingEdited);
+  const handleOnFocus = (event) => {
+    const valueOnFocus = event.target.value;
+    setvalueOnFocus(valueOnFocus);
+  };
+  const handleOnBlur = (event) => {
+    const valueOnBlur = event.target.value;
+    if (valueOnFocus !== valueOnBlur) {
+      displaySuccessMessage();
+    }
   };
 
   return (
-    <AdminForm
+    <Form
       product={productSelected}
       onChange={handleChange}
+      onFocus={handleOnFocus}
+      onBlur={handleOnBlur}
       ref={titleEditRef}
     >
-      <InfoEditMessage />
-    </AdminForm>
+      {isSaved ? <SavingMessage /> : <InfoEditMessage />}
+    </Form>
   );
 }

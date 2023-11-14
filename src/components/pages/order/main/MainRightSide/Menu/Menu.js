@@ -5,79 +5,119 @@ import { formatPrice } from "../../../../../../utils/maths";
 import Card from "../../../../../reusable-ui/Card";
 import EmptyMenuAdmin from "./EmptyMenuAdmin";
 import EmptyMenuClient from "./EmptyMenuClient";
-import { EMPTY_PRODUCT } from "../../../../../../enum/product";
-import { focusOnRef } from "../../../../../../utils/focusOnRef";
-import { find } from "../../../../../../utils/find";
-import { getImageSource } from "../../../../../../utils/getImageSource";
+import {
+  EMPTY_PRODUCT,
+  IMAGE_COMING_SOON,
+  IMAGE_NO_STOCK,
+} from "../../../../../../enum/product";
 import Loader from "../../../../../reusable-ui/Loader";
 import { fakeMenu } from "../../../../../../fakeData/fakeMenu";
+import { isEmpty } from "../../../../../../utils/array";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import {convertStringToBoolean} from "../../../../../../utils/string";
+import RibbonAnimated, {ribbonAnimation} from "./RibbonAnimated";
+import { theme } from "../../../../../../theme";
+import { checkIfProductIsClicked } from "./helper";
+import { menuAnimation } from "../../../../../../theme/animation";
 
 export default function Menu() {
   const {
     isAdminMode,
-    handleRemove,
+    handleDelete,
     productSelected,
     addProductToBasket,
     username,
     handleProductSelected,
     setProductSelected,
     menu,
-    titleEditRef,
     resetMenu,
     deleteBasketProduct,
   } = useContext(GlobalContext);
 
-    if(!menu) return <Loader />;
-    if (menu?.length === 0) {
+  if (menu === undefined) return <Loader />;
+  if (menu?.length === 0) {
     if (!isAdminMode) return <EmptyMenuClient />;
-    return <EmptyMenuAdmin onReset={() => resetMenu(username, fakeMenu.LARGE)} />;
+    return (
+      <EmptyMenuAdmin onReset={() => resetMenu(username, fakeMenu.LARGE)} />
+    );
   }
 
-  const handleOnDelete = (event, id) => {
+  const handleCardDelete = (event, idProductToDelete) => {
+    event.stopPropagation()
+    handleDelete(idProductToDelete, username)
+    deleteBasketProduct(idProductToDelete, username)
+    idProductToDelete === productSelected.id && setProductSelected(EMPTY_PRODUCT)
+  }
+  const handleAddButton = (event, idProductToAdd) => {
     event.stopPropagation();
-    handleRemove(username, id);
-
-    if (productSelected && productSelected.id === id) {
-      setProductSelected(EMPTY_PRODUCT);
-    }
-    focusOnRef(titleEditRef);
-    deleteBasketProduct(id);
+    addProductToBasket(idProductToAdd, username);
   };
 
-  const handleProductToBasket = (event, id) => {
-    event.stopPropagation();
-    const productToAdd = find(id, menu);
-    addProductToBasket(productToAdd);
-  };
+  let cardContainerClassName = isAdminMode
+    ? "card-container is-hoverable"
+    : "card-container";
 
+  if (menu === undefined) return <Loader />;
+
+  if (isEmpty(menu)) {
+    if (!isAdminMode) return <EmptyMenuClient />;
+    return <EmptyMenuAdmin onReset={() => resetMenu(username)} />;
+  }
   return (
-    <MenuStyled>
-      {menu.map(({ id, title, imageSource, price }) => (
-        <Card
-          key={id}
-          title={title}
-          image={getImageSource(imageSource)}
-          leftDescription={formatPrice(price)}
-          hasDeleteButton={isAdminMode}
-          onDelete={(event) => handleOnDelete(event, id)}
-          onClick={() => handleProductSelected(id)}
-          onButtonClick={(event) => handleProductToBasket(event, id)}
-          isHoverable={isAdminMode}
-          isSelected={productSelected?.id === id && true}
-        />
-      ))}
-    </MenuStyled>
+    <TransitionGroup component={MenuStyled} className="menu">
+      {menu.map(({ id, title, imageSource, price, isAvailable, isPublicised }) => {
+        return (
+          <CSSTransition classNames={"menu-animation"} key={id} timeout={300}>
+            <div className={cardContainerClassName}>
+              {convertStringToBoolean(isPublicised) && <RibbonAnimated />}
+              <Card
+                title={title}
+                imageSource={imageSource ? imageSource : IMAGE_COMING_SOON}
+                leftDescription={formatPrice(price)}
+                hasDeleteButton={isAdminMode}
+                onDelete={(event) => handleCardDelete(event, id)}
+                onClick={isAdminMode ? () => handleProductSelected(id) : null}
+                isHoverable={isAdminMode}
+                isSelected={checkIfProductIsClicked(id, productSelected.id)}
+                onAdd={(event) => handleAddButton(event, id)}
+                overlapImageSource={IMAGE_NO_STOCK}
+                isOverlapImageVisible={convertStringToBoolean(isAvailable) === false}
+              />
+            </div>
+          </CSSTransition>
+        )
+      })}
+    </TransitionGroup>
   );
 }
 
 const MenuStyled = styled.div`
-   box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset;
-  padding: 50px 50px 150px;
+  background: ${theme.colors.background_white};
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-row-gap: 60px;
+  padding: 50px 50px 150px;
   justify-items: center;
-  background-color: transparent;
+  box-shadow: 0px 8px 20px 8px rgba(0, 0, 0, 0.2) inset;
   overflow-y: scroll;
-  flex: 1;
+
+  ${menuAnimation}
+
+  .card-container {
+    position: relative;
+    height: 330px;
+    border-radius: ${theme.borderRadius.extraRound};
+
+    &.is-hoverable {
+      :hover {
+        transform: scale(1.05);
+        transition: ease-out 0.4s;
+      }
+    }
+  }
+
+  .ribbon {
+    z-index: 2;
+  }
+  ${ribbonAnimation}
 `;

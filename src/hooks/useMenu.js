@@ -1,36 +1,39 @@
-import { useState } from "react";
-import { filter } from "../utils/filter";
-import { getIndex } from "../utils/getIndex";
-import { deepClone } from "../utils/array";
-import { syncBothMenu } from "../api/product";
+import { useState } from "react"
+import { fakeMenu } from "../fakeData/fakeMenu"
+import { deepClone } from "../utils/array"
+import { syncBothMenu } from "../api/product"
 
 export const useMenu = () => {
-  const [menu, setMenu] = useState();
+  const [menu, setMenu] = useState()
 
-  const handleAdd = (userId, productToAdd) => {
-    const menuCopy = deepClone(menu);
-    const menuUpdated = [productToAdd, ...menuCopy];
-    setMenu(menuUpdated);
-    syncBothMenu(userId, menuUpdated);
-  };
+  const handleAdd = (newProduct, username) => {
+    const menuCopy = deepClone(menu)
+    const menuUpdated = [newProduct, ...menuCopy]
+    setMenu(menuUpdated)
+    syncBothMenu(username, menuUpdated)
+  }
 
-  const handleRemove = (userId, idProductToRemove) => {
-    const menuUpdated = filter(idProductToRemove, menu);
-    setMenu(menuUpdated);
-    syncBothMenu(userId, menuUpdated);
-  };
+  const handleDelete = (idOfProductToDelete, username) => {
+    const menuCopy = deepClone(menu)
+    const menuUpdated = menuCopy.filter((product) => product.id !== idOfProductToDelete)
+    setMenu(menuUpdated)
+    syncBothMenu(username, menuUpdated)
+  }
 
-  const handleEdit = (userId, productToEdit) => {
-    const productTobeEdited = getIndex(productToEdit.id, menu);
-    menu[productTobeEdited] = productToEdit;
-    setMenu(menu);
-    syncBothMenu(userId, menu);
-  };
+  const handleEdit = (productBeingEdited, username) => {
+    const menuCopy = deepClone(menu)
+    const indexOfProductToEdit = menu.findIndex(
+      (menuProduct) => menuProduct.id === productBeingEdited.id
+    )
+    menuCopy[indexOfProductToEdit] = productBeingEdited
+    setMenu(menuCopy)
+    syncBothMenu(username, menuCopy)
+  }
 
-  const resetMenu = (userId, newMenu) => {
-    setMenu(newMenu);
-    syncBothMenu(userId, newMenu);
-  };
+  const resetMenu = (username) => {
+    setMenu(fakeMenu.LARGE)
+    syncBothMenu(username, fakeMenu.LARGE)
+  }
 
-  return { handleAdd, handleRemove, setMenu, handleEdit, resetMenu, menu };
-};
+  return { menu, setMenu, handleAdd, handleDelete, handleEdit, resetMenu }
+}
