@@ -11,17 +11,19 @@ export const getUser = async (userId) => {
     return userReceived;
   }
 };
-export const addUser = (userId) => {
+export const addUser = async (userId) => {
   const docRef = doc(db, "users", userId);
   const user = {
     username: userId,
     menu: fakeMenu.LARGE,
   };
-  setDoc(docRef, user);  
+  await setDoc(docRef, user);
+  return user; 
 };
 export const authenticateUser = async (userId) => {
   const existingUser = await getUser(userId);
   if (!existingUser) {
-    addUser(userId);
+    return await addUser(userId);
   }
+  return existingUser;
 };

@@ -8,7 +8,7 @@ import refreshPage from "../../../../utils/window";
 export default function Navbar() {
   return (
     <NavbarStyled>
-      <Logo className="logo-order-page" onClick={refreshPage} />
+      <Logo className="logo-order-page" onClick={() => refreshPage()} />
       <NavbarRightSide />
     </NavbarStyled>
   );

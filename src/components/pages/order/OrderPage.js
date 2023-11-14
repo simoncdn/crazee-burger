@@ -6,11 +6,11 @@ import { useEffect, useRef, useState } from "react";
 import GlobalContext from "../../../context/GlobalContext";
 import { EMPTY_PRODUCT } from "../../../enum/product";
 import { focusOnRef } from "../../../utils/focusOnRef";
-import { find } from "../../../utils/find";
 import { useMenu } from "../../../hooks/useMenu";
 import { useBasket } from "../../../hooks/useBasket";
 import { useParams } from "react-router-dom";
 import { initialiseUserSession } from "../../../utils/intialiseUserSession";
+import { findObjectById } from "../../../utils/array";
 
 export default function OrderPage() {
   const [isAdminMode, setIsAdminMode] = useState(false);
@@ -20,22 +20,15 @@ export default function OrderPage() {
   const [newProduct, setNewProduct] = useState(EMPTY_PRODUCT);
   const titleEditRef = useRef();
   const { username } = useParams();
-  const { menu, setMenu, handleAdd, handleRemove, resetMenu, handleEdit } =
+  const { menu, setMenu, handleAdd, handleDelete, resetMenu, handleEdit } =
     useMenu();
-  const {
-    basketMenu,
-    setBasket,
-    addProductToBasket,
-    updateProductQuantity,
-    deleteBasketProduct,
-    editProductToBasket,
-  } = useBasket();
+  const { basketMenu, setBasketMenu, addProductToBasket, deleteBasketProduct } =
+    useBasket();
   // useLocalStorage(basketMenu);
   const handleProductSelected = async (idProductSelected) => {
     if (!isAdminMode) return;
-    const productSelected = find(idProductSelected, menu);
-
-    await setProductSelected(productSelected);
+    const productClickedOn = findObjectById(idProductSelected, menu);
+    await setProductSelected(productClickedOn);
     await setCurrentTabSelected("edit");
     await setIsCollapsed(false);
 
@@ -52,9 +45,8 @@ export default function OrderPage() {
     setCurrentTabSelected,
 
     menu,
-    setMenu,
     handleAdd,
-    handleRemove,
+    handleDelete,
     resetMenu,
     handleEdit,
 
@@ -67,18 +59,14 @@ export default function OrderPage() {
     setNewProduct,
 
     basketMenu,
-
     addProductToBasket,
-
-    editProductToBasket,
     deleteBasketProduct,
-    updateProductQuantity,
 
     handleProductSelected,
   };
 
   useEffect(() => {
-    initialiseUserSession(username, setMenu, setBasket);
+    initialiseUserSession(username, setMenu, setBasketMenu);
   }, []);
 
   return (

@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import GlobalContext from "../../../../../../../../context/GlobalContext";
 import { EMPTY_PRODUCT } from "../../../../../../../../enum/product";
-import AdminForm from "../../../../../../../reusable-ui/AdminForm";
 import SubmitButton from "./SubmitButton";
 import { useDisplaySuccessMessage } from "../../../../../../../../hooks/useDisplaySuccessMessage";
+import Form from "../Form/Form";
 
 export default function AddForm() {
-  const { newProduct, setNewProduct, handleAdd, username } = useContext(GlobalContext);
+  const { newProduct, setNewProduct, handleAdd, username } =
+    useContext(GlobalContext);
   const { isSuccess, displaySuccessMessage } = useDisplaySuccessMessage();
 
   const handleChange = (e) => {
@@ -17,7 +18,7 @@ export default function AddForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    handleAdd(username,{
+    handleAdd(username, {
       ...newProduct,
       id: crypto.randomUUID(),
     });
@@ -26,12 +27,8 @@ export default function AddForm() {
   };
 
   return (
-    <AdminForm
-      product={newProduct}
-      onChange={handleChange}
-      onSubmit={handleSubmit}
-    >
-      <SubmitButton isSuccess={isSuccess} />
-    </AdminForm>
+    <Form product={newProduct} onSubmit={handleSubmit} onChange={handleChange}>
+      <SubmitButton isSubmitted={isSuccess} />
+    </Form>
   );
 }

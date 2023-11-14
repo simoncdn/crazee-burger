@@ -1,56 +1,73 @@
-import styled, { css } from "styled-components";
-import { theme } from "../../theme/index";
-import { RxCross2 } from "react-icons/rx";
-import Button from "./Button";
+import styled, { css } from "styled-components"
+import { theme } from "../../theme"
+import Button from "./Button"
+import { TiDelete } from "react-icons/ti"
+import { fadeInFromRight, fadeInFromTop } from "../../theme/animation"
 
 export default function Card({
   title,
-  image,
+  imageSource,
   leftDescription,
   hasDeleteButton,
-  onClick,
   onDelete,
+  onClick,
   isHoverable,
   isSelected,
-  onButtonClick,
+  onAdd,
+  overlapImageSource,
+  isOverlapImageVisible,
 }) {
   return (
     <CardStyled
+      className="produit"
       onClick={onClick}
       isHoverable={isHoverable}
       isSelected={isSelected}
     >
       <div className="card">
         {hasDeleteButton && (
-          <button className="delete-btn" onClick={onDelete}>
-            <RxCross2 className="icon" />
+          <button className="delete-button" aria-label="delete-button" onClick={onDelete}>
+            <TiDelete className="icon" />
           </button>
         )}
+
         <div className="image">
-          <img src={image} alt={title} />
+          {isOverlapImageVisible && (
+            <div className="overlap">
+              <div className="transparent-layer"></div>
+              <img className="overlap-image" src={overlapImageSource} alt="overlap" />
+            </div>
+          )}
+          <img className="product" src={imageSource} alt={title} />
         </div>
+
         <div className="text-info">
           <div className="title">{title}</div>
           <div className="description">
             <div className="left-description">{leftDescription}</div>
             <div className="right-description">
               <Button
-                classname="primary-button"
+                className="primary-button"
                 label={"Ajouter"}
-                onClick={onButtonClick}
+                onClick={onAdd}
+                disabled={isOverlapImageVisible}
               />
             </div>
           </div>
         </div>
       </div>
     </CardStyled>
-  );
+  )
 }
+
 const CardStyled = styled.div`
-  height: fit-content;
+  ${({ isHoverable }) => isHoverable && hoverableStyle}
   border-radius: ${theme.borderRadius.extraRound};
-  ${({ isHoverable }) => isHoverable && hoverableStyle};
+  height: 330px;
+
   .card {
+    background: ${theme.colors.white};
+    box-sizing: border-box;
     width: 240px;
     height: 330px;
     display: grid;
@@ -59,64 +76,89 @@ const CardStyled = styled.div`
     padding-bottom: 10px;
     box-shadow: -8px 8px 20px 0px rgb(0 0 0 / 20%);
     border-radius: ${theme.borderRadius.extraRound};
-    background-color: ${theme.colors.white};
     position: relative;
 
-    .delete-btn {
+    .delete-button {
+      border: 1px solid red;
       position: absolute;
-      top: 0;
-      right: 0;
-      margin-top: 20px;
-      margin-right: 20px;
-      width: 20px;
-      height: 20px;
-      border-radius: ${theme.borderRadius.extraRound};
-      background-color: ${theme.colors.primary};
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: none;
+      top: 15px;
+      right: 15px;
       cursor: pointer;
+      width: 30px;
+      height: 30px;
+      color: ${theme.colors.primary};
+      z-index: 2;
+      padding: 0;
+      border: none;
+      background: none;
+      animation: ${fadeInFromRight} ${theme.animations.speed.slow} ease-out;
+
       .icon {
-        color: ${theme.colors.white};
-      }
-      :hover {
-        background-color: ${theme.colors.red};
-      }
-      :active {
-        background-color: ${theme.colors.primary};
-      }
-    }
-    .image {
-      width: 100%;
-      height: auto;
-      margin-top: 30px;
-      margin-bottom: 20px;
-      z-index: 1;
-      img {
         height: 100%;
         width: 100%;
-        object-fit: contain;
+      }
+
+      :hover {
+        color: ${theme.colors.red};
+      }
+      :active {
+        color: ${theme.colors.primary};
       }
     }
+
+    .image {
+      margin-top: 30px;
+      margin-bottom: 20px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .overlap {
+        .overlap-image {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 80%;
+          height: 100%;
+          z-index: 1;
+          animation: ${fadeInFromTop} 500ms;
+          border-radius: ${theme.borderRadius.extraRound};
+        }
+
+        .transparent-layer {
+          height: 100%;
+          width: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          opacity: 70%;
+          background: snow;
+          z-index: 1;
+          border-radius: ${theme.borderRadius.extraRound};
+        }
+      }
+    }
+
     .text-info {
       display: grid;
       grid-template-rows: 30% 70%;
       padding: 5px;
 
       .title {
-        width: 100%;
-        text-align: left;
         margin: auto 0;
+        font-size: ${theme.fonts.size.P4};
         position: relative;
         bottom: 10px;
-        font-family: "Amatic SC", cursive;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        font-size: ${theme.fonts.size.P4};
         font-weight: ${theme.fonts.weights.bold};
         color: ${theme.colors.dark};
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 100%;
+        text-overflow: ellipsis;
+        font-family: "Amatic SC", cursive;
       }
 
       .description {
@@ -127,13 +169,14 @@ const CardStyled = styled.div`
           display: flex;
           justify-content: flex-start;
           align-items: center;
+          font-weight: ${theme.fonts.weights.medium};
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
           font-weight: ${theme.fonts.weights.medium};
-          font-weight: ${theme.fonts.weights.medium};
           color: ${theme.colors.primary};
         }
+
         .right-description {
           display: flex;
           justify-content: flex-end;
@@ -142,38 +185,30 @@ const CardStyled = styled.div`
 
           .primary-button {
             font-size: ${theme.fonts.size.XS};
-            cursor: pointer;
             padding: 12px;
           }
         }
       }
     }
-    ${(props) => props.isHoverable && props.isSelected && selectedStyle};
+
+    ${({ isHoverable, isSelected }) => isHoverable && isSelected && selectedStyle}
   }
-`;
+`
+
+const hoverableStyle = css`
+  :hover {
+    box-shadow: ${theme.shadows.orangeHighlight};
+    cursor: pointer;
+  }
+`
 
 const selectedStyle = css`
-  background-color: ${theme.colors.primary};
-  .delete-btn {
-    background-color: ${theme.colors.white};
-    .icon {
-      color: ${theme.colors.primary};
-    }
-    :active {
-      background-color: ${theme.colors.white};
-    }
-  }
-  .text-info {
-    .description {
-      .left-description {
-        color: ${theme.colors.white};
-      }
-    }
-  }
+  background: ${theme.colors.primary};
   .primary-button {
     color: ${theme.colors.primary};
     background-color: ${theme.colors.white};
     border: 1px solid ${theme.colors.white};
+    transition: all 200ms ease-out;
     :hover {
       color: ${theme.colors.white};
       background-color: ${theme.colors.primary};
@@ -206,13 +241,20 @@ const selectedStyle = css`
       }
     }
   }
-`;
 
-const hoverableStyle = css`
-  :hover {
-    box-shadow: 0px 0px 8px ${theme.colors.primary_halo};
-    transform: scale(1.05);
-    transition: transform 0.4s ease-out;
-    cursor: pointer;
+  .delete-button {
+    color: ${theme.colors.white};
+
+    :active {
+      color: ${theme.colors.white};
+    }
   }
-`;
+
+  .text-info {
+    .description {
+      .left-description {
+        color: ${theme.colors.white};
+      }
+    }
+  }
+`

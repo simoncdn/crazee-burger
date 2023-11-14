@@ -1,70 +1,42 @@
-import { useEffect, useState } from "react";
-import { find } from "../utils/find";
-import { getIndex } from "../utils/getIndex";
-import { filter } from "../utils/filter";
-import { useParams } from "react-router-dom";
-import { deepClone } from "../utils/array";
+import { useState } from "react"
+import { deepClone, findObjectById, getIndex, removeObjectById } from "../utils/array"
+import { setLocalStorage } from "../utils/window"
 
 export const useBasket = () => {
-  const [basketMenu, setBasketMenu] = useState([]);
+  const [basketMenu, setBasketMenu] = useState([])
 
-  const { username } = useParams();
-  const stored = JSON.parse(localStorage.getItem(username)) || [];
+  const addProductToBasket = (idProductToAdd, username) => {
+    const basketCopy = deepClone(basketMenu)
+    const productAlreadyInBasket = findObjectById(idProductToAdd, basketCopy)
 
-  const addProductToBasket = (productToAdd) => {
-    const basketCopy = deepClone(basketMenu);
-    const productAlreadyInBasket = find(productToAdd.id, basketMenu);
-
-    if (!productAlreadyInBasket) {
-      productToAdd.quantity = 1;
-      const newBasketMenu = [productToAdd, ...basketCopy];
-      setBasketMenu(newBasketMenu);
-      localStorage.setItem(username, JSON.stringify(newBasketMenu));
-      return;
+    if (productAlreadyInBasket) {
+      incrementProductAlreadyInBasket(idProductToAdd, basketCopy, username)
+      return
     }
-    updateProductQuantity(productAlreadyInBasket);
-  };
 
-  useEffect(() => {
-    setBasketMenu(JSON.parse(localStorage.getItem(username)) || []);
+    createNewBasketProduct(idProductToAdd, basketCopy, setBasketMenu, username)
+  }
 
-    if (stored.length === 0) {
-      localStorage.setItem(username, JSON.stringify(basketMenu));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const incrementProductAlreadyInBasket = (idProductToAdd, basketCopy, username) => {
+    const indexOfBasketProductToIncrement = getIndex(idProductToAdd, basketCopy)
+    basketCopy[indexOfBasketProductToIncrement].quantity += 1
+    setBasketMenu(basketCopy)
+    setLocalStorage(username, basketCopy)
+  }
 
-  const editProductToBasket = (productToEdit) => {
-    const productInBasket = getIndex(productToEdit.id, basketMenu);
+  const createNewBasketProduct = (idProductToAdd, basketCopy, setBasket, username) => {
+    // we do not re-create a whole product, we only add the extra info a basket product has in comparison to a menu product
+    const newBasketProduct = { id: idProductToAdd, quantity: 1 }
+    const newBasket = [newBasketProduct, ...basketCopy]
+    setBasket(newBasket)
+    setLocalStorage(username, newBasket)
+  }
 
-    basketMenu[productInBasket] = productToEdit;
+  const deleteBasketProduct = (idBasketProduct, username) => {
+    const basketUpdated = removeObjectById(idBasketProduct, basketMenu)
+    setBasketMenu(basketUpdated)
+    setLocalStorage(username, basketUpdated)
+  }
 
-    setBasketMenu(basketMenu);
-    localStorage.setItem(username, JSON.stringify(basketMenu));
-  };
-
-  const updateProductQuantity = (productToUpdate) => {
-    const basketCopy = deepClone(basketMenu);
-    const productIndex = getIndex(productToUpdate.id, basketMenu);
-
-    basketCopy[productIndex].quantity += 1;
-
-    setBasketMenu(basketCopy);
-    localStorage.setItem(username, JSON.stringify(basketCopy));
-  };
-
-  const deleteBasketProduct = (idProductToRemove) => {
-    const basketUpdated = filter(idProductToRemove, basketMenu);
-
-    localStorage.setItem(username, JSON.stringify(basketUpdated));
-    setBasketMenu(basketUpdated);
-  };
-
-  return {
-    basketMenu,
-    addProductToBasket,
-    updateProductQuantity,
-    deleteBasketProduct,
-    editProductToBasket,
-  };
-};
+  return { basketMenu, setBasketMenu, addProductToBasket, deleteBasketProduct }
+}

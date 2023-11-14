@@ -1,63 +1,56 @@
-import styled, { css } from "styled-components";
-import { theme } from "../../theme";
+import styled, { css } from "styled-components"
+import { theme } from "../../theme"
 
-export default function Button({
-  label,
-  Icon,
-  classname,
-  onClick,
-  variant = "normal",
-}) {
+export default function Button({ label, Icon, className, version = "normal", onClick, disabled }) {
   return (
-    <ButtonStyled className={classname} onClick={onClick} variant={variant}>
+    <ButtonStyled className={className} version={version} onClick={onClick} disabled={disabled}>
       <span>{label}</span>
-      {Icon && <div className="icon">{Icon}</div>}
+      <div className="icon">{Icon && Icon}</div>
     </ButtonStyled>
-  );
+  )
 }
 
 const ButtonStyled = styled.button`
-  ${({ variant }) => buttonStyle[variant]}
-`;
+  ${({ version }) => extraStyle[version]};
+`
 
-const normalStyle = css`
+const extraStyleNormal = css`
   width: 100%;
+  border: 1px solid red;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
   position: relative;
   white-space: nowrap;
   text-decoration: none;
   line-height: 1;
 
   padding: 18px 24px;
-  border-radius: ${theme.borderRadius.round};
-  font-size: ${theme.fonts.size.P0};
-  font-weight: ${theme.fonts.weights.heavy};
-  color: ${theme.colors.white};
-  background-color: ${theme.colors.primary_burger};
-  border: 1px solid ${theme.colors.primary_burger};
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 800;
+  color: white;
+  background-color: #ff9f1b;
+  border: 1px solid #ff9f1b;
   cursor: pointer;
 
-  gap: 15px;
   :hover {
+    color: ${theme.colors.primary};
     background-color: ${theme.colors.white};
-    color: ${theme.colors.primary_burger};
-    border: 1px solid ${theme.colors.primary_burger};
+    border: 1px solid ${theme.colors.primary};
     transition: all 200ms ease-out;
   }
-
   :active {
+    background-color: ${theme.colors.primary};
     color: ${theme.colors.white};
-    background-color: ${theme.colors.primary_burger};
-    /* border: 1px solid ${theme.colors.primary_burger}; */
   }
 
-  &.is-disabled {
-    opacity: 0.6;
+  &:disabled {
+    opacity: 50%;
     cursor: not-allowed;
+    z-index: 2;
   }
+
   &.with-focus {
     border: 1px solid white;
     background-color: ${theme.colors.white};
@@ -72,14 +65,15 @@ const normalStyle = css`
       color: ${theme.colors.primary};
     }
   }
+
   .icon {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-`;
+`
 
-const successStyle = css`
+const extraStyleSuccess = css`
   cursor: pointer;
   color: ${theme.colors.white};
   background: ${theme.colors.success};
@@ -98,9 +92,8 @@ const successStyle = css`
     background: ${theme.colors.success};
     border: 1px solid ${theme.colors.success};
   }
-`;
-
-const buttonStyle = {
-  normal: normalStyle,
-  success: successStyle,
-};
+`
+const extraStyle = {
+  normal: extraStyleNormal,
+  success: extraStyleSuccess,
+}

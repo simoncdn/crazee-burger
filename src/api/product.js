@@ -6,8 +6,8 @@ export const getMenu = async (userId) => {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    const userReceived = docSnap.data();
-    return userReceived.menu;
+    const { menu } = docSnap.data();
+    return menu;
   }
 };
 

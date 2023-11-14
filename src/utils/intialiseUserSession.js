@@ -6,12 +6,12 @@ const intialiseMenu = async (username, setMenu) => {
   setMenu(menuReceived);
 };
 
-const intialiseBasket = (username, setBasket) => {
+const intialiseBasket = (username, setBasketMenu) => {
   const basketReceived = getLocalStorage(username);
-  if (basketReceived) setBasket(basketReceived);
+  if (basketReceived) setBasketMenu(basketReceived);
 };
 
-export const initialiseUserSession = async (username, setMenu, setBasket) => {
+export const initialiseUserSession = async (username, setMenu, setBasketMenu) => {
   await intialiseMenu(username, setMenu);
-  intialiseBasket(username, setBasket);
+  intialiseBasket(username, setBasketMenu);
 };
