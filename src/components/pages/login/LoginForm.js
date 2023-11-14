@@ -10,7 +10,7 @@ import Button from "../../reusable-ui/Button";
 import { authenticateUser } from "../../../api/user";
 
 export default function LoginForm() {
-  const [username, setUsername] = useState("Simon");
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -21,7 +21,7 @@ export default function LoginForm() {
     event.preventDefault();
     const userReceived = await authenticateUser(username);
     setUsername("");
-    navigate(`order/${userReceived}`);
+    navigate(`order/${userReceived.username}`);
   };
 
   return (
