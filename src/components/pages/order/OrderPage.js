@@ -24,7 +24,7 @@ export default function OrderPage() {
     useMenu();
   const { basketMenu, setBasketMenu, addProductToBasket, deleteBasketProduct } =
     useBasket();
-  // useLocalStorage(basketMenu);
+
   const handleProductSelected = async (idProductSelected) => {
     if (!isAdminMode) return;
     const productClickedOn = findObjectById(idProductSelected, menu);
